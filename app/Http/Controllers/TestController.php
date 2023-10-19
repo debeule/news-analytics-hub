@@ -12,8 +12,12 @@ class TestController extends Controller
     {
         $client = new Client();
 
-        $url = 'quotes.toscrape.com';
+        $url = "";
         
+        $headers = [
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+        ];
+
         $response = $client->get($url);
         
         
@@ -21,8 +25,7 @@ class TestController extends Controller
         {
             $html = $response->getBody()->getContents();
             
-            $helper = new Helpers();
-            $htmlArray = $helper->HtmlToArray(html: $html);
+            $htmlArray = Helpers::ExtractHtmlContent(html: $html);
 
             ray($htmlArray)->die();
         }
