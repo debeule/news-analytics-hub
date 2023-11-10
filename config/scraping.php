@@ -13,4 +13,6 @@ return [
             'articles_page' => 'meest-recent.html',
         ],
     ],
+    
+    'destination' => env('SCRAPER_PROJECT_DESTINATION'),
 ];
