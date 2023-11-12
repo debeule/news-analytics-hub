@@ -20,13 +20,17 @@ class ScrapeArticlesListJob implements ShouldQueue
 
     public function handle(): void
     {
-        $baseCommand = 'scrapy crawl ArticleListScraper';
-        $arg1 = '-a START_URLS="' . $this->entity . '"'; 
-        $arg2 = '-a ALLOWED_DOMAINS="' . $this->entity . '"';
+        $changeDirCommand = "cd " . config("scraping.destination");
+        
+        $enableVenvCommand = " .\\venv\\Scripts\\activate"; // source for linux
 
-        $command = $baseCommand . ' ' . $arg1 . ' ' . $arg2;
+        $source = "https://" . "www.praxistraining.be/opleidingen/opleiding/273-scraper";
+        $argument = '-a scrape_url="' . $source . '"'; 
+        $scrapyCommand = 'scrapy crawl ArticleListScraper' . ' ' . $argument;
 
-        $articles = shell_exec($command);
+
+        $command = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand . "2>&1";
+        $response = shell_exec($command);
 
         foreach ($articles as $article) 
         {

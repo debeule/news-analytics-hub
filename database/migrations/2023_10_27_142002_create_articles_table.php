@@ -11,13 +11,13 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->text('full_content');
-            $table->boolean('is_processed');
+            $table->boolean('is_processed')->default(false);
 
-            $table->string('main_title');
-            $table->string('article_length');
-            $table->string('category');
+            $table->string('main_title')->nullable();
+            $table->string('article_length')->nullable();;
+            $table->string('category')->nullable();;
 
-            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('entity_id')->nullable();
             $table->foreign('entity_id')->references('id')->on('entities');
 
             $table->timestamps();
