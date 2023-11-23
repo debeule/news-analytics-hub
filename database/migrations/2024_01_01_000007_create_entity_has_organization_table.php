@@ -8,19 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('entity_has_organization', function (Blueprint $table) {
             $table->id();
             
-            $table->string('name');
-            $table->string('category');
-            $table->string('occupation')->nullable();
-
-            $table->timestamps();
+            $table->foreignId('organization_id')->constrained('organizations');
+            $table->foreignId('author_id')->constrained('entities');
         });
     }
-    
+
     public function down(): void
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('entity_has_organization');
     }
 };

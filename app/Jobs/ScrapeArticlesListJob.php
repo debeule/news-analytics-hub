@@ -14,27 +14,30 @@ class ScrapeArticlesListJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
-        public string $entity
-    )
+        private string $organizationId)
     {}
 
     public function handle(): void
     {
         $changeDirCommand = "cd " . config("scraping.destination");
+        $enableVenvCommand = config("scraping.enableVenvCommand");
+
+        $scrapyCommand = 'scrapy crawl ArticleListScraper -a organization_id=' . $this->organizationId;
+
+
+        $combinedCommand = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand;
         
-        $enableVenvCommand = " .\\venv\\Scripts\\activate"; // source for linux
-
-        $source = "https://" . "www.praxistraining.be/opleidingen/opleiding/273-scraper";
-        $argument = '-a scrape_url="' . $source . '"'; 
-        $scrapyCommand = 'scrapy crawl ArticleListScraper' . ' ' . $argument;
-
-
-        $command = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand . "2>&1";
-        $response = shell_exec($command);
-
-        foreach ($articles as $article) 
+        try 
         {
-            Dispatch(new ScrapeArticleJob($article));
+            shell_exec($combinedCommand);
+        } 
+        catch (\Exception $e) 
+        {
+            DB::table('logs')->insert([
+                'log_level' => 'error',
+                'message' => $e->getMessage(),
+                'failed_action' => $combinedCommand,
+            ]);
         }
     }
 }

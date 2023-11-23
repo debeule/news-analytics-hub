@@ -14,17 +14,12 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
 
-            $table->string('occupation');
-
-            $table->unsignedBigInteger('organization_id');
-            $table->foreign('organization_id')->references('id')->on('organizations');
-            
-            $table->timestamps(); 
+            $table->timestamp('created_at')->useCurrent();
         });
     }
     
     public function down(): void
     {
-        Schema::dropIfExists('entities');
+        Schema::dropIfExists('authors');
     }
 };
