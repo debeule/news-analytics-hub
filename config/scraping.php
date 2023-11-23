@@ -9,4 +9,5 @@ return [
     ],
     
     'destination' => env('SCRAPER_PROJECT_DESTINATION'),
+    'enableVenvCommand' => env('APP_ENV') == 'local' ? ".\\venv\\Scripts\\activate" : "source .\\venv\\Scripts\\activate",
 ];

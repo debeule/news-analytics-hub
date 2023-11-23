@@ -18,10 +18,15 @@ class TestController extends Controller
         
         dd($combinedCommand);
         
+        $enableVenvCommand = config("scraping.enableVenvCommand");
+
+        $scrapyCommand = 'scrapy crawl ArticleListScraper -a provider=' . $request->provider;
+
+        $combinedCommand = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand;
+        
 
         try 
         {
-            dd($combinedCommand);
             shell_exec($combinedCommand);
         } 
         catch (\Exception $e) 
