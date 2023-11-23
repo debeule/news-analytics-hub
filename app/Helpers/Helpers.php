@@ -7,7 +7,7 @@ use App\Helpers\HtmlParser;
 
 class Helpers
 {
-    public static function extractHtmlContent(string $html)
+    public static function ExtractHtmlContent(string $html)
     {
         $htmlArray = HtmlParser::HtmlToArray(html: $html);
 

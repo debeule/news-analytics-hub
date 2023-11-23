@@ -10,28 +10,28 @@ class TestController extends Controller
     public function __invoke(Request $request)
     {
         $changeDirCommand = "cd " . config("scraping.destination");
+        $enableVenvCommand = "source ./venv/Scripts/activate";
+
+        $scrapyCommand = 'scrapy crawl ArticleListScraper -a organization_id=' . "1";
+
+        $combinedCommand = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand;
         
-        $enableVenvCommand = " .\\venv\\Scripts\\activate"; // source for linux
+        dd($combinedCommand);
+        
 
-        $source = "https://" . "www.praxistraining.be/opleidingen/opleiding/273-scraper";
-        $argument = '-a scrape_url="' . $source . '"'; 
-        $scrapyCommand = 'scrapy crawl ArticleListScraper' . ' ' . $argument;
-
-
-        $command = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand . "2>&1";
-        $response = shell_exec($command);
-
-
-        // foreach (config("scraping.sources") as $source) 
-        // {
-        //     $baseCommand = 'scrapy runspider ArticleListScraper';
-        //     $arg1 = '-a scrape_url="' . $source["domain"] . '"'; 
-    
-        //     $command = $baseCommand . ' ' . $arg1 . ' ' . $arg2;
-            
-        //     ray(shell_exec($command))->die();
-        //     $articles = shell_exec($command);
-        // }
+        try 
+        {
+            dd($combinedCommand);
+            shell_exec($combinedCommand);
+        } 
+        catch (\Exception $e) 
+        {
+            DB::table('logs')->insert([
+                'log_level' => 'error',
+                'message' => $e->getMessage(),
+                'failed_action' => $combinedCommand,
+            ]);
+        }
     }
 }
 

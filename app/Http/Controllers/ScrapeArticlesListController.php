@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\Organization;
+
 use App\Jobs\ScrapeArticlesListJob;
+
 
 class ScrapeArticlesListController extends Controller
 {
     public function __invoke()
     {
-        foreach (config("scraping.entities") as $entity) 
+        foreach (config("scraping.organizations") as $organization) 
         {
-            Dispatch(new ScrapeArticlesListJob(entity: $entity));
+            $organization = Organization::where('name', $organization["name"])->first();
+            
+            Dispatch(new ScrapeArticlesListJob($organization->id));
         }
     }
 }
