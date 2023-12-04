@@ -8,6 +8,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Organization;
+use GuzzleHttp\Client;
+use App\Models\Log;
 
 class ScrapeArticlesListJob implements ShouldQueue
 {
@@ -19,24 +22,38 @@ class ScrapeArticlesListJob implements ShouldQueue
 
     public function handle(): void
     {
-        $changeDirCommand = "cd " . config("scraping.destination");
-        $enableVenvCommand = "source ./venv/Scripts/activate";
+        $url = "http://scraper:5000";
+        $endpoint = "/api/ArticleListScraper";
 
-        $scrapyCommand = 'scrapy crawl ArticleListScraper -a organization_id=' . $this->organizationId;
+        $data = [
+            'organizationId' => $this->organizationId,
+        ];
 
-        $combinedCommand = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand;
-        
         try 
         {
-            shell_exec($combinedCommand);
+            $client = new Client();
+
+            $response = $client->post($url . $endpoint, [
+                'json' => $data,
+            ]);
+            
+            if ($response->getStatusCode() !== 200) {
+                Log::create([
+                    'log_level' => 'error',
+                    'action' => 'ScrapeArticlesListJob ==> scraper',
+                    'message' => 'Unexpected response: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase(),
+                ]);
+            }
         } 
-        catch (\Exception $e) 
+        
+        catch (\Throwable $th) 
         {
-            DB::table('logs')->insert([
-                'log_level' => 'error',
-                'message' => $e->getMessage(),
-                'failed_action' => $combinedCommand,
+            Log::create([
+                'log_level' => "error",
+                'action' => "ScrapeArticlesListJob ==> laravel",
+                'message' => $th->getMessage(),
             ]);
         }
+        
     }
 }

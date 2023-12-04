@@ -1,0 +1,118 @@
+2023-12-01 14:20:44,179 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-12-01 14:20:44,182 INFO supervisord started with pid 1
+2023-12-01 14:20:45,183 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:45,184 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:45,184 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:45,184 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:45,184 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:45,185 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:45,185 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:45,185 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,186 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,187 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,187 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,187 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,187 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,188 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,188 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:46,188 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,191 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,191 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,191 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,191 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,191 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,191 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,191 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:48,192 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,195 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,195 INFO gave up: laravel-worker_00 entered FATAL state, too many start retries too quickly
+2023-12-01 14:20:51,196 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,196 INFO gave up: laravel-worker_01 entered FATAL state, too many start retries too quickly
+2023-12-01 14:20:51,196 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,196 INFO gave up: laravel-worker_02 entered FATAL state, too many start retries too quickly
+2023-12-01 14:20:51,196 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,196 INFO gave up: laravel-worker_03 entered FATAL state, too many start retries too quickly
+2023-12-01 14:20:51,197 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,197 INFO gave up: laravel-worker_04 entered FATAL state, too many start retries too quickly
+2023-12-01 14:20:51,197 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,197 INFO gave up: laravel-worker_05 entered FATAL state, too many start retries too quickly
+2023-12-01 14:20:51,197 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,197 INFO gave up: laravel-worker_06 entered FATAL state, too many start retries too quickly
+2023-12-01 14:20:51,197 INFO spawnerr: can't find command './vendor/bin/sail'
+2023-12-01 14:20:51,198 INFO gave up: laravel-worker_07 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:16,227 WARN received SIGQUIT indicating exit request
+2023-12-01 14:21:17,195 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-12-01 14:21:17,198 INFO supervisord started with pid 1
+2023-12-01 14:21:18,200 INFO spawned: 'laravel-worker_00' with pid 7
+2023-12-01 14:21:18,202 INFO spawned: 'laravel-worker_01' with pid 8
+2023-12-01 14:21:18,205 INFO spawned: 'laravel-worker_02' with pid 9
+2023-12-01 14:21:18,207 INFO spawned: 'laravel-worker_03' with pid 10
+2023-12-01 14:21:18,209 INFO spawned: 'laravel-worker_04' with pid 11
+2023-12-01 14:21:18,212 INFO spawned: 'laravel-worker_05' with pid 12
+2023-12-01 14:21:18,215 INFO spawned: 'laravel-worker_06' with pid 13
+2023-12-01 14:21:18,218 INFO spawned: 'laravel-worker_07' with pid 14
+2023-12-01 14:21:18,225 WARN exited: laravel-worker_00 (exit status 1; not expected)
+2023-12-01 14:21:18,225 WARN exited: laravel-worker_01 (exit status 1; not expected)
+2023-12-01 14:21:18,228 WARN exited: laravel-worker_02 (exit status 1; not expected)
+2023-12-01 14:21:18,230 WARN exited: laravel-worker_03 (exit status 1; not expected)
+2023-12-01 14:21:18,232 WARN exited: laravel-worker_04 (exit status 1; not expected)
+2023-12-01 14:21:18,234 WARN exited: laravel-worker_06 (exit status 1; not expected)
+2023-12-01 14:21:18,235 WARN exited: laravel-worker_05 (exit status 1; not expected)
+2023-12-01 14:21:18,237 WARN exited: laravel-worker_07 (exit status 1; not expected)
+2023-12-01 14:21:19,239 INFO spawned: 'laravel-worker_00' with pid 15
+2023-12-01 14:21:19,241 INFO spawned: 'laravel-worker_01' with pid 16
+2023-12-01 14:21:19,243 INFO spawned: 'laravel-worker_02' with pid 17
+2023-12-01 14:21:19,245 INFO spawned: 'laravel-worker_03' with pid 18
+2023-12-01 14:21:19,246 INFO spawned: 'laravel-worker_04' with pid 19
+2023-12-01 14:21:19,248 INFO spawned: 'laravel-worker_05' with pid 20
+2023-12-01 14:21:19,251 INFO spawned: 'laravel-worker_06' with pid 21
+2023-12-01 14:21:19,253 INFO spawned: 'laravel-worker_07' with pid 22
+2023-12-01 14:21:19,259 WARN exited: laravel-worker_00 (exit status 1; not expected)
+2023-12-01 14:21:19,261 WARN exited: laravel-worker_01 (exit status 1; not expected)
+2023-12-01 14:21:19,264 WARN exited: laravel-worker_02 (exit status 1; not expected)
+2023-12-01 14:21:19,264 WARN exited: laravel-worker_03 (exit status 1; not expected)
+2023-12-01 14:21:19,267 WARN exited: laravel-worker_04 (exit status 1; not expected)
+2023-12-01 14:21:19,269 WARN exited: laravel-worker_05 (exit status 1; not expected)
+2023-12-01 14:21:19,269 WARN exited: laravel-worker_06 (exit status 1; not expected)
+2023-12-01 14:21:19,270 WARN exited: laravel-worker_07 (exit status 1; not expected)
+2023-12-01 14:21:21,274 INFO spawned: 'laravel-worker_00' with pid 23
+2023-12-01 14:21:21,276 INFO spawned: 'laravel-worker_01' with pid 24
+2023-12-01 14:21:21,277 INFO spawned: 'laravel-worker_02' with pid 25
+2023-12-01 14:21:21,279 INFO spawned: 'laravel-worker_03' with pid 26
+2023-12-01 14:21:21,281 INFO spawned: 'laravel-worker_04' with pid 27
+2023-12-01 14:21:21,283 INFO spawned: 'laravel-worker_05' with pid 28
+2023-12-01 14:21:21,286 INFO spawned: 'laravel-worker_06' with pid 29
+2023-12-01 14:21:21,288 INFO spawned: 'laravel-worker_07' with pid 30
+2023-12-01 14:21:21,292 WARN exited: laravel-worker_00 (exit status 1; not expected)
+2023-12-01 14:21:21,294 WARN exited: laravel-worker_01 (exit status 1; not expected)
+2023-12-01 14:21:21,295 WARN exited: laravel-worker_02 (exit status 1; not expected)
+2023-12-01 14:21:21,299 WARN exited: laravel-worker_03 (exit status 1; not expected)
+2023-12-01 14:21:21,301 WARN exited: laravel-worker_04 (exit status 1; not expected)
+2023-12-01 14:21:21,303 WARN exited: laravel-worker_05 (exit status 1; not expected)
+2023-12-01 14:21:21,303 WARN exited: laravel-worker_06 (exit status 1; not expected)
+2023-12-01 14:21:21,307 WARN exited: laravel-worker_07 (exit status 1; not expected)
+2023-12-01 14:21:24,312 INFO spawned: 'laravel-worker_00' with pid 31
+2023-12-01 14:21:24,314 INFO spawned: 'laravel-worker_01' with pid 32
+2023-12-01 14:21:24,315 INFO spawned: 'laravel-worker_02' with pid 33
+2023-12-01 14:21:24,317 INFO spawned: 'laravel-worker_03' with pid 34
+2023-12-01 14:21:24,319 INFO spawned: 'laravel-worker_04' with pid 35
+2023-12-01 14:21:24,321 INFO spawned: 'laravel-worker_05' with pid 36
+2023-12-01 14:21:24,323 INFO spawned: 'laravel-worker_06' with pid 37
+2023-12-01 14:21:24,326 INFO spawned: 'laravel-worker_07' with pid 38
+2023-12-01 14:21:24,331 WARN exited: laravel-worker_00 (exit status 1; not expected)
+2023-12-01 14:21:24,333 INFO gave up: laravel-worker_00 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:24,335 WARN exited: laravel-worker_01 (exit status 1; not expected)
+2023-12-01 14:21:24,335 WARN exited: laravel-worker_02 (exit status 1; not expected)
+2023-12-01 14:21:24,335 INFO gave up: laravel-worker_01 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:24,335 INFO gave up: laravel-worker_02 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:24,336 WARN exited: laravel-worker_03 (exit status 1; not expected)
+2023-12-01 14:21:24,338 INFO gave up: laravel-worker_03 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:24,338 WARN exited: laravel-worker_04 (exit status 1; not expected)
+2023-12-01 14:21:24,340 INFO gave up: laravel-worker_04 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:24,343 WARN exited: laravel-worker_05 (exit status 1; not expected)
+2023-12-01 14:21:24,343 WARN exited: laravel-worker_06 (exit status 1; not expected)
+2023-12-01 14:21:24,344 INFO gave up: laravel-worker_05 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:24,344 INFO gave up: laravel-worker_06 entered FATAL state, too many start retries too quickly
+2023-12-01 14:21:24,344 WARN exited: laravel-worker_07 (exit status 1; not expected)
+2023-12-01 14:21:25,345 INFO gave up: laravel-worker_07 entered FATAL state, too many start retries too quickly
+2023-12-04 06:43:34,732 WARN received SIGQUIT indicating exit request

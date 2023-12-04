@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Organization;
 
 use App\Jobs\ScrapeArticlesListJob;
-use App\Models\Organization;
 
 
 class ScrapeArticlesListController extends Controller
