@@ -73,30 +73,31 @@ services:
         build:
             context: /home/debeule/website.int/
             dockerfile: Dockerfile
-
         ports:
             - "5000:5000"
             
         volumes:
             - /home/debeule/website.int/:/app
-
         networks:
             - sail
-
         depends_on:
             - mysql
             - redis
 
-    supervisor:
+    horizon:
         build:
-            context: .
-            dockerfile: supervisor/supervisor.dockerfile
-        container_name: supervisor
+            context: ./supervisor/
+            dockerfile: supervisor.dockerfile
+        environment:
+            LARAVEL_HORIZON: 1
         volumes:
-            - ./src:/var/www/html
+            - '.:/var/www/html'
         networks:
             - sail
-
+        depends_on:
+            - laravel.test
+        links:
+            - laravel.test:laravel.test
 
 networks:
     sail:
@@ -108,4 +109,6 @@ volumes:
     sail-redis:
         driver: local
     scraper:
+        driver: local
+    supervisor: 
         driver: local

@@ -1,11 +1,10 @@
-FROM php:7.4-fpm-alpine 
+FROM php:8.2-cli
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apt-get update && \
+    apt-get install -y supervisor libonig-dev libzip-dev zip && \
+    docker-php-ext-install pcntl pdo_mysql && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN apk update && apk add --no-cache supervisor
+COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
 
-RUN mkdir -p "/etc/supervisor/logs"
-
-COPY supervisor/supervisord.conf /etc/supervisor/supervisord.conf
-
-CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisor/supervisord.conf"]
+CMD ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]
