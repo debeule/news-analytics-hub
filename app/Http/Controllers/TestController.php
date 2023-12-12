@@ -4,39 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\Article;
+use App\Jobs\ScrapeArticlesListJob;
+use Illuminate\Support\Facades\Bus;
+use App\Models\Log;
+
 
 class TestController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $changeDirCommand = "cd " . config("scraping.destination");
-        $enableVenvCommand = "source ./venv/Scripts/activate";
+        $articles = Article::where('full_content', null)
+        ->where('organization_id', 1)
+        ->get();
 
-        $scrapyCommand = 'scrapy crawl ArticleListScraper -a organization_id=' . "1";
+        $batch = Bus::batch($articles)
+        ->allowFailures()
+        ->dispatch();
 
-        $combinedCommand = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand;
         
-        dd($combinedCommand);
-        
-        $enableVenvCommand = config("scraping.enableVenvCommand");
-
-        $scrapyCommand = 'scrapy crawl ArticleListScraper -a provider=' . $request->provider;
-
-        $combinedCommand = $changeDirCommand . " && " . $enableVenvCommand . " && " . $scrapyCommand;
-        
-
-        try 
-        {
-            shell_exec($combinedCommand);
-        } 
-        catch (\Exception $e) 
-        {
-            DB::table('logs')->insert([
-                'log_level' => 'error',
-                'message' => $e->getMessage(),
-                'failed_action' => $combinedCommand,
-            ]);
-        }
+        dd($batch);
     }
 }
 
