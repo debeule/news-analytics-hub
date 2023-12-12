@@ -8,9 +8,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Organization;
 use GuzzleHttp\Client;
+use App\Jobs\ScrapeArticleJob;
+use App\Models\Organization;
 use App\Models\Log;
+use App\Models\Article;
+
 
 class ScrapeArticlesListJob implements ShouldQueue
 {
@@ -23,7 +26,7 @@ class ScrapeArticlesListJob implements ShouldQueue
     public function handle(): void
     {
         $url = "http://scraper:5000";
-        $endpoint = "/api/ArticleListScraper";
+        $endpoint = "/api/articles_list_scraper";
 
         $data = [
             'organizationId' => $this->organizationId,
@@ -37,12 +40,25 @@ class ScrapeArticlesListJob implements ShouldQueue
                 'json' => $data,
             ]);
             
-            if ($response->getStatusCode() !== 200) {
+            if ($response->getStatusCode() !== 200) 
+            {
                 Log::create([
                     'log_level' => 'error',
                     'action' => 'ScrapeArticlesListJob ==> scraper',
                     'message' => 'Unexpected response: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase(),
                 ]);
+            }
+
+            if ($response->getStatusCode() == 200) 
+            {
+                $articles = Article::where('full_content', null)
+                ->where('organization_id', $this->organizationId)
+                ->get();
+
+                foreach ($articles as $article) 
+                {
+                    Dispatch(new ScrapeArticleJob($article->url))->onqueue('scraping-article');
+                }
             }
         } 
         
@@ -51,9 +67,17 @@ class ScrapeArticlesListJob implements ShouldQueue
             Log::create([
                 'log_level' => "error",
                 'action' => "ScrapeArticlesListJob ==> laravel",
-                'message' => $th->getMessage(),
+                'message' => 'Unexpected response: ' . $th->getMessage(),
             ]);
         }
-        
     }
 }
+
+                
+            //     $batch = Bus::batch([]);
+
+            //     $batch->add()
+
+            //     ->allowFailures()
+            //     ->dispatch();
+            //

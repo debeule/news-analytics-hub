@@ -17,7 +17,7 @@ class ScrapeArticlesListController extends Controller
         {
             $organization = Organization::where('name', $organization["name"])->first();
             
-            Dispatch(new ScrapeArticlesListJob($organization->id));
+            Dispatch(new ScrapeArticlesListJob($organization->id))->onqueue('scraping-articles-list');
         }
     }
 }
