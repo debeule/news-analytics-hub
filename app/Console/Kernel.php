@@ -10,7 +10,12 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(new ScrapeArticlesListController)->everySixHours();
+        $schedule->call(new ScrapeArticlesListController)
+        ->everySixHours();
+        
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
+        
+        $schedule->command('queue:prune-batches')->daily();
     }
     
     protected function commands(): void
