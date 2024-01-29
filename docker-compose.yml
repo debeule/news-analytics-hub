@@ -3,7 +3,7 @@ version: "3"
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.2
+            context: ./Sail
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -96,8 +96,6 @@ services:
             - sail
         depends_on:
             - laravel.test
-        links:
-            - laravel.test:laravel.test
 
 networks:
     sail:
@@ -112,3 +110,4 @@ volumes:
         driver: local
     supervisor: 
         driver: local
+    
