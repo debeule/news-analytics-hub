@@ -13,11 +13,11 @@ class ScrapeArticlesListController extends Controller
 {
     public function __invoke()
     {
-        foreach (config("scraping.organizations") as $organization) 
-        {
-            $organization = Organization::where('name', $organization["name"])->first();
-            
-            Dispatch(new ScrapeArticlesListJob($organization->id))->onqueue('scraping-articles-list');
+        $newsOrganizations = Organization::where('organization_type', 'news_paper')->get();
+
+        foreach ($newsOrganizations as $newsOrganization) 
+        {            
+            Dispatch(new ScrapeArticlesListJob($newsOrganization->id))->onqueue('scraping-articles-list');
         }
     }
 }
