@@ -25,7 +25,7 @@ class ScrapeArticleJob implements ShouldQueue
     public function handle(): void
     {
         $url = "http://scraper:5000";
-        $endpoint = "/api/ArticleScraper";
+        $endpoint = "/api/article-scraper";
 
         $data = [
             'url' => $this->scrapingUrl,
