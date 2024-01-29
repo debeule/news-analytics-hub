@@ -48,18 +48,6 @@ class ScrapeArticlesListJob implements ShouldQueue
                     'message' => 'Unexpected response: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase(),
                 ]);
             }
-
-            if ($response->getStatusCode() == 200) 
-            {
-                $articles = Article::where('full_content', null)
-                ->where('organization_id', $this->organizationId)
-                ->get();
-
-                foreach ($articles as $article) 
-                {
-                    Dispatch(new ScrapeArticleJob($article->url))->onqueue('scraping-article');
-                }
-            }
         } 
         
         catch (\Throwable $th) 
@@ -72,12 +60,3 @@ class ScrapeArticlesListJob implements ShouldQueue
         }
     }
 }
-
-                
-            //     $batch = Bus::batch([]);
-
-            //     $batch->add()
-
-            //     ->allowFailures()
-            //     ->dispatch();
-            //
