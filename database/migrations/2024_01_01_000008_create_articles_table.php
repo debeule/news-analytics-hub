@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('category')->nullable();
 
             $table->text('full_content')->nullable();
-            $table->string('url');
+            $table->text('url');
 
             $table->boolean('is_processed')->default(false);
 
