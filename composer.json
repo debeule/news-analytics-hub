@@ -57,5 +57,32 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "start": "composer setup && composer migrate",
+        "testing": "composer testing:migrate && composer testing:seed",
+        
+        "setup": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "php artisan key:generate --ansi"
+        ],
+
+        "migrate:processed": "php artisan migrate:fresh --path=database/processed/migrations--database=processed",
+        "migrate:raw": "php artisan migrate:fresh --path=database/raw/migrations--database=raw",
+
+        "migrate": ["composer migrate:processed", "composer migrate:raw"],
+
+        "testing:migrate": [
+            "php artisan migrate:fresh --path=database/processed/migrations/ --database=db-testing",
+            "php artisan migrate:fresh --path=database/raw/migrations/ --database=kohera-testing"
+        ],
+        
+        "phpunit": [
+            "vendor/bin/phpunit --colors=always,'Feature','Integration'"
+        ],
+
+        "cs:check": "vendor/bin/phpcs --standard=PSR12 app",
+        "cs:fix": "vendor/bin/php-cs-fixer fix --verbose",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit=2G"
+    }
 }
