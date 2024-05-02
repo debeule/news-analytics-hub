@@ -31,8 +31,10 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Http\\": "http/",
+            "Console\\": "console/",
+            "Database\\db\\Factories\\": "database/db/factories/",
+            "Database\\db\\Seeders\\": "database/db/seeders/"
         }
     },
     "autoload-dev": {
