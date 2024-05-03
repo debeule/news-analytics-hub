@@ -1,0 +1,17 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+parameters:
+    tmpDir: ./storage/phpstan/
+    inferPrivatePropertyTypeFromConstructor: true
+    level: 6
+    paths:
+        - app
+        - http
+        - console
+    excludePaths:
+        - ./*/*Test.php
+        - ./*/Testing/*
+    universalObjectCratesClasses:
+        - Illuminate\Database\Eloquent\Model
+    checkMissingIterableValueType: true
+    checkGenericClassInNonGenericObjectType: false
