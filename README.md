@@ -1,2 +1,3 @@
-### start docker for redis (make sure the docker daemon is running)
-docker-compose up -d --build
+### startup guide
+docker exec hub composer i 
+docker exec hub composer start
