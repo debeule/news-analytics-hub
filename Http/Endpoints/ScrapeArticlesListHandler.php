@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers;
+namespace Http\Endpoints;
 
 use Illuminate\Http\Request;
 
@@ -9,7 +9,7 @@ use App\Models\Organization;
 use App\Jobs\ScrapeArticlesListJob;
 
 
-class ScrapeArticlesListController extends Controller
+class ScrapeArticlesListHandler
 {
     public function __invoke()
     {

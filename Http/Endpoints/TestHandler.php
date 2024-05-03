@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers;
+namespace Http\Endpoints;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Bus;
 use App\Models\Log;
 
 
-class TestController extends Controller
+class TestHandler
 {
     public function __invoke(Request $request)
     {
@@ -24,6 +24,10 @@ class TestController extends Controller
 
         
         dd($batch);
+    }
+    public function test(Request $request)
+    {
+        Dispatch(new ScrapeArticleJob(1))->onqueue('scraping-article');
     }
 }
 
