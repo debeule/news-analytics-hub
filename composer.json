@@ -5,7 +5,7 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "ext-iconv": "*",
         "ext-pcntl": "*",
         "ext-pdo_mysql": "*",
