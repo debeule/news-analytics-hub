@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Newspaper;
+namespace App\Processed;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Mention extends Model
 {
-    use HasFactory;
 }
