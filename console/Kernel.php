@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Console;
 
+use App\Http\Controllers\ScrapeArticlesListController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Http\Controllers\ScrapeArticlesListController;
 
 class Kernel extends ConsoleKernel
 {

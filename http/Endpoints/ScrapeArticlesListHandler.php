@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Http\Endpoints;
 
-use Illuminate\Http\Request;
-
-use App\Models\Organization;
 
 use App\Jobs\ScrapeArticlesListJob;
+
+use App\Models\Organization;
 
 
 class ScrapeArticlesListHandler
 {
-    public function __invoke()
+    public function __invoke(): void
     {
         $newsOrganizations = Organization::where('organization_type', 'news_paper')->get();
 
