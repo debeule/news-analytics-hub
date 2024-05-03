@@ -10,5 +10,8 @@ use App\Http\Controllers\ScrapeArticlesListController;
 Route::get('/test', TestController::class)->name('test');
 Route::get('/test2', Test2Controller::class)->name('test2');
 
-Route::get('/', GetDashboardController::class)->name('dashboard');
+Route::get('/', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 Route::get('/dispatch', ScrapeArticlesListController::class)->name('dispatch');
