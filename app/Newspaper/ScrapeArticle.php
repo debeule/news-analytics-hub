@@ -6,30 +6,29 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Bus\Batchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use GuzzleHttp\Client;
-use App\Jobs\ScrapeArticleJob;
-use App\Models\Organization;
 use App\Models\Log;
-use App\Models\Article;
 
 
-class ScrapeArticlesListJob implements ShouldQueue
+class ScrapeArticle implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    
     public function __construct(
-        private int $organizationId)
+        public string $scrapingUrl,
+    )
     {}
 
     public function handle(): void
     {
         $url = "http://scraper:5000";
-        $endpoint = "/api/articles_list_scraper";
+        $endpoint = "/api/article-scraper";
 
         $data = [
-            'organizationId' => $this->organizationId,
+            'url' => $this->scrapingUrl,
         ];
 
         try 
@@ -44,7 +43,7 @@ class ScrapeArticlesListJob implements ShouldQueue
             {
                 Log::create([
                     'log_level' => 'error',
-                    'action' => 'ScrapeArticlesListJob ==> scraper',
+                    'action' => 'ScrapeArticleJob ==> scraper',
                     'message' => 'Unexpected response: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase(),
                 ]);
             }
@@ -55,8 +54,9 @@ class ScrapeArticlesListJob implements ShouldQueue
             Log::create([
                 'log_level' => "error",
                 'action' => "ScrapeArticlesListJob ==> laravel",
-                'message' => 'Unexpected response: ' . $th->getMessage(),
+                'message' => $th->getMessage(),
             ]);
         }
+        
     }
 }
