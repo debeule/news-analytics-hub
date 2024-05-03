@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Newspaper;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -9,13 +9,10 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use GuzzleHttp\Client;
-use App\Jobs\ScrapeArticleJob;
-use App\Models\Organization;
-use App\Models\Log;
-use App\Models\Article;
+use App\Newspaper\Organization;
+use App\Newspaper\Article;
 
-
-class ScrapeArticlesListJob implements ShouldQueue
+class ScrapeArticlesList implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
