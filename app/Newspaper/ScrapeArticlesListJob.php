@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Newspaper;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
