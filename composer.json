@@ -63,13 +63,15 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
+
     "scripts": {
         "start": "composer setup && composer migrate",
-        "testing": "composer testing:migrate && composer testing:seed",
+        "testing": "composer testing:migrate",
         
         "setup": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "php artisan key:generate --ansi"
+            "php artisan key:generate --ansi",
+            "composer install"
         ],
 
         "migrate:processed": "php artisan migrate:fresh --path=database/processed/migrations--database=processed",
