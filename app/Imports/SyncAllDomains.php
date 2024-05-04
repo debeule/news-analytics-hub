@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Imports;
 
-use App\Location\Commands\SyncLocationDomain;
-use App\School\Commands\SyncSchoolDomain;
-use App\Sport\Commands\SyncSportDomain;
+use App\Location\Commands\SyncRawDomain;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,14 +18,8 @@ final class SyncAllDomains implements ShouldQueue
 
     public function handle(): void
     {
-        $syncLocationDomain = new SyncLocationDomain();
-        $syncLocationDomain();
-        
-        $syncSchoolDomain = new SyncSchoolDomain();
-        $syncSchoolDomain();
-
-        $syncSportDomain = new SyncSportDomain();
-        $syncSportDomain();
+        $syncRawDomain = new SyncRawDomain();
+        $syncRawDomain();
         
     }
 }
