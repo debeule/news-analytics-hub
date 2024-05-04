@@ -11,12 +11,12 @@ class Occupation extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'main_title',
-        'url',
-        'full_content',
-        'category',
-        'author',
-        'organization',
-        'article_created_at',
+        'name',
+        'sector'
     ];
+    
+    public function entityHasOccupations()
+    {
+        return $this->hasMany(EntityHasOccupation::class);
+    }
 }
