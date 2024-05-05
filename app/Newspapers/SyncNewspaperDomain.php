@@ -12,6 +12,15 @@ final class SyncRawDomain
 
     public function __invoke(): void
     {
+        $this->DispatchSync(new SyncRaw);
+        $this->DispatchSync(new SyncProcessed);
+        //retrieve raw
+
+        //insert raw
+
+        //process start
+
+        //ori
         foreach (Organization::get() as $organization) 
         {
             $this->DispatchSync(new SyncOrganization($organization));
