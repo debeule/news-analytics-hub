@@ -1,7 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Router;
 
 use Http\Endpoints\TestHandler;
 use Http\Endpoints\ScrapeArticlesListHandler;
