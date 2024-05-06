@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 final class HasOrganizationId
 {
     public function __construct(
-        private int $value,
+        private int $value = 0,
     ) {}
 
     public function __invoke(Builder $query): Builder
