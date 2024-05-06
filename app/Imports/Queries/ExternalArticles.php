@@ -6,7 +6,7 @@ namespace App\Imports\Queries;
 
 use Illuminate\Support\Collection;
 
-interface ExternalSports
+interface ExternalArticles
 {
     public function get(): Collection;
 }

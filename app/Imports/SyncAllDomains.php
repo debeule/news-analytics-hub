@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Imports;
 
-use App\Location\Commands\SyncRawDomain;
-
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+
+
+use App\Newspaper\Commands\SyncNewspaperDomain;
 
 final class SyncAllDomains implements ShouldQueue
 {
@@ -18,8 +19,7 @@ final class SyncAllDomains implements ShouldQueue
 
     public function handle(): void
     {
-        $syncRawDomain = new SyncRawDomain();
-        $syncRawDomain();
-        
+        $syncNewspaperDomain = new SyncnewspaperDomain;
+        $syncNewspaperDomain();
     }
 }
