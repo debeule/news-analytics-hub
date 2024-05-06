@@ -7,11 +7,19 @@ namespace Http\Endpoints;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
-
+use App\Imports\SyncAllDomains;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class TestHandler
 {
-    public function __invoke(Request $request): void
+    use DispatchesJobs;
+    
+    public function __invoke()
+    {
+        $this->dispatchSync(new SyncAllDomains);
+    }
+
+    public function test2(Request $request): void
     {
         $articles = Article::where('full_content', null)
         ->where('organization_id', 1)
