@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table): void {
             $table->id();
 
-            $table->string('main_title');
+            $table->string('title');
             $table->integer('article_length')->nullable();
             $table->string('category')->nullable();
 
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignId('author_id')->nullable()->constrained('entities');
             $table->foreignId('organization_id')->constrained('organizations');
 
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('article_created_at')->nullable();
         });
     }
     
