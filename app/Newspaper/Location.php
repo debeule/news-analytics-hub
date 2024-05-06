@@ -2,21 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Processed;
+namespace App\Newspaper;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Location extends Model
 {
     protected $fillable = [
-        'main_title',
-        'article_length',
-        'full_content',
-        'url',
-        'is_processed',
-        'created_at',
-        'category_id',
-        'author_id',
+        'name',
+        'country',
+        'city',
+        'street',
         'organization_id'
     ];
     
