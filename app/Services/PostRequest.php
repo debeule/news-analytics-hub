@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use Exception;
 
 final class PostRequest
 {
@@ -24,13 +25,13 @@ final class PostRequest
         try 
         {
             return $this->client->post($this->url, [
-                'json' => $data,
+                'json' => $this->data,
             ]);
         } 
         
         catch (\Throwable $th) 
         {
-            throw new Exception($th->getStatusCode() . ' - ' . $th->getMessage());
+            throw new Exception($th->getMessage());
         }
     }
 }

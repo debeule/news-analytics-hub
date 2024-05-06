@@ -19,7 +19,7 @@ final class FilterAdditions
          
         foreach ($this->externalRecords as $externalRecord) 
         {
-            if($this->existingRecords->where('record_id', $externalRecord->recordId())->isEmpty())
+            if($this->existingRecords->where('title', $externalRecord->title())->isEmpty())
             {
                 $newRecords->push($externalRecord);
             }
