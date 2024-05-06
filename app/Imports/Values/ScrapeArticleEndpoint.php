@@ -6,13 +6,13 @@ namespace App\Imports\Values;
 
 use League\Uri\Uri;
 
-final class ScraperUrl
+final class ScrapeArticleEndpoint
 {
     public string $value;
 
     public function __construct(
         private ScrapeUrl $scrapeUrl = new ScrapeUrl(),
-        private string $endpoint = 'article-scraper',
+        private string $endpoint = 'article_scraper',
     ) {
         $this->value = (string) Uri::new((string) $this->scrapeUrl . $this->endpoint);
     }
