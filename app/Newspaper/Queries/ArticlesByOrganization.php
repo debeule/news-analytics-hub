@@ -1,33 +1,41 @@
 <?php
 
-namespace App\Processed\Queries;
+namespace App\Newspaper\Queries;
 
-final class AllRecentArticles
+use App\Newspaper\Article;
+use App\Extensions\Eloquent\Scopes\HasOrganizationId;
+use App\Extensions\Eloquent\Scopes\FromDatetime;
+use Illuminate\Database\Eloquent\Builder;
+use App\Imports\Values\Datetime;
+use Illuminate\Support\Collection;
+
+final class ArticlesByOrganization
 {
     public function __construct(
         public HasOrganizationId $hasOrganizationId = new HasOrganizationId,
-        public FromRecent $fromRecent = new FromRecent,
+        public FromDatetime $FromDatetime = new FromDatetime,
     ) {}
 
     public function query(): Builder
     {
-        return Sport::query()
-            ->tap($this->hasOrganizationName);
+        return Article::query()
+            ->tap($this->hasOrganizationId)
+            ->when($this->FromDatetime, $this->FromDatetime);
     }
 
     public function fromOrganizationId(int $organizationId): self
     {
         return new self(
             new HasOrganizationId($organizationId),
-            $this->fromRecent,
+            $this->FromDatetime,
         );
     }
 
-    public function fromRecent(int $amountOfHours): self
+    public function FromDatetime(int $amountOfHours): self
     {
         return new self(
             $this->hasOrganizationId,
-            new FromRecent(Datetime::fromHoursAgo($amountOfHours)),
+            new FromDatetime(Datetime::fromHoursAgo($amountOfHours)),
         );
     }
 

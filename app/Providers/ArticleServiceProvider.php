@@ -7,12 +7,12 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use App\Imports\Queries\ExternalArticles;
-use App\Newspapers\NewspaperArticles;
+use App\Scraper\Queries\AllArticles;
 
-class AppServiceProvider extends ServiceProvider
+class ArticleServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(ExternalArticles::class, NewspaperArticles::class);
+        $this->app->bind(ExternalArticles::class, AllArticles::class);
     }
 }
