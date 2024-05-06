@@ -7,7 +7,7 @@ namespace App\Extensions\Eloquent\Scopes;
 use App\Imports\Values\Datetime;
 use Illuminate\Database\Eloquent\Builder;
 
-final class FromRecent
+final class FromDatetime
 {
     public function __construct(
         private Datetime $Datetime = new Datetime,
@@ -16,6 +16,6 @@ final class FromRecent
     public function __invoke(Builder $query): Builder
     {
         return $query
-            ->whereDatetime('article_created_at', '>=', $this->Datetime->toString());
+            ->whereDate('article_created_at', '>=', $this->Datetime->toString());
     }
 }
