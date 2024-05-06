@@ -19,7 +19,8 @@
         "laravel/framework": "^11.0",
         "laravel/horizon": "^5.21",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "league/uri": "^7.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
