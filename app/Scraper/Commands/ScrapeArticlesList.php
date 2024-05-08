@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Collection;
 
 use App\Imports\Values\ScrapeArticlesListEndpoint;
 use App\Services\PostRequest;
@@ -28,11 +29,25 @@ class ScrapeArticlesList implements ShouldQueue
         return new self($organizationId);
     }
 
-    public function get(): void
+    public function execute(): void
     {
         PostRequest::setup(
             (string) $this->endpoint,
             ['organizationId' => $this->organizationId]
         )->execute();
+    }
+
+    public function get(): Collection
+    {
+        $collection = collect();
+
+        foreach($this->execute() as $listItem)
+        {
+            $externalArticle = new Article($listItem->title, $listItem->url, $listItem->organization_id);
+
+            $collection->push(new Article($externalArticle));
+        }
+
+        return $collection;
     }
 }
