@@ -24,11 +24,16 @@ class ScrapeArticle implements ShouldQueue
         return new self($url);
     }
 
-    public function get(): void
+    public function execute(): void
     {
         PostRequest::setup(
             (string) $this->endpoint,
             ['url' => $this->scrapingUrl]
         )->execute();
+    }
+
+    public function get()
+    {
+        return $this->execute()->full_content;
     }
 }
