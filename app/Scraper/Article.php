@@ -7,30 +7,32 @@ namespace App\Scraper;
 use Illuminate\Database\Eloquent\Model;
 use App\Imports\Queries\Article as ArticleInterface;
 
-class Article extends Model implements ArticleInterface
+class Article implements ArticleInterface
 {
-    protected $fillable = [
-        'title',
-        'url',
-        'full_content',
-        'category',
-        'author',
-        'organization',
-        'article_created_at'
-    ];
-
-    protected $casts = [
-        'article_created_at' => 'datetime',
-    ];
-
+    public function __construct(
+        public string $title, 
+        public string $url, 
+        public ?string $fullContent = null,
+        public int $organizationId
+    ) {}
     
-    public function getUrl(): string
+    public function title(): string
+    {
+        return $this->title;
+    }
+
+    public function url(): string
     {
         return $this->url;
     }
 
-    public function getFullContent(): string
+    public function organization(): int
     {
-        return $this->full_content;
+        return Organization::find($this->organizationId);
+    }
+
+    public function fullContent(): string
+    {
+        return $this->fullContent;
     }
 }
