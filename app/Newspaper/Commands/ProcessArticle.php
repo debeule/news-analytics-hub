@@ -9,20 +9,19 @@ final class ProcessBaseData
 {
     public function __construct(
         public ExternalArticle $article,
-        private ProcessData $processData,
-    ){
-        $this->processData = new ProcessData($this->article);
-    }
+    ){}
 
     public function __invoke(): void
     {
-        ProcessCategories::setup($this->data->categories)->execute();
-        ProcessEntities::setup($this->data->entities)->execute();
-        ProcessOrganizations::setup($this->data->organizations)->execute();
-        ProcessOccupations::setup($this->data->occupations)->execute();
+        $data = ProcessData::setup($this->article->fullContent)->execute();
 
-        ProcessArticles::setup($this->data->articles)->execute();
+        ProcessCategories::setup($data->categories)->execute();
+        ProcessEntities::setup($data->entities)->execute();
+        ProcessOrganizations::setup($data->organizations)->execute();
+        ProcessOccupations::setup($data->occupations)->execute();
+
+        ProcessArticles::setup($data->articles)->execute();
         
-        ProcessMentions::setup($this->data->mentions)->execute();
+        ProcessMentions::setup($data->mentions)->execute();
     }
 }
