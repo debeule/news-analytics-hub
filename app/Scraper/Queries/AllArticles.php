@@ -5,6 +5,7 @@ namespace App\Scraper\Queries;
 use App\Imports\Queries\ExternalArticles;
 use Illuminate\Support\Collection;
 use App\Scraper\Commands\ScrapeArticlesList;
+use App\Scraper\Article;
 
 final class AllArticles implements ExternalArticles
 {
@@ -19,14 +20,16 @@ final class AllArticles implements ExternalArticles
 
     public function scrapeArticles(): Collection
     {
-        $collection = collect();
+        $scraperArticles = collect();
 
-        foreach (ScrapeArticlesList::setup($this->organizationId)->get() as $articleUrl) 
+        $articles = ScrapeArticlesList::setup($this->organizationId)->get();
+
+        foreach ($articles as $article) 
         {
-            $collection->push(ScrapeArticle::setup($articleurl)->get());
+            $article->fullContent = ScrapeArticle::setup($article->url())->get();
         }
 
-        return $collection;
+        return $articles;
     }
 
     public function get(): Collection
