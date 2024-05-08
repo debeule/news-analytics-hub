@@ -12,22 +12,24 @@ final class SyncArticles
 {
     use DispatchesJobs;
 
-    // private ArticlesDiff $ArticlesDiff;
-
-    // public function __construct(
-    //     public int $organizationId,
-    //     ) {
-    //         $this->articlesDiff = new ArticlesDiff();
-    //     }
+    public function __construct(
+        private ProcessData $processData = new ProcessData,
+    ){}
 
     public function __invoke(ArticlesDiff $articlesDiff): void
     {
+        #TODO: replace config file with organizations records
         foreach (config('scraping.organizations') as $key => $organization) 
         {
+            $jobs = [];
+
             foreach ($articlesDiff($key)->additions() as $externalArticle) 
             {
-                $this->dispatchSync(new CreateArticle($externalArticle));
+                #TODO: add queue job to be dispatched in batch per organization
+                $jobs[] = new ProcessArticle($externalArticle);
             }
+
+            Bus::batch($jobs)->dispatch();
         }
     }
 }

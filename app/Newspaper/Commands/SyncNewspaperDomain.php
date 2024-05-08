@@ -12,6 +12,6 @@ final class SyncNewspaperDomain
 
     public function __invoke(): void
     {
-        $this->DispatchSync(new SyncArticles(1));
+        $this->DispatchSync(new SyncArticles);
     }
 }
