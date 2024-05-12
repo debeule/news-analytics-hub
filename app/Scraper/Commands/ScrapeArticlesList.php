@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Scraper\Commands;
 
-use App\Newspaper\Article;
+use App\Scraper\Article;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -13,6 +13,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
 use App\Imports\Values\ScrapeArticlesListEndpoint;
+use App\Imports\Values\Response;
 use App\Services\PostRequest;
 
 class ScrapeArticlesList implements ShouldQueue
@@ -29,23 +30,26 @@ class ScrapeArticlesList implements ShouldQueue
         return new self($organizationId);
     }
 
-    public function execute(): void
+    public function execute()
     {
-        PostRequest::setup(
+        return PostRequest::setup(
             (string) $this->endpoint,
-            ['organizationId' => $this->organizationId]
+            ['organization_id' => $this->organizationId]
         )->execute();
-    }
+    }   
 
     public function get(): Collection
     {
+        $response = $this->execute();
+        $data = Response::fromResponse($response)->getData();
+
         $collection = collect();
 
-        foreach($this->execute() as $listItem)
+        foreach($data['response'] as $listItem)
         {
-            $externalArticle = new Article($listItem->title, $listItem->url, $listItem->organization_id);
+            $externalArticle = new Article($listItem['title'], $listItem['url'], $this->organizationId);
 
-            $collection->push(new Article($externalArticle));
+            $collection->push($externalArticle);
         }
 
         return $collection;
