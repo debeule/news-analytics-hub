@@ -11,10 +11,10 @@ final class ScrapeArticleEndpoint
     public string $value;
 
     public function __construct(
-        private ScrapeUrl $scrapeUrl = new ScrapeUrl(),
+        private ScraperUrl $scraperUrl = new ScraperUrl(),
         private string $endpoint = 'article_scraper',
     ) {
-        $this->value = (string) Uri::new((string) $this->scrapeUrl . $this->endpoint);
+        $this->value = (string) Uri::new((string) $this->scraperUrl . $this->endpoint);
     }
 
     public function __toString(): string
