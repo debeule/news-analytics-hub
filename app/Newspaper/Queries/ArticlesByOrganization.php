@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Imports\Values\Datetime;
 use Illuminate\Support\Collection;
 
-final class ArticlesByOrganization
+class ArticlesByOrganization
 {
     public function __construct(
         public HasOrganizationId $hasOrganizationId = new HasOrganizationId,

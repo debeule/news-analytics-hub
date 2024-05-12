@@ -7,7 +7,7 @@ use App\Services\FilterAdditions;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Collection;
 
-final class ArticlesDiff
+class ArticlesDiff
 {
     use DispatchesJobs;
 
@@ -25,10 +25,15 @@ final class ArticlesDiff
     {
         $this->externalArticlesQuery->organizationId = $organizationId;
         $this->externalArticles = $this->externalArticlesQuery->get();
+
+        return $this;
     }
     
     public function additions(): Collection
     {
-        return $this->DispatchSync(new FilterAdditions($this->allRecentArticles, $this->externalArticles));
+        return $this->externalArticles;
+
+        #TODO: filter existing records
+        // return $this->DispatchSync(new FilterAdditions($this->allRecentArticles, $this->externalArticles));
     }
 }
