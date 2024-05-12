@@ -7,29 +7,25 @@ namespace App\Newspaper\Commands;
 use App\Newspaper\Queries\ArticlesDiff;
 use App\Newspaper\Article;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use App\Newspaper\Organization;
+use Illuminate\Support\Facades\Bus;
 
-final class SyncArticles
+class SyncArticles
 {
     use DispatchesJobs;
 
-    public function __construct(
-        private ProcessData $processData = new ProcessData,
-    ){}
-
     public function __invoke(ArticlesDiff $articlesDiff): void
     {
-        #TODO: replace config file with organizations records
-        foreach (config('scraping.organizations') as $key => $organization) 
+        foreach (Organization::get() as $organization) 
         {
             $jobs = [];
 
-            foreach ($articlesDiff($key)->additions() as $externalArticle) 
+            foreach ($articlesDiff($organization->id)->additions() as $externalArticle) 
             {
-                #TODO: add queue job to be dispatched in batch per organization
                 $jobs[] = new ProcessArticle($externalArticle);
             }
-
-            Bus::batch($jobs)->dispatch();
+            
+            Bus::batch($jobs)->name('article-scraping:' . $organization->name)->dispatch();
         }
     }
 }
