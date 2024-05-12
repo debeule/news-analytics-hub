@@ -42,11 +42,12 @@
             "App\\": "app/",
             "Http\\": "http/",
             "Console\\": "console/",
-            "Database\\db\\Factories\\": "database/db/factories/",
-            "Database\\db\\Seeders\\": "database/db/seeders/"
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
+            "Database\\Scraper\\": "database/scraper/"
         }
     },
-    "autoload-dev": {
+    "autoload-dev": {   
         "psr-4": {
             "Tests\\": "tests/"
         }
@@ -69,8 +70,8 @@
     "prefer-stable": true,
 
     "scripts": {
-        "start": "composer setup && php artisan migrate:fresh",
-        "testing": "composer testing:migrate",
+        "start": "composer setup && php artisan migrate:fresh --seed",
+        "testing": "php artisan migrate:fresh --database=db-testing",
         
         "setup": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
