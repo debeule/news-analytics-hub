@@ -10,10 +10,6 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, dispatchesJobs, RefreshDatabase;
-
-    protected $connectionsToTransact = ['db-testing', 'kohera-testing'];
-
     /**
      * @param object $class
      */
@@ -33,13 +29,5 @@ abstract class TestCase extends BaseTestCase
     public function setUp(): void
     {
         parent::setUp();
-    }
-
-    public function getApiToken(): string
-    {
-        $user = User::create();
-        $token = $user->createToken('token-name');
-
-        return $token->plainTextToken;
     }
 }
