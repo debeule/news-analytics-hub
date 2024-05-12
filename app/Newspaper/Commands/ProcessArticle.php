@@ -2,11 +2,20 @@
 
 namespace App\Newspaper\Commands;
 
-use App\OpenAi\Commands\ProcessData;
-use App\Imports\Article as ExternalArticle;
+use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
-final class ProcessBaseData
+use App\OpenAi\Commands\ProcessData;
+use App\Imports\Queries\Article as ExternalArticle;
+
+final class ProcessArticle implements ShouldQueue
 {
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     public function __construct(
         public ExternalArticle $article,
     ){}
