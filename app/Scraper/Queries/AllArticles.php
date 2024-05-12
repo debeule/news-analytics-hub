@@ -5,7 +5,9 @@ namespace App\Scraper\Queries;
 use App\Imports\Queries\ExternalArticles;
 use Illuminate\Support\Collection;
 use App\Scraper\Commands\ScrapeArticlesList;
+use App\Scraper\Commands\ScrapeArticle;
 use App\Scraper\Article;
+use App\Imports\Values\Response;
 
 final class AllArticles implements ExternalArticles
 {
@@ -18,7 +20,7 @@ final class AllArticles implements ExternalArticles
         return new self($organizationId);
     }
 
-    public function scrapeArticles(): Collection
+    private function scrapeArticle(): Collection
     {
         $scraperArticles = collect();
 
@@ -26,7 +28,13 @@ final class AllArticles implements ExternalArticles
 
         foreach ($articles as $article) 
         {
-            $article->fullContent = ScrapeArticle::setup($article->url())->get();
+            $response = ScrapeArticle::setup($article)->get();
+            $data = Response::fromResponse($response)->getData();
+            
+            $article->fullContent = $data['response'][0]['result'];
+
+            #TODO: remove break when not debugging
+            break;
         }
 
         return $articles;
@@ -34,7 +42,7 @@ final class AllArticles implements ExternalArticles
 
     public function get(): Collection
     {
-        return $this->scrapeArticles();
+        return $this->scrapeArticle();
     }
 
     public function find(): ?Collection
