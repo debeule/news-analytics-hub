@@ -28,6 +28,7 @@ final class ProcessArticle implements ShouldQueue
         ProcessEntities::setup($data->entities)->execute();
         ProcessOrganizations::setup($data->organizations)->execute();
         ProcessOccupations::setup($data->occupations)->execute();
+        ProcessLocations::setup($data->occupations)->execute();
 
         ProcessArticles::setup($data->articles)->execute();
         
