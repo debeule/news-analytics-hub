@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Scraper\Article;
+use App\Newspaper\Article;
+use App\Scraper\Article as ScraperArticle;
 use App\Newspaper\Commands\CreateArticle;
-use App\School\School;
 use App\Testing\TestCase;
 use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use Database\Main\Factories\AddressFactory;
@@ -26,7 +26,7 @@ final class FilterAdditionsTest extends TestCase
         ));
             
         $this->assertInstanceOf(Collection::class, $result);
-        $this->assertInstanceOf(Article::class, $result->first());
+        $this->assertInstanceOf(ScraperArticle::class, $result->first());
         $this->assertEquals(3, $result->count());
     }
 
@@ -40,7 +40,7 @@ final class FilterAdditionsTest extends TestCase
         $this->DispatchSync(new CreateArticle($externalArticles->first()));
 
         $result = $this->DispatchSync(new FilterAdditions(
-            School::get(),
+            Article::get(),
             $externalArticles
         ));
         
