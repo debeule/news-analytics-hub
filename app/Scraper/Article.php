@@ -6,7 +6,6 @@ namespace App\Scraper;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Imports\Queries\Article as ArticleInterface;
-use App\Newspaper\Organization;
 
 class Article implements ArticleInterface
 {
@@ -27,9 +26,9 @@ class Article implements ArticleInterface
         return $this->url;
     }
 
-    public function organization(): Organization
+    public function organizationId(): int
     {
-        return Organization::find($this->organizationId);
+        return $this->organizationId;
     }
 
     public function fullContent(): string
