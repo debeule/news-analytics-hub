@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
+use GuzzleHttp\Client;
 
 use App\Imports\Values\OpenAiEndpoint;
 use App\Services\PostRequest;
@@ -20,6 +21,7 @@ class ProcessData implements ShouldQueue
     public function __construct(
         private string $fullContent,
         private OpenAiEndpoint $endpoint = new OpenAiEndpoint(),
+        private Client $client = new Client(),
     ) {}
 
     public static function setup(string $fullContent): self
@@ -29,10 +31,19 @@ class ProcessData implements ShouldQueue
 
     public function execute(): void
     {
-        PostRequest::setup(
-            (string) $this->endpoint,
-            ['data' => $this->fullContent]
-        )->execute();
+        $response = $this->client->post((string) $this->endpoint, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+                'Content-Type' => 'application/json',
+            ],
+            'json' => [
+                'model' => 'gpt-3.5-turbo',
+                'prompt' => $this->fullContent,
+                'max_tokens' => 100,
+            ],
+        ]);
+
+        $this->responseData = json_decode($response->getBody()->getContents(), true);
     }
 
     public function get(): Collection
