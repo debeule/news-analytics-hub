@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace App\Imports\Values;
 
-use GuzzleHttp\Psr7\Response as GuzzleResponse;
+use GuzzleHttp\Psr7\Response;
 
-final class Response
+final class GuzzleResponse
 {
     private string $value;
 
     public function __construct(
-        private GuzzleResponse $response,
+        private Response $response,
     ) {
         $this->value = $this->getContents($this->response);
     }
 
-    public static function fromResponse(GuzzleResponse $response): self
+    public static function fromResponse(Response $response): self
     {
         return new self($response);
     }
 
-    private function getContents(GuzzleResponse $response)
+    private function getContents(Response $response)
     {
         return $response->getBody()->getContents();
     }
@@ -34,5 +34,12 @@ final class Response
     public function getData()
     {
         return $this->decode();
+    }
+
+    public function extractOpenAiResponse(): array
+    {
+        $contents = $this->getData()['choices'][0]['message']['content'];
+        
+        return json_decode($contents, true);
     }
 }
