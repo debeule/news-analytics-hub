@@ -11,13 +11,14 @@ final class PostRequest
 {
     public function __construct(
         private string $url,
+        private array $headers = [],
         private array $data,
         private Client $client = new Client()
     ) {}
 
-    public static function setup(string $url, array $data): self
+    public static function setup(string $url, array $headers = [], array $data): self
     {
-        return new self($url, $data);
+        return new self($url, $headers, $data);
     }
 
     public function execute(): Object
@@ -25,6 +26,7 @@ final class PostRequest
         try 
         {
             return $this->client->post($this->url, [
+                'headers' => $this->headers,
                 'json' => $this->data,
             ]);
         } 

@@ -13,40 +13,54 @@ use GuzzleHttp\Client;
 
 use App\Imports\Values\OpenAiEndpoint;
 use App\Services\PostRequest;
+use App\Imports\Values\GuzzleResponse;
 
 class ProcessData implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private array $data;
+    private array $headers;
+
     public function __construct(
         private string $fullContent,
         private OpenAiEndpoint $endpoint = new OpenAiEndpoint(),
         private Client $client = new Client(),
-    ) {}
+    ) {
+        $this->data = [
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                [
+                    'role' => 'user', 
+                    'content' => config('scraping.processing.prompt') . '\n' . $this->fullContent
+                ],
+            ],
+            'max_tokens' => 4096,
+        ];
+
+        $this->headers = [
+            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Content-Type' => 'application/json',
+        ];
+    }
 
     public static function setup(string $fullContent): self
     {
         return new self($fullContent);
     }
 
-    public function execute(): void
+    public function execute(): Array
     {
-        $response = $this->client->post((string) $this->endpoint, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
-                'Content-Type' => 'application/json',
-            ],
-            'json' => [
-                'model' => 'gpt-3.5-turbo',
-                'prompt' => $this->fullContent,
-                'max_tokens' => 100,
-            ],
-        ]);
+        $response = PostRequest::setup(
+            (string) $this->endpoint,
+            $this->headers,
+            $this->data,
+        )->execute();
 
-        $this->responseData = json_decode($response->getBody()->getContents(), true);
+        return GuzzleResponse::fromResponse($response)->extractOpenAiResponse();
     }
 
-    public function get(): Collection
+    public function get(): Array
     {
         return $this->execute();
     }
