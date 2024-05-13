@@ -24,14 +24,24 @@ final class ProcessArticle implements ShouldQueue
     {
         $data = ProcessData::setup($this->article->fullContent)->execute();
 
-        ProcessCategories::setup($data->categories)->execute();
-        ProcessEntities::setup($data->entities)->execute();
-        ProcessOrganizations::setup($data->organizations)->execute();
-        ProcessOccupations::setup($data->occupations)->execute();
-        ProcessLocations::setup($data->occupations)->execute();
+        $this->dispatchSync(new CreateArticle($this->article, $data['response']));
 
-        ProcessArticles::setup($data->articles)->execute();
-        
-        ProcessMentions::setup($data->mentions)->execute();
+        foreach ($data['organizations'] as $organization) 
+        {
+            $this->dispatchSync(new CreateOrganization($organization));
+            $this->dispatchSync(new LinkOrganization($organization));
+        }
+
+        foreach ($data['entities'] as $entity) 
+        {
+            $this->dispatchSync(new CreateEntity($entity));
+            $this->dispatchSync(new LinkEntity($entity));
+        }
+
+        foreach ($data['mentions'] as $mention) 
+        {
+            $this->dispatchSync(new CreateMention($mention));
+            $this->dispatchSync(new LinkMention($mention));
+        }
     }
 }
