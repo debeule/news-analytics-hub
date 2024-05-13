@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use App\Scraper\Commands\ScrapeArticlesList;
 use App\Scraper\Commands\ScrapeArticle;
 use App\Scraper\Article;
-use App\Imports\Values\Response;
+use App\Imports\Values\GuzzleResponse;
 
 final class AllArticles implements ExternalArticles
 {
@@ -29,7 +29,7 @@ final class AllArticles implements ExternalArticles
         foreach ($articles as $article) 
         {
             $response = ScrapeArticle::setup($article)->get();
-            $data = Response::fromResponse($response)->getData();
+            $data = GuzzleResponse::fromResponse($response)->getData();
             
             $article->fullContent = $data['response'][0]['result'];
 
