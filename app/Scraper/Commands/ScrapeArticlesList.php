@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
 use App\Imports\Values\ScrapeArticlesListEndpoint;
-use App\Imports\Values\Response;
+use App\Imports\Values\GuzzleResponse;
 use App\Services\PostRequest;
 
 class ScrapeArticlesList implements ShouldQueue
@@ -41,7 +41,7 @@ class ScrapeArticlesList implements ShouldQueue
     public function get(): Collection
     {
         $response = $this->execute();
-        $data = Response::fromResponse($response)->getData();
+        $data = GuzzleResponse::fromResponse($response)->getData();
 
         $collection = collect();
 
