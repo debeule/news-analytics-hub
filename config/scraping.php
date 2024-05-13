@@ -13,10 +13,31 @@ return [
     ],
     
     'processing' => [
-        'prompt' => "Respond only with an array. Do not exclude data. Everything in lowercase. Structure the array like: 
+        'prompt' => "Respond only in json format. Do not exclude data. If a field is not mentioned it is null. Everything in lowercase. Structure the json like:
+            
+            key: category
+            value: choose most fitting: Politics, Business, Economy, Technology, Science & planet, Entertainment, Sports, Opinion,
+           
+            key: organizations
+            value: every mentioned organizations and company 
+                with 
+                    name => organization name, 
+                    sector => general sector
 
-            key: 'categories' value: category of news discussed.
-            key: 'entities-occupations' value: array containing all entities mentioned with: [entity, occupation of entity, location (if not mentioned => null), organization of entity (not applicable = null)].
-            key: 'entity-mentions' value: array containing all instances of an entity being mentioned with: [mentioned entity, context of mention, location(not mentioned = null), positivity score from 1 - 16]",
+            key: entities
+            value: every person mentioned 
+                with
+                    name, 
+                    occupation, 
+                    name of linked organization from organizations key.
+
+            key: mentions
+            value: all instances of an entity or organization being mentioned
+                with
+                    mentioned entity,
+                    mentioned organization, 
+                    context of mention (15 words), 
+                    positivity score from 1 - 16
+        ",
     ]
 ];
