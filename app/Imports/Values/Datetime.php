@@ -40,4 +40,9 @@ final class Datetime
     {
         return (string) $this->value;
     }
+
+    public function toCarbonImmutable(): CarbonImmutable
+    {
+        return CarbonImmutable::parse($this->value);
+    }
 }
