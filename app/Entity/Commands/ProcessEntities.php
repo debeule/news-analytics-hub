@@ -8,18 +8,15 @@ final class ProcessEntities
         private collection $entities,
     ) {}
 
-    public function setup(Collection $entities)
+    public function __invoke(): void
     {
-        return new self($this->entities = $entities);
-    }
-
-    public function execute(): void
-    {
-        $filteredEntities = $this->DispatchSync(new FilterAdditions(Entity::get(), $this->entities));
+        $filteredEntities = $this->DispatchSync(new FilterAdditions(Entity::get(), $this->entity));
         
         foreach ($filteredEntities as $entity) 
         {
             $this->dispatchSync(new CreateEntity($entity));
+            $this->dispatchSync(new LinkEntityOccupation($entity));
+            $this->dispatchSync(new LinkEntityOrganization($entity));
         }
     }
 }

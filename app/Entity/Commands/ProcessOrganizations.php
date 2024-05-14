@@ -8,18 +8,13 @@ final class ProcessOrganizations
         private collection $organizations,
     ) {}
 
-    public function setup(Collection $organizations)
+    public function __invoke(): void
     {
-        return new self($this->organizations = $organizations);
-    }
-
-    public function execute(): void
-    {
-        $filteredCategories = $this->DispatchSync(new FilterAdditions(Organization::get(), $this->organization));
+        $filteredOrganizations = $this->DispatchSync(new FilterAdditions(Organization::get(), $this->organization));
         
-        foreach ($filteredCategories as $organization) 
+        foreach ($filteredOrganizations as $organization) 
         {
-            $this->dispatchSync(new CreateCategory($organization));
+            $this->dispatchSync(new CreateOrganization($organization));
         }
     }
 }
