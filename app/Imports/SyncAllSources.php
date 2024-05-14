@@ -11,15 +11,14 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
 
-use App\Newspaper\Commands\SyncNewspaperDomain;
+use App\Article\Commands\SyncArticles;
 
-final class SyncAllDomains implements ShouldQueue
+final class SyncAllSources implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function handle(): void
     {
-        $syncNewspaperDomain = new SyncnewspaperDomain;
-        $syncNewspaperDomain();
+        $this->DispatchSync(new SyncArticles);
     }
 }
