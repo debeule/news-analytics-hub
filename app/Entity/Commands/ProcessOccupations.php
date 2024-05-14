@@ -8,18 +8,13 @@ final class ProcessOccupations
         private collection $occupations,
     ) {}
 
-    public function setup(Collection $occupations)
+    public function __invoke(): void
     {
-        return new self($this->occupations = $occupations);
-    }
-
-    public function execute(): void
-    {
-        $filteredCategories = $this->DispatchSync(new FilterAdditions(Occupation::get(), $this->occupation));
+        $filteredOccupations = $this->DispatchSync(new FilterAdditions(Occupation::get(), $this->occupation));
         
-        foreach ($this->occupations as $occupation) 
+        foreach ($filteredOccupations as $occupation) 
         {
-            $this->dispatchSync(new CreateCategory($occupation));
+            $this->dispatchSync(new CreateOccupation($occupation));
         }
     }
 }

@@ -6,20 +6,17 @@ final class ProcessMentions
 {
     public function __construct(
         private collection $mentions,
+        private int $articleId,
     ) {}
 
-    public function setup(Collection $mentions)
+    public function __invoke(): void
     {
-        return new self($this->mentions = $mentions);
-    }
-
-    public function execute(): void
-    {
-        $filteredCategories = $this->DispatchSync(new FilterAdditions(Mention::get(), $this->mention));
-        
-        foreach ($filteredCategories as $mention) 
+        foreach ($this->mentions as $mention) 
         {
-            $this->dispatchSync(new CreateCategory($mention));
+            $this->dispatchSync(new CreateMention($mention, $this->articleId));
+            $this->dispatchSync(new LinkMentionArticle($mention));
+            $this->dispatchSync(new LinkMentionEntity($mention));
+            $this->dispatchSync(new LinkMentionOrganization($mention));
         }
     }
 }

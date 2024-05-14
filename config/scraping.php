@@ -21,6 +21,9 @@ return [
             key: created_at
             value: date article was published in format yyyy-mm-dd-hh-mm
 
+            key: occupations
+            value: every occupation of an entity mentioned
+
             key: organizations
             value: every mentioned organizations and company 
                 with 
