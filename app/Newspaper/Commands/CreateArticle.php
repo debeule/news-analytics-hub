@@ -24,7 +24,10 @@ final class CreateArticle
         $newArticle = new DbArticle();
         
         $newArticle->title = $article->title();
+        $newArticle->full_content = $article->fullContent();
         $newArticle->url = $article->url();
+        $newArticle->category = $article->category();
+        $newArticle->article_created_at = $article->createdAt();
         $newArticle->organization_id = $article->organizationId();
 
         return $newArticle;
