@@ -1,38 +1,35 @@
-<?php
-
-declare(strict_types=1);
+<?php 
 
 namespace App\OpenAi;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Imports\Queries\Article as ArticleInterface;
+use App\Imports\Dtos\Mention as MentionInterface;
 
-class Article implements ArticleInterface
+class Mention implements MentionInterface
 {
     public function __construct(
-        public string $title, 
-        public string $url, 
-        public int $organizationId,
-        public ?string $fullContent = null
-    ) {}
-    
-    public function title(): string
+        public string $entity,
+        public string $organization,
+        public string $context,
+        public int $sentiment,
+    ){}
+
+    public function entity(): string
     {
-        return $this->title;
+        return $this->entity;
     }
 
-    public function url(): string
+    public function organization(): string
     {
-        return $this->url;
+        return $this->organization;
     }
 
-    public function organizationId(): int
+    public function context(): string
     {
-        return $this->organizationId;
+        return $this->context;
     }
 
-    public function fullContent(): string
+    public function sentiment(): int
     {
-        return $this->fullContent;
+        return $this->sentiment;
     }
 }

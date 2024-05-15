@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Scraper;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Imports\Queries\Article as ArticleInterface;
-use App\Values\DateTime;
+use App\Imports\Dtos\Article as ArticleInterface;
+use App\Imports\Values\DateTime;
+use Carbon\CarbonImmutable;
 
 class Article implements ArticleInterface
 {
@@ -34,18 +35,20 @@ class Article implements ArticleInterface
         return $this->organizationId;
     }
 
-    public function fullContent(): string
+    public function fullContent(): ?string
     {
         return $this->fullContent;
     }
 
-    public function category(): string
+    public function category(): ?string
     {
         return $this->category;
     }
 
-    public function createdAt(): string
+    public function createdAt(): ?CarbonImmutable
     {
+        if(is_null($this->createdAt)) return null;
+
         return DateTime::fromString($this->createdAt)->toCarbonImmutable();
     }
 }
