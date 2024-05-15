@@ -11,14 +11,14 @@ final class PostRequest
 {
     public function __construct(
         private string $url,
-        private array $headers = [],
         private array $data,
+        private array $headers = [],
         private Client $client = new Client()
     ) {}
 
-    public static function setup(string $url, array $headers = [], array $data): self
+    public static function setup(string $url, array $data, array $headers = []): self
     {
-        return new self($url, $headers, $data);
+        return new self($url, $data, $headers);
     }
 
     public function execute(): Object
