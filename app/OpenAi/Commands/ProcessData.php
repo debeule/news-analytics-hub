@@ -2,7 +2,7 @@
 
 namespace App\OpenAi\Commands;
 
-use App\Newspaper\Article;
+use App\Article\Article;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -11,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use GuzzleHttp\Client;
 
+use App\OpenAi\Data;
 use App\Imports\Values\OpenAiEndpoint;
 use App\Services\PostRequest;
 use App\Imports\Values\GuzzleResponse;
@@ -44,17 +45,12 @@ class ProcessData implements ShouldQueue
         ];
     }
 
-    public static function setup(string $fullContent): self
-    {
-        return new self($fullContent);
-    }
-
     public function execute(): Array
     {
         $response = PostRequest::setup(
             (string) $this->endpoint,
-            $this->headers,
             $this->data,
+            $this->headers,
         )->execute();
 
         return GuzzleResponse::fromResponse($response)->extractOpenAiResponse();
