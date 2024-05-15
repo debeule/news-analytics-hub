@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Newspaper\Queries;
+namespace App\Article\Queries;
 
 use App\Imports\Queries\ExternalArticles;
 use App\Services\FilterAdditions;
@@ -18,7 +18,7 @@ class ArticlesDiff
         private ArticlesByOrganization $articlesQuery = new ArticlesByOrganization,
         private ExternalArticles $externalArticlesQuery,
     ) {
-        $this->allRecentArticles = $this->articlesQuery->FromDatetime(24)->get();
+        $this->allRecentArticles = $this->articlesQuery->FromDateTime(24)->get();
     }
 
     public function __invoke(int $organizationId)
