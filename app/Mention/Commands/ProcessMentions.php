@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Newspaper\Commands;
+namespace App\Article\Commands;
 
 final class ProcessMentions
 {
