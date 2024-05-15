@@ -44,7 +44,8 @@
             "Console\\": "console/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Database\\Scraper\\": "database/scraper/"
+            "Database\\Scraper\\": "database/Scraper/",
+            "Database\\OpenAi\\": "database/OpenAi/"
         }
     },
     "autoload-dev": {   
