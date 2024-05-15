@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Newspaper\Commands;
+namespace App\Entity\Commands;
 
 final class ProcessOccupations
 {

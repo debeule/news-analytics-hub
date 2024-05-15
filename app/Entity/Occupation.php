@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Newspaper;
+namespace App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
 
