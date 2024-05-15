@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Newspaper\Organization;
+use App\Entity\Organization;
 
 final class OrganizationFactory extends Factory
 {
@@ -14,7 +14,7 @@ final class OrganizationFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'organization_type' => $this->faker->randomElement(['newspaper']),
+            'type' => $this->faker->randomElement(['newspaper']),
         ];
     }
 }
