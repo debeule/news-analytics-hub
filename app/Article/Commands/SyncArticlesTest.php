@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Unit\Newspaper\Commands;
+namespace Article\Commands;
 
-use App\Newspaper\Article;
-use App\Newspaper\Commands\SyncArticles;
-use App\Newspaper\Organization;
-use App\Newspaper\Queries\ArticlesDiff;
+use App\Article\Article;
+use App\Article\Commands\SyncArticles;
+use App\Entity\Organization;
+use App\Article\Queries\ArticlesDiff;
 use Illuminate\Bus\Batch;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
@@ -15,9 +15,9 @@ use Illuminate\Bus\PendingBatch;
 
 use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use Database\Factories\OrganizationFactory;
-use App\Newspaper\Commands\ProcessArticle;
+use App\Article\Commands\ProcessArticle;
 use App\Imports\Queries\ExternalArticles;
-use App\Newspaper\Queries\ArticlesByOrganization;
+use App\Article\Queries\ArticlesByOrganization;
 
 class SyncArticlesTest extends TestCase
 {
@@ -47,7 +47,7 @@ class SyncArticlesTest extends TestCase
         {
             return $batch->jobs->every(function ($job) 
             {
-                return $job instanceof ProcessArticle;
+                return $job instanceOf ProcessArticle;
             });
         });
 
