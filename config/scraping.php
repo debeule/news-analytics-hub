@@ -4,11 +4,11 @@ return [
     'organizations' => [
             "1" => [
                 "name" => "detijd",
-                "organization_type" => "newspaper",
+                "organization_type" => "source_newspaper",
             ],
             "2" => [
                 "name" => "demorgen",
-                "organization_type" => "newspaper",
+                "organization_type" => "source_newspaper",
             ],
     ],
     
