@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Article\Commands;
 
-use App\Newspaper\Queries\ArticlesDiff;
-use App\Newspaper\Article;
+use App\Article\Queries\ArticlesDiff;
+use App\Article\Article;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use App\Newspaper\Organization;
+use App\Entity\Organization;
 use Illuminate\Support\Facades\Bus;
 use App\Imports\ProcessArticle;
 
@@ -17,14 +17,14 @@ class SyncArticles
 
     public function __invoke(ArticlesDiff $articlesDiff): void
     {
-        dd('a');
-        foreach (Organization::where('type', 'source-newspaper')->get() as $organization) 
+        foreach (Organization::where('type', 'source_newspaper')->get() as $organization) 
         {
             $jobs = [];
-
+            
             foreach ($articlesDiff($organization->id)->additions() as $externalArticle) 
             {
                 $jobs[] = new ProcessArticle($externalArticle);
+                break;
             }
             
             Bus::batch($jobs)->name('article-scraping:' . $organization->name)->dispatch();
