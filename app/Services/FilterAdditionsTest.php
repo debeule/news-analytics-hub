@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Newspaper\Article;
+use App\Article\Article;
 use App\Scraper\Article as ScraperArticle;
-use App\Newspaper\Commands\CreateArticle;
+use App\Article\Commands\CreateArticle;
 use App\Testing\TestCase;
 use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use Database\Main\Factories\AddressFactory;
