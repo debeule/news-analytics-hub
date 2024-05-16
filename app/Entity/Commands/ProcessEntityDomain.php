@@ -3,12 +3,12 @@
 namespace App\Entity\Commands;
 
 use App\Entity\Entity;
+use App\OpenAI\Data;
 
 final class ProcessEntityDomain
 {
     public function __construct(
-        private Collection $data,
-        private int $articleId,
+        private Data $data,
     ){}
 
     public function __invoke(): void
