@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Imports\Dtos\Article as ArticleInterface;
 use App\Imports\Values\DateTime;
 use Carbon\CarbonImmutable;
+use App\Entity\Organization;
+use App\Entity\Entity;
 
 class Article implements ArticleInterface
 {
     public function __construct(
         public string $title, 
         public string $url, 
-        public int $organizationId,
+        public string $organizationName,
+        public string $authorName,
         public ?string $fullContent = null,
         public ?string $category = null,
         public ?string $createdAt = null,
@@ -28,11 +31,6 @@ class Article implements ArticleInterface
     public function url(): string
     {
         return $this->url;
-    }
-
-    public function organizationId(): int
-    {
-        return $this->organizationId;
     }
 
     public function fullContent(): ?string
@@ -50,5 +48,15 @@ class Article implements ArticleInterface
         if(is_null($this->createdAt)) return null;
 
         return DateTime::fromString($this->createdAt)->toCarbonImmutable();
+    }
+
+    public function organizationId(): int
+    {
+        return Organization::where('name', $this->organizationName)->first()->id;
+    }
+
+    public function authorId(): int
+    {
+        return Entity::where('name', $this->authorName)->first()->id;
     }
 }
