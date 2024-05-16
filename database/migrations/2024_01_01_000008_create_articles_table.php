@@ -14,19 +14,15 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
-            $table->integer('article_length')->nullable();
-            $table->string('category')->nullable();
-
-            $table->text('full_content')->nullable();
+            $table->text('full_content');
             $table->text('url');
 
-            $table->boolean('is_processed')->default(false);
-
-            $table->foreignId('category_id')->nullable()->constrained('categories');
-            $table->foreignId('author_id')->nullable()->constrained('entities');
-            $table->foreignId('organization_id')->constrained('organizations');
-
+            $table->string('category');
+            $table->integer('word_count');
             $table->timestamp('article_created_at')->nullable();
+
+            $table->foreignId('author_id')->constrained('entities');
+            $table->foreignId('organization_id')->constrained('organizations');
         });
     }
     
