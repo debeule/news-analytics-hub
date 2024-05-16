@@ -36,8 +36,8 @@ class ProcessArticleTest extends TestCase
 
         $processArticleMock->handle();
 
-        Bus::assertDispatchedSync(ProcessArticleDomain::class);
         Bus::assertDispatchedSync(ProcessEntityDomain::class);
+        Bus::assertDispatchedSync(ProcessArticleDomain::class);
         Bus::assertDispatchedSync(ProcessMentionDomain::class);
     }
 }

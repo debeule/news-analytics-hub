@@ -7,10 +7,11 @@ namespace App\Testing;
 use App\Users\User;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use dispatchesJobs;
+    use dispatchesJobs, CreatesApplication, RefreshDatabase;
     
     /**
      * @param object $class
