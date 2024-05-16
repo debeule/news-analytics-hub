@@ -11,9 +11,33 @@ final class FilterAdditions
     public function __construct(
         private Collection $existingRecords,
         private Collection $externalRecords,
+        private string $searchField = 'name',
     ){}
 
     public function handle(): Collection
+    {
+        if($this->searchField === 'name') return $this->filterByName();
+        
+        if($this->searchField === 'title') return $this->filterByTitle();
+        
+    }
+
+    private function filterByName()
+    {
+        $newRecords = collect();
+         
+        foreach ($this->externalRecords as $externalRecord) 
+        {
+            if($this->existingRecords->where('name', $externalRecord->name())->isEmpty())
+            {
+                $newRecords->push($externalRecord);
+            }
+        }
+
+        return $newRecords;
+    }
+
+    private function filterByTitle()
     {
         $newRecords = collect();
          
@@ -24,7 +48,7 @@ final class FilterAdditions
                 $newRecords->push($externalRecord);
             }
         }
-        
+
         return $newRecords;
     }
 }
