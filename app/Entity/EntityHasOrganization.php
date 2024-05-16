@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class EntityHasOrganization extends Model
 {
+    public $timestamps = false;
+    
     protected $fillable = [
         'organization_id',
         'author_id',

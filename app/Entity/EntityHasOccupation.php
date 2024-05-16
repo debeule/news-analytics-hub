@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class EntityHasOccupation extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'entity_id',
         'occupation_id',
