@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Scraper\Queries;
 
 use App\Imports\Queries\ExternalArticles;
-use Illuminate\Support\Collection;
-use App\Scraper\Commands\ScrapeArticlesList;
-use App\Scraper\Commands\ScrapeArticle;
-use App\Scraper\Article;
 use App\Imports\Values\GuzzleResponse;
+use App\Scraper\Commands\ScrapeArticle;
+use App\Scraper\Commands\ScrapeArticlesList;
+use Illuminate\Support\Collection;
 
 final class AllArticles implements ExternalArticles
 {

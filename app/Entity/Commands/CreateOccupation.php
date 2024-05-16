@@ -1,9 +1,12 @@
-<?php 
+<?php
+
+declare(strict_types=1);
+
 
 namespace App\Entity\Commands;
 
-use App\Imports\Dtos\Occupation;
 use App\Entity\Occupation as DbOccupation;
+use App\Imports\Dtos\Occupation;
 
 final class CreateOccupation
 {

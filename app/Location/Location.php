@@ -13,7 +13,7 @@ class Location extends Model
         'country',
         'city',
         'street',
-        'organization_id'
+        'organization_id',
     ];
     
     public function organization()

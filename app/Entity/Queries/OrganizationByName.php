@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity\Queries;
 
-use App\Extensions\Eloquent\Scopes\FromVersion;
 use App\Extensions\Eloquent\Scopes\HasName;
 use App\Processed\Organization;
 use Illuminate\Database\Eloquent\Builder;

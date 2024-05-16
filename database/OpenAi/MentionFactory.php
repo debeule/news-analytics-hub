@@ -8,8 +8,6 @@ use App\OpenAi\Mention;
 use Faker\Factory as FakerFactory;
 use Illuminate\Support\Collection;
 
-use App\OpenAi\Entity;
-use App\OpenAi\Organization;
 
 final class MentionFactory
 {

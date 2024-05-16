@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Scraper\Commands;
 
+use App\Imports\Values\GuzzleResponse;
+use App\Imports\Values\ScrapeArticlesListEndpoint;
 use App\Scraper\Article;
+use App\Services\PostRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
-
-use App\Imports\Values\ScrapeArticlesListEndpoint;
-use App\Imports\Values\GuzzleResponse;
-use App\Services\PostRequest;
 
 class ScrapeArticlesList implements ShouldQueue
 {

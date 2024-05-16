@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Article\Commands;
 
 use App\Imports\Article as ExternalArticle;

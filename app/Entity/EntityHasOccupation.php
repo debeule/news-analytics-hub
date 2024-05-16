@@ -11,7 +11,7 @@ class EntityHasOccupation extends Model
     protected $fillable = [
         'entity_id',
         'occupation_id',
-        'created_at'
+        'created_at',
     ];
     
     public function entity()

@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity\Commands;
 
-use App\Entity\Entity;
 use App\OpenAI\Data;
 
 final class ProcessEntityDomain

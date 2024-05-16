@@ -1,31 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Article\Commands;
 
 use App\Article\Article;
 use App\Article\Commands\SyncArticles;
-use App\Entity\Organization;
+use App\Article\Queries\ArticlesByOrganization;
 use App\Article\Queries\ArticlesDiff;
-use Illuminate\Bus\Batch;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Bus;
-use App\Testing\TestCase;
-use PHPUnit\Framework\Attributes\Test;
-use Illuminate\Bus\PendingBatch;
-
-use Database\Scraper\ArticleFactory as ScraperArticleFactory;
-use Database\Factories\OrganizationFactory;
-use Database\Factories\EntityFactory;
 use App\Imports\ProcessArticle;
 use App\Imports\Queries\ExternalArticles;
-use App\Article\Queries\ArticlesByOrganization;
+use App\Testing\TestCase;
+use Database\Factories\EntityFactory;
+
+use Database\Factories\OrganizationFactory;
+use Database\Scraper\ArticleFactory as ScraperArticleFactory;
+use Illuminate\Bus\PendingBatch;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use PHPUnit\Framework\Attributes\Test;
 
 class SyncArticlesTest extends TestCase
 {
     use RefreshDatabase;
 
     #[Test]
-    public function itDispatchesBatchOfNewProcessArticleJobs()
+    public function itDispatchesBatchOfNewProcessArticleJobs(): void
     {
         Bus::fake();
         

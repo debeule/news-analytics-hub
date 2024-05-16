@@ -10,7 +10,7 @@ class EntityHasOrganization extends Model
 {
     protected $fillable = [
         'organization_id',
-        'author_id'
+        'author_id',
     ];
     
     public function organization()

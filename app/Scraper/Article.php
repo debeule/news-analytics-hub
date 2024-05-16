@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace App\Scraper;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Entity\Entity;
+use App\Entity\Organization;
 use App\Imports\Dtos\Article as ArticleInterface;
 use App\Imports\Values\DateTime;
 use Carbon\CarbonImmutable;
-use App\Entity\Organization;
-use App\Entity\Entity;
 
 class Article implements ArticleInterface
 {
     public function __construct(
-        public string $title, 
-        public string $url, 
+        public string $title,
+        public string $url,
         public string $organizationName,
         public string $authorName,
         public ?string $fullContent = null,

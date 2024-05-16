@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Database\Scraper;
 
 use App\Scraper\Article;
-use App\Imports\Values\ProvinceGroup;
+use Database\Factories\EntityFactory;
+use Database\Factories\OrganizationFactory;
 use Faker\Factory as FakerFactory;
 use Illuminate\Support\Collection;
-use Database\Factories\OrganizationFactory;
-use Database\Factories\EntityFactory;
 
 final class ArticleFactory
 {
