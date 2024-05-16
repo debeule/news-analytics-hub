@@ -5,31 +5,30 @@ declare(strict_types=1);
 
 namespace App\Entity\Commands;
 
-use App\Article\Article as DbArticle;
-use App\Imports\Dtos\Article;
+use App\Entity\Organization as DbOrganization;
+use App\Imports\Dtos\Organization;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
-final class CreateArticle
+final class CreateOrganization
 {
     use DispatchesJobs;
 
     public function __construct(
-        public Article $article
+        public Organization $organization
     ) {}
 
     public function handle(): bool
     {
-        return $this->buildRecord($this->article)->save();
+        return $this->buildRecord($this->organization)->save();
     }   
 
-    private function buildRecord(Article $article): DbArticle
+    private function buildRecord(Organization $organization): DbOrganization
     {
-        $newArticle = new DbArticle();
+        $newOrganization = new DbOrganization();
         
-        $newArticle->title = $article->title();
-        $newArticle->url = $article->url();
-        $newArticle->organization_id = $article->organizationId();
+        $newOrganization->name = $organization->name();
+        $newOrganization->sector = $organization->sector();
 
-        return $newArticle;
+        return $newOrganization;
     }
 }

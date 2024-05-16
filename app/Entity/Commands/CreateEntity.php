@@ -24,7 +24,6 @@ final class CreateEntity
         $newEntity = new DbEntity();
         
         $newEntity->name = $entity->name();
-        $newEntity->sector = $entity->sector();
 
         return $newEntity;
     }
