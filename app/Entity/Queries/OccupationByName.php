@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Entity\Queries;
 
 use App\Extensions\Eloquent\Scopes\HasName;
-use App\Entity\Organization;
+use App\Entity\Occupation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-final class OrganizationByName
+final class OccupationByName
 {
     public function __construct(
         public HasName $hasName = new HasName(''),
@@ -17,7 +17,7 @@ final class OrganizationByName
 
     public function query(): Builder
     {
-        return Organization::query()
+        return Occupation::query()
             ->tap($this->hasName);
     }
 
@@ -28,13 +28,13 @@ final class OrganizationByName
         );
     }
 
-    public function get(): Organization
+    public function get(): Occupation
     {
-        /** @var Organization */
+        /** @var Occupation */
         return $this->query()->firstOrFail();
     }
 
-    public function find(): ?Organization
+    public function find(): ?Occupation
     {
         try 
         {
