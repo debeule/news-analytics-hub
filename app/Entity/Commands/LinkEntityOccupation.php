@@ -6,6 +6,10 @@ use App\openAi\Entity as ExternalEntity;
 use App\Entity\Entity;
 use App\Entity\Occupation;
 
+use App\Entity\Queries\EntityByName;
+use App\Entity\Queries\OccupationByName;
+use App\Entity\EntityHasOccupation;
+
 class LinkEntityOccupation
 {
     private Entity $entity;
@@ -13,15 +17,22 @@ class LinkEntityOccupation
 
     public function __construct(
         private ExternalEntity $externalEntity,
-    ) {
-        dd(Occupation::get(), $this->externalEntity->occupatPion());
-        #TODO: put finding of record in interface / implementationif interface
-        $this->entity = Entity::where('name', $this->externalEntity->name())->firstOrFail();
-        $this->occupation = Occupation::where('name', $this->externalEntity->occupation())->firstOrFail();
-    }
+        private EntityByName $entityByName = new EntityByName,
+        private OccupationByName $occupationByName = new OccupationByName,
+    ) {}
 
-    public function __invoke(): void
+    public function handle(): bool
     {
-        dd($this->entity, $this->occupation);
+        return $this->buildRecord($this->externalEntity)->save();
+    } 
+
+    private function buildRecord(ExternalEntity $externalEntity): EntityHasOccupation
+    {
+        $entityHasOccupation = new EntityHasOccupation;
+
+        $entityHasOccupation->entity_id = $this->entityByName->hasName($externalEntity->name())->get()->id;
+        $entityHasOccupation->occupation_id = $this->occupationByName->hasName($externalEntity->occupation())->get()->id;
+
+        return $entityHasOccupation;
     }
 }
