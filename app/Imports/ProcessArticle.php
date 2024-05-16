@@ -17,6 +17,7 @@ use App\Article\Commands\ProcessArticleDomain;
 use App\Entity\Commands\ProcessEntityDomain;
 use App\Mention\Commands\ProcessMentionDomain;
 use App\OpenAi\Data;
+use App\Article\Article;
 
 class ProcessArticle implements ShouldQueue
 {
@@ -34,8 +35,8 @@ class ProcessArticle implements ShouldQueue
     {
         $data = $this->getData();
 
-        $this->dispatchSync(new ProcessArticleDomain($data->article()));
         $this->dispatchSync(new ProcessEntityDomain($data));
+        $this->dispatchSync(new ProcessArticleDomain($data->article()));
         $this->dispatchSync(new ProcessMentionDomain($data));
     }
 

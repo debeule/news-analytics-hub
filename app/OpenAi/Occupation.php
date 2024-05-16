@@ -8,10 +8,16 @@ class Occupation implements OccupationInterface
 {
     public function __construct(
         public string $name,
+        public string $sector,
     ){}
 
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function sector(): string
+    {
+        return $this->sector;
     }
 }
