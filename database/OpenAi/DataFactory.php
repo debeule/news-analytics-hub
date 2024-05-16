@@ -56,9 +56,9 @@ final class DataFactory
 
     public function create()
     {
-        if ($this->articles->isEmpty()) 
+        if ($this->mentions->isEmpty()) 
         {
-            $this->articles->push($this->build());
+            $this->mentions->push($this->build());
         }
 
         if($this->mentions->count() === 1) 
