@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('entity_has_occupation', function (Blueprint $table): void {
+        Schema::create('entity_has_occupations', function (Blueprint $table): void {
             $table->id();
 
             $table->foreignId('entity_id')->constrained('entities');
