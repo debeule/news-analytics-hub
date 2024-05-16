@@ -10,32 +10,39 @@ use Illuminate\Support\Collection;
 
 final class OccupationFactory
 {
+    private ?string $name = null;
+
     public function __construct(
         private Collection $occupations,
     ){}
 
     public static function new()
     {
-        return new self(
-            collect([self::build()])
-        );
+        return new self(collect());
     }
 
-    public static function build(): Occupation
+    public function withName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public static function build(string $name = null): Occupation
     {
         $faker = FakerFactory::create();
 
         return new Occupation(
-            $faker->name(),
+            $name ?? $faker->name(),
             $faker->name(),
         );
     }
 
     public function count(int $times): self
     {
-        for ($i = 0; $i < $times - 1; $i++) 
+        for ($i = 0; $i < $times; $i++) 
         {
-            $this->occupations->push($this->build());
+            $this->occupations->push($this->build($this->name));
         }
 
         return new self($this->occupations);
@@ -44,6 +51,11 @@ final class OccupationFactory
 
     public function create()
     {
+        if ($this->occupations->isEmpty()) 
+        {
+            $this->occupations->push($this->build());
+        }
+        
         if($this->occupations->count() === 1) 
         {
             return $this->occupations->first();

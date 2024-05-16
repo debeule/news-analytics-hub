@@ -10,7 +10,9 @@ use Illuminate\Support\Collection;
 
 final class EntityFactory
 {
-    private ?int $name = null;
+    private ?string $name = null;
+    private ?string $organizationName = null;
+    private ?string $occupationName = null;
 
     public function __construct(
         private Collection $entities,
@@ -18,34 +20,46 @@ final class EntityFactory
 
     public static function new()
     {
-        return new self(
-            collect([self::build()])
-        );
+        return new self(collect());
     }
 
-    public function withLinked(int $name): self
+    public function withName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public static function build(?string $name = null): Entity
+    public function withoccupationName(string $occupationName): self
+    {
+        $this->occupationName = $occupationName;
+
+        return $this;
+    }
+
+    public function withOrganizationName(string $organizationName): self
+    {
+        $this->organizationName = $organizationName;
+
+        return $this;
+    }
+
+    public static function build(?string $name = null, ?string $occupationName = null, ?string $organizationName = null): Entity
     {
         $faker = FakerFactory::create();
 
         return new Entity(
             $name ?? $faker->name(),
-            $faker->word(),
-            $faker->company(),
+            $occupationName ?? $faker->word(),
+            $organizationName ?? $faker->company(),
         );
     }
 
     public function count(int $times): self
     {
-        for ($i = 0; $i < $times - 1; $i++) 
+        for ($i = 0; $i < $times; $i++) 
         {
-            $this->entities->push($this->build($this->name));
+            $this->entities->push($this->build($this->name, $this->occupationName, $this->organizationName));
         }
 
         return new self($this->entities);
@@ -54,6 +68,11 @@ final class EntityFactory
 
     public function create()
     {
+        if ($this->entities->isEmpty()) 
+        {
+            $this->entities->push($this->build($name = null, $organizationName = null, $occupationName = null));
+        }
+
         if($this->entities->count() === 1) 
         {
             return $this->entities->first();
