@@ -4,17 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Entity\Organization;
+use App\Entity\Entity;
 
-final class OrganizationFactory extends Factory
+final class EntityFactory extends Factory
 {
-    protected $model = Organization::class;
+    protected $model = Entity::class;
 
     public function definition()
     {
         return [
             'name' => $this->faker->name(),
-            'type' => $this->faker->randomElement(['source_newspaper']),
         ];
     }
 }

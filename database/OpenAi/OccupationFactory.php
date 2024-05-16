@@ -27,6 +27,7 @@ final class OccupationFactory
 
         return new Occupation(
             $faker->name(),
+            $faker->name(),
         );
     }
 
