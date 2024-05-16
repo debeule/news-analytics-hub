@@ -5,10 +5,9 @@ declare(strict_types=1);
 
 namespace App\OpenAi;
 
-use App\Imports\Dtos\Mention as MentionInterface;
 use App\Entity\Entity;
 use App\Entity\Organization;
-use App\Article\Article;
+use App\Imports\Dtos\Mention as MentionInterface;
 
 class Mention implements MentionInterface
 {

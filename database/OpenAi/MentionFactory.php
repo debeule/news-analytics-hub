@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Database\OpenAi;
 
 use App\OpenAi\Mention;
+use Database\Factories\ArticleFactory;
 use Faker\Factory as FakerFactory;
 use Illuminate\Support\Collection;
-use Database\Factories\ArticleFactory;
 
 
 final class MentionFactory

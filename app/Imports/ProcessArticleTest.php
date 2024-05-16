@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Imports;
 
 use App\Article\Commands\ProcessArticleDomain;
-use App\Article\Commands\ProcessEntityDomain;
-use App\Article\Commands\ProcessMentionDomain;
 use App\Testing\TestCase;
 use Database\OpenAi\DataFactory;
 use Illuminate\Support\Facades\Bus;
