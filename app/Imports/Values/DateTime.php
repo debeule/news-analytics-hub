@@ -45,4 +45,9 @@ final class DateTime
     {
         return CarbonImmutable::parse($this->value);
     }
+
+    public static function now(): self
+    {
+        return new self();
+    }
 }

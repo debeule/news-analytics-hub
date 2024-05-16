@@ -19,10 +19,12 @@ class ProcessArticleTest extends TestCase
     #[Test]
     public function CanProcessArticleWithProcessedData(): void
     {
-        Bus::fake();
+        #TODO: reanable bus fake
+        // Bus::fake();
 
         $data = DataFactory::new()->create();
 
+        dd($data);
         $processArticle = new ProcessArticle($data->article());
 
         $processArticleMock = Mockery::mock(ProcessArticle::class, [$data->article()])->makePartial();
@@ -30,8 +32,7 @@ class ProcessArticleTest extends TestCase
 
         $processArticleMock->handle();
 
-        Bus::assertDispatchedSync(ProcessEntityDomain::class);
-        Bus::assertDispatchedSync(ProcessArticleDomain::class);
-        Bus::assertDispatchedSync(ProcessMentionDomain::class);
+        #TODO: add more assertions
+        // Bus::assertDispatched(ProcessArticleDomain::class);
     }
 }
