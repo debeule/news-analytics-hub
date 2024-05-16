@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Mention\Commands;
 
+use App\Article\Queries\ArticleByTitle;
 use App\OpenAI\Data;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use App\Article\Queries\ArticleByTitle;
 
 final class ProcessMentionDomain
 {

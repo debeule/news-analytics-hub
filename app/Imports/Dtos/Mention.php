@@ -6,7 +6,6 @@ namespace App\Imports\Dtos;
 
 use App\Entity\Entity;
 use App\Entity\Organization;
-use App\Article\Article;
 
 interface Mention 
 {

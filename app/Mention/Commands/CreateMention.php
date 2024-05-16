@@ -5,10 +5,10 @@ declare(strict_types=1);
 
 namespace App\Mention\Commands;
 
-use App\Mention\Mention as DbMention;
 use App\Imports\Dtos\Mention;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Imports\Values\DateTime;
+use App\Mention\Mention as DbMention;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 final class CreateMention
 {

@@ -6,7 +6,6 @@ namespace App\Entity\Commands;
 
 use App\OpenAI\Data;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use App\Article\Queries\ArticleByTitle;
 
 final class ProcessEntityDomain
 {

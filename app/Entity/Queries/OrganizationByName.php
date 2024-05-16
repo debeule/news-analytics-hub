@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity\Queries;
 
-use App\Extensions\Eloquent\Scopes\HasName;
 use App\Entity\Organization;
+use App\Extensions\Eloquent\Scopes\HasName;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

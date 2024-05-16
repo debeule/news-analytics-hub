@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity\Commands;
 
-use App\openAi\Entity as ExternalEntity;
 use App\Entity\Entity;
+use App\Entity\EntityHasOrganization;
 use App\Entity\Organization;
 
 use App\Entity\Queries\EntityByName;
 use App\Entity\Queries\OrganizationByName;
-use App\Entity\EntityHasOrganization;
+use App\openAi\Entity as ExternalEntity;
 
 class LinkEntityOrganization
 {

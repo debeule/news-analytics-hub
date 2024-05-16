@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Mention;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Article\Article;
 use App\Entity\Entity;
 use App\Entity\Organization;
-use App\Article\Article;
+use Illuminate\Database\Eloquent\Model;
 
 class Mention extends Model
 {

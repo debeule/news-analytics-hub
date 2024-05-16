@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Entity\Entity;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Article\Article;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class ArticleFactory extends Factory
 {
