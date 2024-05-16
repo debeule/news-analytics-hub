@@ -12,14 +12,12 @@ use Illuminate\Support\Collection;
 final class OrganizationFactory
 {
     public function __construct(
-        private Collection $occupations,
+        private Collection $organizations,
     ){}
 
     public static function new()
     {
-        return new self(
-            collect([self::build()])
-        );
+        return new self(collect());
     }
 
     public static function build(): Organization
@@ -34,22 +32,27 @@ final class OrganizationFactory
 
     public function count(int $times): self
     {
-        for ($i = 0; $i < $times - 1; $i++) 
+        for ($i = 0; $i < $times; $i++) 
         {
-            $this->occupations->push($this->build());
+            $this->organizations->push($this->build());
         }
 
-        return new self($this->occupations);
+        return new self($this->organizations);
         
     }
 
     public function create()
     {
-        if($this->occupations->count() === 1) 
+        if ($this->organizations->isEmpty()) 
         {
-            return $this->occupations->first();
+            $this->organizations->push($this->build());
         }
 
-        return $this->occupations;
+        if($this->organizations->count() === 1) 
+        {
+            return $this->organizations->first();
+        }
+
+        return $this->organizations;
     }
 }

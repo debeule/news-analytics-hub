@@ -18,9 +18,7 @@ final class DataFactory
 
     public static function new()
     {
-        return new self(
-            collect([self::build()])
-        );
+        return new self(collect());
     }
 
     public static function build(): Data
@@ -28,11 +26,17 @@ final class DataFactory
         $faker = FakerFactory::create();
 
         $organizations = OrganizationFactory::new()->count(3)->create();
-        $entities = EntityFactory::new()->count(3)->create();
+        $occupations = OccupationFactory::new()->count(3)->create();
+        
+        $entities = EntityFactory::new()
+            ->withOrganizationName($organizations->first()->name())
+            ->withOccupationName($occupations->first()->name())
+            ->count(3)
+            ->create();
 
         return new Data(
             ArticleFactory::new()->create(),
-            OccupationFactory::new()->count(3)->create(),
+            $occupations,
             $organizations,
             $entities,
             MentionFactory::new()->withLinked($entities->first()->name, $organizations->first()->name)->count(3)->create(),
@@ -41,7 +45,7 @@ final class DataFactory
 
     public function count(int $times): self
     {
-        for ($i = 0; $i < $times - 1; $i++) 
+        for ($i = 0; $i < $times; $i++) 
         {
             $this->mentions->push($this->build());
         }
@@ -52,23 +56,16 @@ final class DataFactory
 
     public function create()
     {
+        if ($this->articles->isEmpty()) 
+        {
+            $this->articles->push($this->build());
+        }
+
         if($this->mentions->count() === 1) 
         {
             return $this->mentions->first();
         }
 
         return $this->mentions;
-    }
-
-    public function createArray(): array
-    {
-        $outputArray = [];
-
-        foreach ($this->mentions as $mention) 
-        {
-            array_push($outputArray, array_values((array) $mention));
-        }
-
-        return $outputArray;
     }
 }
