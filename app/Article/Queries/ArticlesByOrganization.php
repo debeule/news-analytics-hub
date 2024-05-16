@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Article\Queries;
 
 use App\Article\Article;
-use App\Extensions\Eloquent\Scopes\HasOrganizationId;
 use App\Extensions\Eloquent\Scopes\FromDateTime;
-use Illuminate\Database\Eloquent\Builder;
+use App\Extensions\Eloquent\Scopes\HasOrganizationId;
 use App\Imports\Values\DateTime;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 class ArticlesByOrganization

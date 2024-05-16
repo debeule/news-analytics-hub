@@ -13,7 +13,7 @@ class Mention extends Model
         'name',
         'entity_id',
         'article_id',
-        'location_id'
+        'location_id',
     ];
     
     public function article()

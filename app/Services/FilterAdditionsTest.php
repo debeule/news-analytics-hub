@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Article\Article;
-use App\Scraper\Article as ScraperArticle;
 use App\Article\Commands\CreateArticle;
+use App\Scraper\Article as ScraperArticle;
 use App\Testing\TestCase;
+use Database\Factories\OrganizationFactory;
 use Database\Scraper\ArticleFactory as ScraperArticleFactory;
-use Database\Main\Factories\AddressFactory;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\Test;
-use App\Services\FilterAdditions;
-use Database\Factories\OrganizationFactory;
 
 final class FilterAdditionsTest extends TestCase
 {

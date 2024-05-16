@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Database\OpenAi;
 
 use App\OpenAi\Data;
-use Faker\Factory as FakerFactory;
-use Illuminate\Support\Collection;
-
 use Database\Scraper\ArticleFactory;
+use Faker\Factory as FakerFactory;
+
+use Illuminate\Support\Collection;
 
 final class DataFactory
 {
@@ -35,7 +35,7 @@ final class DataFactory
             OccupationFactory::new()->count(3)->create(),
             $organizations,
             $entities,
-            MentionFactory::new()->withLinked($entities->first()->name, $organizations->first()->name)->count(3)->create(),            
+            MentionFactory::new()->withLinked($entities->first()->name, $organizations->first()->name)->count(3)->create(),
         );
     }
 

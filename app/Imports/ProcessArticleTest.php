@@ -1,29 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Imports;
 
-use App\Imports\ProcessArticle;
-use App\Article\Queries\ArticleByTitle;
-use App\OpenAi\Commands\ProcessData;
-use App\OpenAi\Commands\CreateDataObject;
-use App\Imports\Dtos\Article as ExternalArticle;
 use App\Article\Commands\ProcessArticleDomain;
 use App\Article\Commands\ProcessEntityDomain;
 use App\Article\Commands\ProcessMentionDomain;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Queue;
 use App\Testing\TestCase;
-use PHPUnit\Framework\Attributes\Test;
+use Database\OpenAi\DataFactory;
 use Illuminate\Support\Facades\Bus;
-use Mockery\MockInterface;
 use Mockery;
 
-use Database\OpenAi\DataFactory;
+use PHPUnit\Framework\Attributes\Test;
 
 class ProcessArticleTest extends TestCase
 {
     #[Test]
-    public function CanProcessArticleWithProcessedData()
+    public function CanProcessArticleWithProcessedData(): void
     {
         Bus::fake();
 

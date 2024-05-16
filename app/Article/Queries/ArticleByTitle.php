@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Article\Queries;
 
-use App\Extensions\Eloquent\Scopes\FromVersion;
-use App\Extensions\Eloquent\Scopes\HasTitle;
 use App\Article\Article;
+use App\Extensions\Eloquent\Scopes\HasTitle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

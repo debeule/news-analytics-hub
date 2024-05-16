@@ -1,23 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Imports;
 
+use App\Article\Commands\ProcessArticleDomain;
+use App\Entity\Commands\ProcessEntityDomain;
+use App\Imports\Dtos\Article as ExternalArticle;
+use App\Mention\Commands\ProcessMentionDomain;
+use App\OpenAi\Commands\CreateDataObject;
+use App\OpenAi\Commands\ProcessData;
+
+use App\OpenAi\Data;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-
-use App\OpenAi\Commands\ProcessData;
-use App\OpenAi\Commands\CreateDataObject;
-use App\Imports\Dtos\Article as ExternalArticle;
-use App\Article\Commands\ProcessArticleDomain;
-use App\Entity\Commands\ProcessEntityDomain;
-use App\Mention\Commands\ProcessMentionDomain;
-use App\OpenAi\Data;
-use App\Article\Article;
 
 class ProcessArticle implements ShouldQueue
 {

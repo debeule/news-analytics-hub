@@ -1,9 +1,12 @@
-<?php 
+<?php
+
+declare(strict_types=1);
+
 
 namespace App\Article\Commands;
 
-use App\Imports\Dtos\Article;
 use App\Article\Article as DbArticle;
+use App\Imports\Dtos\Article;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 final class CreateArticle

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity\Commands;
 
-use App\Kohera\Occupation as KoheraOccupation;
 use App\Entity\Occupation;
 use App\Testing\TestCase;
 use Database\OpenAi\OccupationFactory as OpenAiOccupationFactory;

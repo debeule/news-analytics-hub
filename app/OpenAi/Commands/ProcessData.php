@@ -1,20 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\OpenAi\Commands;
 
-use App\Article\Article;
+use App\Imports\Values\GuzzleResponse;
+use App\Imports\Values\OpenAiEndpoint;
+use App\Services\PostRequest;
+use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Collection;
-use GuzzleHttp\Client;
-
-use App\OpenAi\Data;
-use App\Imports\Values\OpenAiEndpoint;
-use App\Services\PostRequest;
-use App\Imports\Values\GuzzleResponse;
 
 class ProcessData implements ShouldQueue
 {
@@ -33,7 +32,7 @@ class ProcessData implements ShouldQueue
             'messages' => [
                 [
                     'role' => 'user', 
-                    'content' => config('scraping.processing.prompt') . '\n' . $this->fullContent
+                    'content' => config('scraping.processing.prompt') . '\n' . $this->fullContent,
                 ],
             ],
             'max_tokens' => 4096,

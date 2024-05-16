@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mention\Commands;
 
-use App\Imports\Mention as ExternalMention;
 use App\OpenAI\Data;
 
 final class ProcessMentionDomain

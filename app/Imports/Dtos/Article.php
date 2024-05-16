@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Imports\Dtos;
 
-use App\Entity\Organization;
 use Carbon\CarbonImmutable;
 
 interface Article 

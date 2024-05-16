@@ -1,9 +1,12 @@
-<?php 
+<?php
+
+declare(strict_types=1);
+
 
 namespace App\Entity\Commands;
 
-use App\Imports\Dtos\entity;
 use App\Entity\entity as DbEntity;
+use App\Imports\Dtos\entity;
 
 final class CreateEntity
 {

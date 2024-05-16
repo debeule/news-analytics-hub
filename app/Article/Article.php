@@ -19,7 +19,7 @@ class Article extends Model
         'created_at',
         'category_id',
         'author_id',
-        'organization_id'
+        'organization_id',
     ];
     
     public function organization()

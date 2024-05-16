@@ -13,7 +13,7 @@ class Entity extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'created_at'
+        'created_at',
     ];
     
     public function entityHasOccupations()

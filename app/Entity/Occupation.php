@@ -12,7 +12,7 @@ class Occupation extends Model
 
     protected $fillable = [
         'name',
-        'sector'
+        'sector',
     ];
     
     public function entityHasOccupations()

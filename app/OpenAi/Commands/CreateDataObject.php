@@ -1,16 +1,18 @@
 <?php
 
-namespace App\OpenAi\Commands;
+declare(strict_types=1);
 
-use Illuminate\Support\Collection;
+namespace App\OpenAi\Commands;
 
 use App\Imports\Dtos\Article;
 
-use App\OpenAi\Organization;
-use App\OpenAi\Occupation;
-use App\OpenAi\Mention;
-use App\OpenAi\Entity;
 use App\OpenAi\Data;
+
+use App\OpenAi\Entity;
+use App\OpenAi\Mention;
+use App\OpenAi\Occupation;
+use App\OpenAi\Organization;
+use Illuminate\Support\Collection;
 
 class CreateDataObject
 {
