@@ -24,7 +24,6 @@ class ProcessArticleTest extends TestCase
 
         $data = DataFactory::new()->create();
 
-        dd($data);
         $processArticle = new ProcessArticle($data->article());
 
         $processArticleMock = Mockery::mock(ProcessArticle::class, [$data->article()])->makePartial();
