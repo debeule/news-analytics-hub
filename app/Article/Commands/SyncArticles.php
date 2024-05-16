@@ -16,7 +16,7 @@ class SyncArticles
 
     public function __invoke(ArticlesDiff $articlesDiff): void
     {
-        foreach (Organization::where('type', 'source_newspaper')->get() as $organization) 
+        foreach (Organization::where('sector', 'source_newspaper')->get() as $organization) 
         {
             $jobs = [];
             
