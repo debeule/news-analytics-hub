@@ -15,7 +15,7 @@ class OrganizationSeeder extends Seeder
         {
             DB::table('organizations')->insert([
                 'name' => $organization['name'],
-                'type' => $organization['organization_type'],
+                'type' => $organization['type'],
             ]);
         }
     }

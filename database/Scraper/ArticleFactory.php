@@ -9,10 +9,12 @@ use App\Imports\Values\ProvinceGroup;
 use Faker\Factory as FakerFactory;
 use Illuminate\Support\Collection;
 use Database\Factories\OrganizationFactory;
+use Database\Factories\EntityFactory;
 
 final class ArticleFactory
 {
-    private ?int $organizationId = null;
+    private ?string $organizationName = null;
+    private ?string $authorName = null;
 
     public function __construct(
         private Collection $articles,
@@ -23,21 +25,29 @@ final class ArticleFactory
         return new self(collect());
     }
 
-    public function withOrganizationId(int $organizationId): self
+    public function withOrganizationName(string $organizationName): self
     {
-        $this->organizationId = $organizationId;
+        $this->organizationName = $organizationName;
 
         return $this;
     }
 
-    public static function build(int $organizationId = null): Article
+    public function withAuthorName(string $authorName): self
+    {
+        $this->authorName = $authorName;
+
+        return $this;
+    }
+
+    public static function build(string $organizationName = null, string $authorName = null): Article
     {
         $faker = FakerFactory::create();
 
         return new Article(
             $faker->text(10),
             $faker->url(),
-            $organizationId ?? OrganizationFactory::new()->create()->id,
+            $organizationName ?? OrganizationFactory::new()->create()->name,
+            $authorName ?? EntityFactory::new()->create()->name,
             $faker->randomHtml(),
             $faker->word(),
             $faker->dateTime()->format('Y-m-d H:i'),
@@ -48,7 +58,7 @@ final class ArticleFactory
     {
         for ($i = 0; $i < $times; $i++) 
         {
-            $this->articles->push($this->build($this->organizationId));
+            $this->articles->push($this->build($this->organizationName));
         }
 
         return new self($this->articles);
@@ -59,7 +69,7 @@ final class ArticleFactory
     {
         if ($this->articles->isEmpty()) 
         {
-            $this->articles->push($this->build($this->organizationId));
+            $this->articles->push($this->build($this->organizationName, $this->authorName));
         }
 
         if($this->articles->count() === 1) 
