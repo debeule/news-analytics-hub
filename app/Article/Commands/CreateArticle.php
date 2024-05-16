@@ -26,8 +26,12 @@ final class CreateArticle
         $newArticle->title = $article->title();
         $newArticle->full_content = $article->fullContent();
         $newArticle->url = $article->url();
+
         $newArticle->category = $article->category();
+        $newArticle->word_count = str_word_count($this->article->fullContent());
         $newArticle->article_created_at = $article->createdAt();
+        
+        $newArticle->author_id = $article->authorId();
         $newArticle->organization_id = $article->organizationId();
 
         return $newArticle;

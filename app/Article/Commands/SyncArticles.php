@@ -24,7 +24,6 @@ class SyncArticles
             foreach ($articlesDiff($organization->id)->additions() as $externalArticle) 
             {
                 $jobs[] = new ProcessArticle($externalArticle);
-                break;
             }
             
             Bus::batch($jobs)->name('article-scraping:' . $organization->name)->dispatch();

@@ -15,7 +15,8 @@ use Illuminate\Bus\PendingBatch;
 
 use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use Database\Factories\OrganizationFactory;
-use App\Article\Commands\ProcessArticle;
+use Database\Factories\EntityFactory;
+use App\Imports\ProcessArticle;
 use App\Imports\Queries\ExternalArticles;
 use App\Article\Queries\ArticlesByOrganization;
 
@@ -26,8 +27,16 @@ class SyncArticlesTest extends TestCase
     #[Test]
     public function itDispatchesBatchOfNewProcessArticleJobs()
     {
+        Bus::fake();
+        
         $organization = OrganizationFactory::new()->create();
-        $externalArticles = ScraperArticleFactory::new()->withOrganizationId($organization->id)->count(2)->create();
+        $entity = EntityFactory::new()->create();
+
+        $externalArticles = ScraperArticleFactory::new()
+            ->withOrganizationName($organization->name)
+            ->withAuthorName($entity->name)
+            ->count(2)
+            ->create();
         
         $articlesByOrganizationMock = $this->createMock(ArticlesByOrganization::class);
         $articlesByOrganizationMock->method('get')->willReturn(Article::get());
@@ -36,12 +45,9 @@ class SyncArticlesTest extends TestCase
         $externalArticlesMock->method('get')->willReturn($externalArticles);
 
         $articlesDiff = new ArticlesDiff($articlesByOrganizationMock, $externalArticlesMock);
-
-        Bus::fake();
-
         $syncArticles = new SyncArticles();
-        $syncArticles($articlesDiff);
 
+        $syncArticles($articlesDiff);
         
         Bus::assertBatched(function (PendingBatch $batch) 
         {
