@@ -12,7 +12,7 @@ class Organization extends Model
     
     protected $fillable = [
         'name',
-        'type',
+        'sector',
     ];
 
     public function articles()

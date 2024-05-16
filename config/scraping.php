@@ -4,11 +4,11 @@ return [
     'organizations' => [
             "1" => [
                 "name" => "detijd",
-                "type" => "source_newspaper",
+                "sector" => "source_newspaper",
             ],
             "2" => [
                 "name" => "demorgen",
-                "type" => "source_newspaper",
+                "sector" => "source_newspaper",
             ],
     ],
     
@@ -40,10 +40,10 @@ return [
             key: mentions
             value: all instances of an entity or organization being mentioned
                 with
-                    mentioned entity,
-                    mentioned organization, 
                     context of mention (15 words), 
                     positivity score from 1 - 16
+                    name of mentioned entity,
+                    name of mentioned organization, 
         ",
     ]
 ];

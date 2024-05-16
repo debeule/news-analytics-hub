@@ -6,25 +6,18 @@ declare(strict_types=1);
 namespace App\OpenAi;
 
 use App\Imports\Dtos\Mention as MentionInterface;
+use App\Entity\Entity;
+use App\Entity\Organization;
+use App\Article\Article;
 
 class Mention implements MentionInterface
 {
     public function __construct(
-        public string $entity,
-        public string $organization,
         public string $context,
         public int $sentiment,
+        public string $entityName,
+        public string $organizationName,
     ){}
-
-    public function entity(): string
-    {
-        return $this->entity;
-    }
-
-    public function organization(): string
-    {
-        return $this->organization;
-    }
 
     public function context(): string
     {
@@ -34,5 +27,15 @@ class Mention implements MentionInterface
     public function sentiment(): int
     {
         return $this->sentiment;
+    }
+
+    public function entity(): Entity
+    {
+        return Entity::where('name', $this->entityName)->first();
+    }
+
+    public function organization(): Organization
+    {
+        return Organization::where('name', $this->organizationName)->first();
     }
 }

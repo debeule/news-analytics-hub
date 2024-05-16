@@ -11,9 +11,7 @@ class Entity extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'created_at',
+        'name',
     ];
     
     public function entityHasOccupations()
