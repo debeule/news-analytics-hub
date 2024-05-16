@@ -22,7 +22,8 @@ final class FilterAdditionsTest extends TestCase
     {
         $result = $this->DispatchSync(new FilterAdditions(
             collect(),
-            ScraperArticleFactory::new()->count(3)->create()
+            ScraperArticleFactory::new()->count(3)->create(),
+            'title'
         ));
             
         $this->assertInstanceOf(Collection::class, $result);
@@ -34,14 +35,15 @@ final class FilterAdditionsTest extends TestCase
     public function createDoesNotContainExistingRecords(): void
     {
         $organization = Organizationfactory::new()->create();
-        $externalArticles = ScraperArticleFactory::new()->withOrganizationId($organization->id)->count(3)->create();
+        $externalArticles = ScraperArticleFactory::new()->withOrganizationName($organization->name)->count(3)->create();
 
 
         $this->DispatchSync(new CreateArticle($externalArticles->first()));
 
         $result = $this->DispatchSync(new FilterAdditions(
             Article::get(),
-            $externalArticles
+            $externalArticles,
+            'title'
         ));
         
         $this->assertEquals(2, $result->count());
