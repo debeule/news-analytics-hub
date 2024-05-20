@@ -7,5 +7,3 @@ use Http\Endpoints\TestHandler;
 use Http\Endpoints\ScrapeArticlesListHandler;
 
 Route::get('/', TestHandler::class)->name('test');
-
-Route::get('/dispatch', ScrapeArticlesListHandler::class)->name('dispatch');
