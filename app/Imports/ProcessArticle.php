@@ -23,13 +23,9 @@ class ProcessArticle implements ShouldQueue
 {
     use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
-    public ProcessData $processData;
-
     public function __construct(
         public ExternalArticle $article,
-    ){
-        $this->processData = new ProcessData($this->article->fullContent());
-    }
+    ){}
 
     public function handle(): void
     {
@@ -42,6 +38,8 @@ class ProcessArticle implements ShouldQueue
 
     public function getData(): Data
     {
-        return CreateDataobject::fromArray($this->processData->get(), $this->article)->toDataObject();
+        $processData = new ProcessData($this->article->fullContent());
+
+        return CreateDataobject::fromArray($processData->get(), $this->article)->toDataObject();
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Endpoints;
 
-use App\Imports\SyncAllDomains;
+use App\Imports\SyncAllSources;
 use Illuminate\Http\JsonResponse;
 
 final class SyncHandler
@@ -13,7 +13,7 @@ final class SyncHandler
     {
         try 
         {
-            SyncAllDomains::dispatch();
+            SyncAllSources::dispatch();
         } 
         catch (\Throwable $th) 
         {
