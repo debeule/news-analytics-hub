@@ -22,8 +22,6 @@ class ProcessArticleTest extends TestCase
 
         $data = DataFactory::new()->create();
 
-        $processArticle = new ProcessArticle($data->article());
-
         $processArticleMock = Mockery::mock(ProcessArticle::class, [$data->article()])->makePartial();
         $processArticleMock->shouldReceive('getData')->once()->andReturn($data);
 

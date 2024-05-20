@@ -12,6 +12,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
+use App\Entity\Organization;
+
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
@@ -43,15 +45,20 @@ class ScrapeArticlesList implements ShouldQueue
         $response = $this->execute();
         $data = GuzzleResponse::fromResponse($response)->getData();
 
-        $collection = collect();
+        $externalArticles = collect();
 
         foreach($data['response'] as $listItem)
         {
-            $externalArticle = new Article($listItem['title'], $listItem['url'], $this->organizationId);
+            $externalArticle = new Article(
+                $listItem['title'], 
+                $listItem['url'], 
+                #TODO: rework article into seperate scraper article / openai article
+                Organization::find($this->organizationId)->name,
+        );
 
-            $collection->push($externalArticle);
+            $externalArticles->push($externalArticle);
         }
 
-        return $collection;
+        return $externalArticles;
     }
 }

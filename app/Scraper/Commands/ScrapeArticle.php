@@ -34,7 +34,7 @@ class ScrapeArticle implements ShouldQueue
         return PostRequest::setup(
             (string) $this->endpoint,
             [
-                'organization_id' => $this->article->organizationId,
+                'organization_id' => $this->article->organizationId(),
                 'url' => $this->article->url,
             ]
         )->execute();
