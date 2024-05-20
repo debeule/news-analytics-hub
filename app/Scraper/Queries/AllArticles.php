@@ -21,7 +21,7 @@ final class AllArticles implements ExternalArticles
         return new self($organizationId);
     }
 
-    private function scrapeArticle(): Collection
+    private function scrapeArticles(): Collection
     {
         $scraperArticles = collect();
 
@@ -43,7 +43,7 @@ final class AllArticles implements ExternalArticles
 
     public function get(): Collection
     {
-        return $this->scrapeArticle();
+        return $this->scrapeArticles();
     }
 
     public function find(): ?Collection
