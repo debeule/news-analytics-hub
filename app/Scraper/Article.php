@@ -16,7 +16,7 @@ class Article implements ArticleInterface
         public string $title,
         public string $url,
         public string $organizationName,
-        public string $authorName,
+        public ?string $authorName = null,
         public ?string $fullContent = null,
         public ?string $category = null,
         public ?string $createdAt = null,

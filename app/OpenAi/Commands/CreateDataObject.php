@@ -45,49 +45,70 @@ class CreateDataObject
         return $this->article;
     }
     
-    private function collectOccupations(): collection
+    private function collectOccupations(): ?collection
     {
+        if(is_null($this->data['occupations'])) return null;
+
         $occupations = collect();
         
         foreach ($this->data['occupations'] as $occupation) 
         {
-            $occupations->push(new Occupation($occupation));
+            $occupations->push(new Occupation(
+                $occupation['name'],
+                $occupation['sector'],
+            ));
         }
 
         return $occupations;
     }
     
-    private function collectOrganizations(): collection
+    private function collectOrganizations(): ?collection
     {
+        if(is_null($this->data['organizations'])) return null;
+
         $organizations = collect();
 
         foreach ($this->data['organizations'] as $organization) 
         {
-            $organizations->push(new Organization($organization));
+            $organizations->push(new Organization(
+                $organization['name'],
+                $organization['sector'],
+            ));
         }
 
         return $organizations;
     }
     
-    private function collectEntities(): collection
+    private function collectEntities(): ?collection
     {
+        if(is_null($this->data['entities'])) return null;
+
         $entities = collect();
 
         foreach ($this->data['entities'] as $entity) 
         {
-            $entities->push(new Entity($entity));
+            $entities->push(new Entity(
+                $entity['name'], 
+                $entity['occupation'], 
+                $entity['organization'],
+            ));
         }
 
         return $entities;
     }
     
-    private function collectMentions(): collection
+    private function collectMentions(): ?collection
     {
         $mentions = collect();
 
         foreach ($this->data['mentions'] as $mention) 
         {
-            $mentions->push(new Mention($mention));
+            $mentions->push(new Mention(
+                $mention['context'],
+                intval($mention['sentiment']),
+                $mention['entityName'],
+                $mention['organizationName'],
+            ));
         }
 
         return $mentions;
