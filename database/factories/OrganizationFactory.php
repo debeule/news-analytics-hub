@@ -15,7 +15,7 @@ final class OrganizationFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'sector' => $this->faker->randomElement(['source_newspaper']),
+            'sector' => $this->faker->word(),
         ];
     }
 }
