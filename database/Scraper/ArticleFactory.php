@@ -14,6 +14,7 @@ final class ArticleFactory
 {
     private ?string $organizationName = null;
     private ?string $authorName = null;
+    private ?string $exampleArticle = null;
 
     public function __construct(
         private Collection $articles,
@@ -46,8 +47,8 @@ final class ArticleFactory
             $faker->text(10),
             $faker->url(),
             $organizationName ?? OrganizationFactory::new()->create()->name,
-            $authorName ?? EntityFactory::new()->create()->name,
-            $faker->randomHtml(),
+            EntityFactory::new()->create()->name,
+            $exampleArticle ?? $faker->text(2000, 4000),
             $faker->word(),
             $faker->dateTime()->format('Y-m-d H:i'),
         );
@@ -57,7 +58,7 @@ final class ArticleFactory
     {
         for ($i = 0; $i < $times; $i++) 
         {
-            $this->articles->push($this->build($this->organizationName));
+            $this->articles->push($this->build($this->organizationName, $this->authorName));
         }
 
         return new self($this->articles);
