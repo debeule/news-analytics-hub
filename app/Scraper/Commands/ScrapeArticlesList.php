@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Scraper\Commands;
 
+use App\Entity\Organization;
 use App\Imports\Values\GuzzleResponse;
 use App\Imports\Values\ScrapeArticlesListEndpoint;
 use App\Scraper\Article;
 use App\Services\PostRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 
-use App\Entity\Organization;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -50,11 +50,11 @@ class ScrapeArticlesList implements ShouldQueue
         foreach($data['response'] as $listItem)
         {
             $externalArticle = new Article(
-                $listItem['title'], 
+                $listItem['title'],
                 $listItem['url'], 
                 #TODO: rework article into seperate scraper article / openai article
                 Organization::find($this->organizationId)->name,
-        );
+            );
 
             $externalArticles->push($externalArticle);
         }
