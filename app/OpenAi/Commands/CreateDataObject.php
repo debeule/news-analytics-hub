@@ -88,8 +88,8 @@ class CreateDataObject
         foreach ($this->data['entities'] as $entity) 
         {
             $entities->push(new Entity(
-                $entity['name'], 
-                $entity['occupation'], 
+                $entity['name'],
+                $entity['occupation'],
                 $entity['organization'],
             ));
         }
