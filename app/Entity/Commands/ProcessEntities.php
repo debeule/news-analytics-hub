@@ -25,8 +25,9 @@ final class ProcessEntities
         {
             $this->dispatchSync(new CreateEntity($entity));
 
-            $this->dispatchSync(new LinkEntityOccupation($entity));
-            $this->dispatchSync(new LinkEntityOrganization($entity));
+            if ($entity->occupation() != null) $this->dispatchSync(new LinkEntityOccupation($entity));
+
+            if ($entity->organization() != null) $this->dispatchSync(new LinkEntityOrganization($entity));
         }
     }
 }
