@@ -11,6 +11,6 @@ interface Mention
 {
     public function context(): string;
     public function sentiment(): int;
-    public function entity(): Entity;
-    public function organization(): Organization;
+    public function entity(): ?Entity;
+    public function organization(): ?Organization;
 }

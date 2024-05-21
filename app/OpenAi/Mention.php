@@ -14,8 +14,8 @@ class Mention implements MentionInterface
     public function __construct(
         public string $context,
         public int $sentiment,
-        public string $entityName,
-        public string $organizationName,
+        public ?string $entityName = null,
+        public ?string $organizationName = null,
     ){}
 
     public function context(): string
@@ -28,12 +28,12 @@ class Mention implements MentionInterface
         return $this->sentiment;
     }
 
-    public function entity(): Entity
+    public function entity(): ?Entity
     {
         return Entity::where('name', $this->entityName)->first();
     }
 
-    public function organization(): Organization
+    public function organization(): ?Organization
     {
         return Organization::where('name', $this->organizationName)->first();
     }

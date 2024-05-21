@@ -4,20 +4,23 @@ declare(strict_types=1);
 
 namespace App\Imports;
 
-use App\Article\Commands\SyncArticles;
+use App\Article\Commands\SyncArticleDomain;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-
 use Illuminate\Queue\SerializesModels;
 
 final class SyncAllSources implements ShouldQueue
 {
-    use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public $tries = 1;
 
     public function handle(): void
     {
-        $this->DispatchSync(new SyncArticles);
+        $syncArticleDomain = new SyncArticleDomain;
+        $syncArticleDomain();
     }
 }

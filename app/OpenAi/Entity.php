@@ -11,8 +11,8 @@ class Entity implements EntityInterface
 {
     public function __construct(
         public string $name,
-        public string $occupation,
-        public string $organization,
+        public ?string $occupation = null,
+        public ?string $organization = null,
     ){}
 
     public function name(): string
@@ -20,12 +20,12 @@ class Entity implements EntityInterface
         return $this->name;
     }
 
-    public function occupation(): string
+    public function occupation(): ?string
     {
         return $this->occupation;
     }
 
-    public function organization(): string
+    public function organization(): ?string
     {
         return $this->organization;
     }

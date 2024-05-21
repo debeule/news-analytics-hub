@@ -23,6 +23,8 @@ class ProcessArticle implements ShouldQueue
 {
     use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
+    public $tries = 1;
+
     public function __construct(
         public ExternalArticle $article,
     ){}
