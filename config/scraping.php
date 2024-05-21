@@ -13,40 +13,38 @@ return [
     ],
     
     'processing' => [
-        'prompt' => "Respond only in json format. Do not exclude data. If a field is not mentioned it is null. Everything in lowercase. Structure the json like:
-            
+        'prompt' => "Respond only in JSON format. Fields cannot be null unless specified. Ensure all data is lowercase. Structure the JSON as follows:
+
             key: category
-            value: choose most fitting (cannot be null): Politics, Business, Economy, Technology, Science & planet, Entertainment, Sports, Opinion,
-           
+            value: choose the most fitting category: Politics, Business, Economy, Technology, Science & Planet, Entertainment, Sports, Opinion.
+        
             key: created_at
-            value: date article was published in format yyyy-mm-dd-hh-mm
+            value: date article was published in the format yyyy-mm-dd-hh-mm.
+        
+            key: author
+            value: name of the author (nullable)
 
             key: occupations
-            value: every occupation occupation mentioned
-                with
-                    name => name of the occupation, 
-                    sector => general sector
-
+            value: list of all mentioned occupations, each with:
+                - name: name of the occupation
+                - sector: general sector
+        
             key: organizations
-            value: every mentioned organizations and company 
-                with 
-                    name => organization name, 
-                    sector => general sector
-
+            value: list of all mentioned organizations and companies, each with:
+                - name: organization name
+                - sector: general sector
+        
             key: entities
-            value: every mention of an organization, company or entity
-                with
-                    name => name of mentioned entity / organization / company, 
-                    occupation => occupation, 
-                    organization => name of linked organization from organizations key.
-
+            value: list of all mentioned entities and organizations, each with:
+                - name: name of mentioned entity/organization/company
+                - occupation: occupation (nullable)
+                - organization: name of linked organization from 'organizations' key (nullable)
+        
             key: mentions
-            value: all instances of an entity or organization being mentioned
-                with
-                    context => context of mention (15 words), 
-                    sentiment => score from 1 - 16
-                    entityName => name of mentioned entity (ensure entity is included in entities key),
-                    organizationName => name of mentioned organization (ensure organization is included in organizations key), 
-        ",
+            value: all instances of entities or organizations being mentioned, each with:
+                - context: context of mention (up to 15 words)
+                - sentiment: score from 1 to 16
+                - entity_name: name of mentioned entity (ensure entity is included in 'entities' key) (nullable if organization is mentioned)
+                - organization_name: name of mentioned organization (ensure organization is included in 'organizations' key) (nullable if entity is mentioned)",
     ]
 ];
