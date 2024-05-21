@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('sentiment');
             $table->timestamp('mention_created_at');
 
-            $table->foreignId('entity_id')->constrained('entities');
-            $table->foreignId('organization_id')->constrained('organizations');
+            $table->foreignId('entity_id')->nullable()->constrained('entities');
+            $table->foreignId('organization_id')->nullable()->constrained('organizations');
             $table->foreignId('article_id')->constrained('articles');
         });
     }

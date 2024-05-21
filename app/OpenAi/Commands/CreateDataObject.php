@@ -41,6 +41,7 @@ class CreateDataObject
     {
         $this->article->category = $this->data['category'];
         $this->article->created_at = $this->data['created_at'];
+        $this->article->author = $this->data['author'];
 
         return $this->article;
     }
@@ -89,8 +90,17 @@ class CreateDataObject
         {
             $entities->push(new Entity(
                 $entity['name'],
-                $entity['occupation'],
-                $entity['organization'],
+                $entity['occupation'] ?? null,
+                $entity['organization'] ?? null,
+            ));
+        }
+
+        if($this->data['author'] != null)
+        {
+            $entities->push(new Entity(
+                $this->data['author'],
+                'author',
+                $this->article->organization(),
             ));
         }
 
@@ -106,8 +116,8 @@ class CreateDataObject
             $mentions->push(new Mention(
                 $mention['context'],
                 intval($mention['sentiment']),
-                $mention['entityName'],
-                $mention['organizationName'],
+                $mention['entityName'] ?? null,
+                $mention['organizationName'] ?? null,
             ));
         }
 
