@@ -6,14 +6,17 @@ namespace Http\Endpoints;
 
 use App\Imports\SyncAllSources;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 final class SyncHandler
 {
+    use DispatchesJobs;
+
     public function __invoke(): JsonResponse
     {
         try 
         {
-            SyncAllSources::dispatch();
+            $this->dispatch(new SyncAllSources);
         } 
         catch (\Throwable $th) 
         {
