@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\OpenAi;
 
 use App\OpenAi\Data;
-use Database\Scraper\ArticleFactory;
 use Faker\Factory as FakerFactory;
 
 use Illuminate\Support\Collection;
