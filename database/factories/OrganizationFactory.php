@@ -18,4 +18,11 @@ final class OrganizationFactory extends Factory
             'sector' => $this->faker->word(),
         ];
     }
+
+    public function withSector(string $sector): self
+    {
+        return $this->state(fn (array $attributes) => [
+            'sector' => $sector,
+        ]);
+    }
 }
