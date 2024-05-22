@@ -16,11 +16,6 @@ final class AllArticles implements ExternalArticles
         public int $organizationId = 0,
     ) {}
 
-    public static function setup(int $organizationId): self
-    {
-        return new self($organizationId);
-    }
-
     private function scrapeArticles(): Collection
     {
         $scraperArticles = collect();
@@ -30,12 +25,9 @@ final class AllArticles implements ExternalArticles
         foreach ($articles as $article) 
         {
             $response = ScrapeArticle::setup($article)->get();
-            $data = GuzzleResponse::fromResponse($response)->getData();
+            $data = GuzzleResponse::fromResponse($response)->extractScraperResponse();
             
-            $article->fullContent = $data['response'][0]['result'];
-
-            #TODO: remove break when not debugging
-            break;
+            $article->fullContent = $data;
         }
 
         return $articles;
