@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('word_count');
             $table->timestamp('article_created_at')->nullable();
 
-            $table->foreignId('author_id')->constrained('entities');
+            $table->foreignId('author_id')->nullable()->constrained('entities');
             $table->foreignId('organization_id')->constrained('organizations');
         });
     }
