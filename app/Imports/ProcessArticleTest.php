@@ -9,6 +9,7 @@ use App\Testing\TestCase;
 use Database\OpenAi\DataFactory;
 use Illuminate\Support\Facades\Bus;
 use Mockery;
+use App\Scraper\Article;
 
 use PHPUnit\Framework\Attributes\Test;
 
@@ -21,8 +22,14 @@ class ProcessArticleTest extends TestCase
         // Bus::fake();
 
         $data = DataFactory::new()->create();
+        $scraperArticle = new Article(
+            $data->article()->title(),
+            $data->article()->url(),
+            $data->article()->organizationId(),
+            $data->article()->fullContent(),
+        );
 
-        $processArticleMock = Mockery::mock(ProcessArticle::class, [$data->article()])->makePartial();
+        $processArticleMock = Mockery::mock(ProcessArticle::class, [$scraperArticle])->makePartial();
         $processArticleMock->shouldReceive('getData')->once()->andReturn($data);
 
         $processArticleMock->handle();
