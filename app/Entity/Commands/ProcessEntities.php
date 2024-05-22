@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Commands;
 
 use App\Entity\Entity;
+use App\Entity\Occupation;
 use App\Services\FilterAdditions;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Collection;
@@ -24,7 +25,7 @@ final class ProcessEntities
         foreach ($filteredEntities as $entity) 
         {
             $this->dispatchSync(new CreateEntity($entity));
-
+            
             if ($entity->occupation() != null) $this->dispatchSync(new LinkEntityOccupation($entity));
 
             if ($entity->organization() != null) $this->dispatchSync(new LinkEntityOrganization($entity));
