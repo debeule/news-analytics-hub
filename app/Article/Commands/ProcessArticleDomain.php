@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Article\Commands;
 
-use App\Imports\Dtos\Article as ExternalArticle;
+use App\Imports\Dtos\ProcessedArticle as ExternalArticle;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 final class ProcessArticleDomain

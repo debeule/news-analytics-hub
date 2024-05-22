@@ -32,7 +32,7 @@ class ProcessData implements ShouldQueue
             'messages' => [
                 [
                     'role' => 'user', 
-                    'content' => config('scraping.processing.prompt') . '\n' . $this->fullContent,
+                    'content' => config('processing.prompt') . '\n' . $this->fullContent,
                 ],
             ],
             'max_tokens' => 4096,

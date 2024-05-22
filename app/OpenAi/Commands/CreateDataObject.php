@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\OpenAi\Commands;
 
-use App\Imports\Dtos\Article;
+use App\Imports\Dtos\Article as ArticleInterface;
+use App\OpenAi\Article;
 
 use App\OpenAi\Data;
 
@@ -14,14 +15,16 @@ use App\OpenAi\Occupation;
 use App\OpenAi\Organization;
 use Illuminate\Support\Collection;
 
+use App\Entity\Organization as DbOrganization;
+
 class CreateDataObject
 {
     public function __construct(
         private Array $data,
-        private Article $article,
+        private ArticleInterface $article,
     ) {}
 
-    public static function fromArray(array $dataArray, Article $article): self
+    public static function fromArray(array $dataArray, ArticleInterface $article): self
     {
         return new self($dataArray, $article);
     }
@@ -39,11 +42,15 @@ class CreateDataObject
 
     private function collectArticle(): Article
     {
-        $this->article->category = $this->data['category'];
-        $this->article->created_at = $this->data['created_at'];
-        $this->article->author = $this->data['author'];
-
-        return $this->article;
+        return new Article(
+            $this->article->title,
+            $this->article->url,
+            $this->article->fullContent,
+            $this->data['category'],
+            $this->article->organizationId,
+            $this->data['author'],
+            $this->data['created_at'],
+        );
     }
     
     private function collectOccupations(): ?collection
@@ -100,7 +107,7 @@ class CreateDataObject
             $entities->push(new Entity(
                 $this->data['author'],
                 'author',
-                $this->article->organization(),
+                DbOrganization::find($this->article->organizationId())->name,
             ));
         }
 
