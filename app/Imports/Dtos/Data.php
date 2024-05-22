@@ -11,7 +11,7 @@ use App\Imports\Queries\Collections\OrganizationCollection;
 
 interface Data 
 {
-    public function article(): Article;
+    public function article(): ProcessedArticle;
     public function occupations(): OccupationCollection;
     public function organizations(): OrganizationCollection;
     public function entities(): EntityCollection;

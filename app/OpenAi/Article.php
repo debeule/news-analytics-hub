@@ -2,21 +2,24 @@
 
 declare(strict_types=1);
 
-namespace App\Scraper;
+namespace App\OpenAi;
 
 use App\Entity\Entity;
 use App\Entity\Organization;
+use App\Imports\Dtos\ProcessedArticle as ArticleInterface;
 use App\Imports\Values\DateTime;
 use Carbon\CarbonImmutable;
-use App\Imports\Dtos\Article as ArticleInterface;
 
 class Article implements ArticleInterface
 {
     public function __construct(
         public string $title,
         public string $url,
-        public int $organizationId,
         public ?string $fullContent = null,
+        public ?string $category = null,
+        public int $organizationId,
+        public ?string $author = null,
+        public ?string $createdAt = null,
     ) {}
     
     public function title(): string
@@ -34,8 +37,25 @@ class Article implements ArticleInterface
         return $this->fullContent;
     }
 
+    public function category(): ?string
+    {
+        return $this->category;
+    }
+
     public function organizationId(): int
     {
         return $this->organizationId;
+    }
+
+    public function author(): ?string
+    {
+        return $this->author;
+    }
+
+    public function createdAt(): ?CarbonImmutable
+    {
+        if(is_null($this->createdAt)) return null;
+
+        return DateTime::fromString($this->createdAt)->toCarbonImmutable();
     }
 }
