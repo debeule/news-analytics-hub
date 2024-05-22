@@ -17,10 +17,9 @@ class ArticlesDiff
     private Collection $externalArticles;
 
     public function __construct(
+        private ExternalArticles $externalArticlesQuery = new ExternalArticles,
         private ArticlesByOrganization $articlesQuery = new ArticlesByOrganization,
-        private ExternalArticles $externalArticlesQuery,
     ) {
-        $this->allRecentArticles = $this->articlesQuery->FromDateTime(24)->get();
     }
 
     public function __invoke(int $organizationId)
@@ -28,14 +27,15 @@ class ArticlesDiff
         $this->externalArticlesQuery->organizationId = $organizationId;
         $this->externalArticles = $this->externalArticlesQuery->get();
 
+        $this->allRecentArticles = $this->articlesQuery->fromOrganizationId($organizationId)->FromDateTime(24)->get();
+
         return $this;
     }
     
     public function additions(): Collection
     {
-        return $this->externalArticles;
+        $filter = new FilterAdditions($this->allRecentArticles, $this->externalArticles, 'title');
 
-        #TODO: filter existing records
-        // return $this->DispatchSync(new FilterAdditions($this->allRecentArticles, $this->externalArticles));
+        return $filter->handle();
     }
 }

@@ -20,12 +20,18 @@ class SyncArticles
         {
             $jobs = [];
             
-            foreach ($articlesDiff($organization->id)->additions() as $externalArticle) 
+            $i = 0;
+            foreach ($articlesDiff($organization->id)->additions() as $scraperArticle) 
             {
-                $jobs[] = new ProcessArticle($externalArticle);
+                $jobs[] = new ProcessArticle($scraperArticle);
+
+                $i++;
+                if($i > 2) break;
             }
-            
-            Bus::batch($jobs)->name('article-scraping:' . $organization->name)->dispatch();
+
+            Bus::batch($jobs)
+                ->name('article-scraping:' . $organization->name)
+                ->dispatch();
         }
     }
 }
