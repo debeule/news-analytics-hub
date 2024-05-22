@@ -36,6 +36,11 @@ final class GuzzleResponse
         return $this->decode();
     }
 
+    public function extractScraperResponse(): string
+    {
+        return $this->getData()['response'][0]['result'];
+    }
+
     public function extractOpenAiResponse(): array
     {
         $contents = $this->getData()['choices'][0]['message']['content'];
