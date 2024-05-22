@@ -47,16 +47,15 @@ class ScrapeArticlesList implements ShouldQueue
 
         $externalArticles = collect();
 
-        foreach($data['response'] as $listItem)
+        foreach($data['response'] as $article)
         {
-            $externalArticle = new Article(
-                $listItem['title'],
-                $listItem['url'], 
-                #TODO: rework article into seperate scraper article / openai article
-                Organization::find($this->organizationId)->name,
+            $externalArticles->push(
+                new Article(
+                    $article['title'],
+                    $article['url'],
+                    $this->organizationId
+                )
             );
-
-            $externalArticles->push($externalArticle);
         }
 
         return $externalArticles;
