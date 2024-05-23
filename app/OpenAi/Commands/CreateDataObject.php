@@ -118,7 +118,17 @@ class CreateDataObject
     {
         $mentions = collect();
 
-        foreach ($this->data['mentions'] as $mention) 
+        foreach ($this->data['entity-mentions'] as $mention) 
+        {
+            $mentions->push(new Mention(
+                $mention['context'],
+                intval($mention['sentiment']),
+                $mention['entityName'] ?? null,
+                $mention['organizationName'] ?? null,
+            ));
+        }
+
+        foreach ($this->data['organization-mentions'] as $mention) 
         {
             $mentions->push(new Mention(
                 $mention['context'],
