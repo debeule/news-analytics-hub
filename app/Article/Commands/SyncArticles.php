@@ -29,6 +29,8 @@ class SyncArticles
                 if($i > 2) break;
             }
 
+            if(count($jobs) === 0) throw new \Exception('Scraping arrticles list failed.');
+
             Bus::batch($jobs)
                 ->name('article-scraping:' . $organization->name)
                 ->dispatch();
