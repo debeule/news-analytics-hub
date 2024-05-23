@@ -10,7 +10,7 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
         uses: releasehub-com/github-action-create-pr-parent-submodule@v1
         with:
           github_token: ${{ secrets.GHCR_TOKEN }}
-          parent_repository: 'github.com/news-analytics-dock'
+          parent_repository: 'news-analytics-dock'
           checkout_branch: 'main'
           pr_against_branch: 'main'
           owner: 'debeule'
