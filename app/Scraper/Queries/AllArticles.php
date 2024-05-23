@@ -22,14 +22,6 @@ final class AllArticles implements ExternalArticles
 
         $articles = ScrapeArticlesList::setup($this->organizationId)->get();
 
-        foreach ($articles as $article) 
-        {
-            $response = ScrapeArticle::setup($article)->get();
-            $data = GuzzleResponse::fromResponse($response)->extractScraperResponse();
-            
-            $article->fullContent = $data;
-        }
-
         return $articles;
     }
 

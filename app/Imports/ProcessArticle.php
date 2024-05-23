@@ -18,6 +18,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Scraper\Commands\ScrapeArticle;
+use App\Imports\Values\GuzzleResponse;
 
 class ProcessArticle implements ShouldQueue
 {
@@ -31,6 +33,8 @@ class ProcessArticle implements ShouldQueue
 
     public function handle(): void
     {
+        $this->article->fullContent = $this->scrapeArticleContent();
+
         $data = $this->getData();
 
         $this->dispatchSync(new ProcessEntityDomain($data));
@@ -43,5 +47,13 @@ class ProcessArticle implements ShouldQueue
         $processData = new ProcessData($this->article->fullContent());
 
         return CreateDataobject::fromArray($processData->get(), $this->article)->toDataObject();
+    }
+
+    public function scrapeArticleContent(): string
+    {
+        $response = ScrapeArticle::setup($this->article)->get();
+        $fullContent = GuzzleResponse::fromResponse($response)->extractScraperResponse();
+
+        return $fullContent;
     }
 }
