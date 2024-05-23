@@ -10,14 +10,16 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Check out the repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Notify main repo
-        if: ${{ github.event.pull_request.merged == true || github.ref == 'refs/heads/main' }}
-        run: |
-          curl -X POST -H "Authorization: token ${{ secrets.GHCR_TOKEN }}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/debeule/news-analytics-dock/dispatches \
-          -d '{"event_type": "repository_dispatch", "client_payload": {"type": "submodules-sync"}}'
+        uses: releasehub-com/github-action-create-pr-parent-submodule@v1
+        with:
+          github_token: ${{ secrets.GHCR_TOKEN }}
+          parent_repository: 'github.com/news-analytics-dock'
+          checkout_branch: 'main'
+          pr_against_branch: 'main'
+          owner: 'debeule'
