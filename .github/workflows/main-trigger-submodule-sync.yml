@@ -19,7 +19,7 @@ jobs:
         uses: releasehub-com/github-action-create-pr-parent-submodule@v1
         with:
           github_token: ${{ secrets.GHCR_TOKEN }}
-          parent_repository: 'news-analytics-dock'
+          parent_repository: 'debeule/news-analytics-dock'
           checkout_branch: 'main'
           pr_against_branch: 'main'
           owner: 'debeule'
