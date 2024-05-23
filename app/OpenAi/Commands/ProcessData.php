@@ -32,14 +32,14 @@ class ProcessData implements ShouldQueue
             'messages' => [
                 [
                     'role' => 'user', 
-                    'content' => config('processing.prompt') . '\n' . $this->fullContent,
+                    'content' => config('Processing.prompt') . '\n' . $this->fullContent,
                 ],
             ],
             'max_tokens' => 4096,
         ];
 
         $this->headers = [
-            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Authorization' => 'Bearer ' . config('Processing.openai_api_key'),
             'Content-Type' => 'application/json',
         ];
     }
