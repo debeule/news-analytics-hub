@@ -14,7 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        ref: ${{ github.sha }}
 
       - name: Notify main repo
         uses: releasehub-com/github-action-create-pr-parent-submodule@v1
