@@ -9,7 +9,7 @@ return [
         value: choose the most fitting category: politics, business, economy, technology, science & planet, entertainment, sports, opinion, media.
     
         key: created_at
-        value: date article was published in the format yyyy-mm-dd-hh-mm.
+        value: date article was published in the format yyyy-mm-dd hh:ii.
     
         key: author
         value: name of the author (nullable)
