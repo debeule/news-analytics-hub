@@ -7,41 +7,52 @@ namespace Http\Endpoints;
 use App\Imports\SyncAllSources;
 use App\OpenAi\Commands\ProcessData;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Database\Factories\ArticleFactory;
+use Database\Scraper\ArticleFactory;
 use Database\Factories\OrganizationFactory;
 use App\Imports\ProcessArticle;
 use App\Imports\Values\DateTime;
 use App\Article\Queries\ArticlesByOrganization;
 use App\Article\Article;
 use Carbon\CarbonImmutable;
+use Database\OpenAi\DataFactory;
+use Illuminate\Support\Facades\Cache;
+use App\Article\Commands\CacheFullContentByTitle;
+use App\Article\Queries\CacheFullContentByTitle as CacheArticleFullContentQuery;
 
 class TestHandler
 {
     use DispatchesJobs;
 
     public function __construct(
-        private ArticlesByOrganization $articlesQuery = new ArticlesByOrganization,
-    ) {}
+        private CacheArticleFullContentQuery $query = new CacheArticleFullContentQuery,
+    ) {
+    }
 
     public function __invoke()
     {
         $o = OrganizationFactory::new()->create();
         $a = ArticleFactory::new()->withOrganizationId($o->id)->create();
-        // dd($o, $a);
 
-        dd(Article::where('article_created_at', '>=', '2024-05-23')->where('organization_id', $o->id)->get());
-        dd($this->articlesQuery->fromDateTime(1)->fromOrganizationId($o->id)->query()->get());
 
-        dd(DateTime::fromDaysAgo(1));
+        CacheFullContentByTitle::setup($a, "aaaabcdef")->execute();
+
+
+        $this->query = $this->query->fromOrganizationId($o->id)->fromArticleTitle($a->title);
+
+        dd($this->query->find());
+        
     }
 
     // public function __invoke()
     // {
-    //     $externalArticle = ArticleFactory::new()->create();
-    //     $externalArticle->organizationId = 1;
-    //     $externalArticle->url = "https://tijd.be/politiek-economie/belgie/vlaanderen/vlaanderen-loopt-voor-op-europa-elke-25-km-een-snellaadpunt-tegen-2025/10547899.html";
-    //     $a = new ProcessArticle($externalArticle);
-    //     $a->handle();
+    //     $o = OrganizationFactory::new()->create();
+    //     $a = ArticleFactory::new()->withOrganizationId($o->id)->create();
+    //     // dd($o, $a);
+
+    //     dd(Article::where('article_created_at', '>=', '2024-05-23')->where('organization_id', $o->id)->get());
+    //     dd($this->articlesQuery->fromDateTime(1)->fromOrganizationId($o->id)->query()->get());
+
+    //     dd(DateTime::fromDaysAgo(1));
     // }
     
     // public function __invoke(): void

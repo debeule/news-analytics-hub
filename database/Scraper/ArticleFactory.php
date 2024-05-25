@@ -30,7 +30,7 @@ final class ArticleFactory
         return $this;
     }
 
-    public static function build(int $organizationId): Article
+    public static function build(?int $organizationId): Article
     {
         $faker = FakerFactory::create();
 
