@@ -23,14 +23,14 @@ final class ArticleFactory
         return new self(collect());
     }
 
-    public function withorganizationId(int $organizationId): self
+    public function withOrganizationId(int $organizationId): self
     {
         $this->organizationId = $organizationId;
 
         return $this;
     }
 
-    public static function build(): Article
+    public static function build(int $organizationId): Article
     {
         $faker = FakerFactory::create();
 
