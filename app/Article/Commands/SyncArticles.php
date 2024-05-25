@@ -6,6 +6,7 @@ namespace App\Article\Commands;
 
 use App\Article\Queries\ArticlesDiff;
 use App\Entity\Organization;
+use App\Imports\ScrapeArticle;
 use App\Imports\ProcessArticle;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Bus;
@@ -15,7 +16,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Scraper\Commands\ScrapeArticle;
 use App\Imports\Values\GuzzleResponse;
 
 class SyncArticles implements ShouldQueue
@@ -35,10 +35,14 @@ class SyncArticles implements ShouldQueue
             $i = 0;
             foreach ($articlesDiff($this->organization->id)->additions() as $scraperArticle) 
             {
-                $jobs[] = new ProcessArticle($scraperArticle);
+                $scrapeJob = new ScrapeArticle($scraperArticle);
+
+                $jobs[] = $scrapeJob->chain([
+                    new ProcessArticle($scraperArticle),
+                ]);
 
                 $i++;
-                if($i > 1) break;
+                if($i >= 3) break;
             }
 
             if(count($jobs) === 0) throw new \Exception('Scraping arrticles list failed.');
