@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\OpenAi;
 
+use App\Imports\Collections\EntityCollection;
 use App\OpenAi\Entity;
 use Faker\Factory as FakerFactory;
-use Illuminate\Support\Collection;
 
 final class EntityFactory
 {
@@ -15,12 +15,12 @@ final class EntityFactory
     private ?string $occupationName = null;
 
     public function __construct(
-        private Collection $entities,
+        private EntityCollection $entities,
     ){}
 
     public static function new()
     {
-        return new self(collect());
+        return new self(new EntityCollection);
     }
 
     public function withName(string $name): self

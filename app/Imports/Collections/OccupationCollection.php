@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Imports\Collections;
 
-use App\Entity\Occupation;
+use App\Imports\Dtos\Occupation;
 use Illuminate\Support\Collection;
 
 class OccupationCollection extends Collection

@@ -6,15 +6,12 @@ namespace App\OpenAi\Commands;
 
 use App\Entity\Organization as DbOrganization;
 use App\Imports\Collections\EntityCollection;
-
 use App\Imports\Collections\MentionCollection;
-
 use App\Imports\Collections\OccupationCollection;
 use App\Imports\Collections\OrganizationCollection;
 use App\Imports\Dtos\Article as ArticleInterface;
 use App\OpenAi\Article;
 use App\OpenAi\Data;
-
 
 use App\OpenAi\Entity;
 use App\OpenAi\Mention;

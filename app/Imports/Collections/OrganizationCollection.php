@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace App\Imports\Collections;
 
-use App\Entity\Organization;
+use App\Imports\Dtos\Organization;
 use Illuminate\Support\Collection;
 
 class OrganizationCollection extends Collection

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Database\OpenAi;
 
+use App\Imports\Collections\OccupationCollection;
 use App\OpenAi\Occupation;
 use Faker\Factory as FakerFactory;
-use Illuminate\Support\Collection;
 
 final class OccupationFactory
 {
     private ?string $name = null;
 
     public function __construct(
-        private Collection $occupations,
+        private OccupationCollection $occupations,
     ){}
 
     public static function new()
     {
-        return new self(collect());
+        return new self(new OccupationCollection);
     }
 
     public function withName(string $name): self
