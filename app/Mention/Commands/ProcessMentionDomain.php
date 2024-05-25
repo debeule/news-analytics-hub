@@ -18,11 +18,11 @@ final class ProcessMentionDomain
         private Data $data,
         private ArticleByTitle $articleByTitle = new ArticleByTitle,
     ){
-        $this->articleId = $this->articleByTitle->hasTitle($this->data->article->title)->get()->id;
+        $this->articleId = $this->articleByTitle->hasTitle($this->data->article()->title())->get()->id;
     }
 
     public function __invoke(): void
     {
-        $this->dispatchSync(new ProcessMentions($this->data->mentions, $this->articleId));
+        $this->dispatchSync(new ProcessMentions($this->data()->mentions(), $this->articleId));
     }
 }
