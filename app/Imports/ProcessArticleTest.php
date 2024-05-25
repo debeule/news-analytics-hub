@@ -10,6 +10,9 @@ use Database\OpenAi\DataFactory;
 use Illuminate\Support\Facades\Bus;
 use Mockery;
 use App\Scraper\Article;
+use App\Article\Article as DbArticle;
+use App\Entity\Entity;
+use App\Mention\Mention;
 
 use PHPUnit\Framework\Attributes\Test;
 
@@ -18,8 +21,6 @@ class ProcessArticleTest extends TestCase
     #[Test]
     public function CanProcessArticleWithProcessedData(): void
     {
-        Bus::fake();
-
         $data = DataFactory::new()->create();
         $scraperArticle = new Article(
             $data->article()->title(),
@@ -30,11 +31,18 @@ class ProcessArticleTest extends TestCase
         $processArticleMock = Mockery::mock(ProcessArticle::class, [$scraperArticle])->makePartial();
         $processArticleMock->shouldReceive('getData')->once()->andReturn($data);
 
+        $startingEntityCount = Entity::count();
+        $startingMentionCount = Mention::count();
+
         $processArticleMock->handle();
 
-        Bus::assertDispatchedSync(ProcessEntityDomain::class);
-        Bus::assertDispatchedSync(ProcessArticleDomain::class);
-        Bus::assertDispatchedSync(ProcessMentionDomain::class);
+        $article = DbArticle::where('title', $data->article()->title())->first();
+        $entityCount = Entity::count();
+        $mentionCount = Mention::count();
+
+        $this->assertNotNull($article);
+        $this->assertEquals($entityCount - $startingEntityCount, 3);
+        $this->assertEquals($mentionCount - $startingMentionCount, 3);
 
     }
 }
