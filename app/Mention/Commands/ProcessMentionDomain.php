@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Mention\Commands;
 
 use App\Article\Queries\ArticleByTitle;
-use App\OpenAI\Data;
+use App\OpenAi\Data;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 final class ProcessMentionDomain
@@ -23,6 +23,6 @@ final class ProcessMentionDomain
 
     public function __invoke(): void
     {
-        $this->dispatchSync(new ProcessMentions($this->data()->mentions(), $this->articleId));
+        $this->dispatchSync(new ProcessMentions($this->data->mentions(), $this->articleId));
     }
 }

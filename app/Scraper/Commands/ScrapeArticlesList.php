@@ -16,7 +16,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Psr7\Response;
 
 class ScrapeArticlesList implements ShouldQueue
 {
@@ -32,7 +32,7 @@ class ScrapeArticlesList implements ShouldQueue
         return new self($organizationId);
     }
 
-    public function execute(): ResponseInterface
+    public function execute(): Response
     {
         return PostRequest::setup(
             (string) $this->endpoint,

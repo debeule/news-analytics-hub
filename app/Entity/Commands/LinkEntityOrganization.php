@@ -10,13 +10,10 @@ use App\Entity\Organization;
 
 use App\Entity\Queries\EntityByName;
 use App\Entity\Queries\OrganizationByName;
-use App\openAi\Entity as ExternalEntity;
+use App\OpenAi\Entity as ExternalEntity;
 
 class LinkEntityOrganization
 {
-    private Entity $entity;
-    private Organization $organization;
-
     public function __construct(
         private ExternalEntity $externalEntity,
         private EntityByName $entityByName = new EntityByName,

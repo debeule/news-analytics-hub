@@ -10,6 +10,7 @@ use App\Extensions\Eloquent\Scopes\HasOrganizationId;
 use App\Imports\Values\DateTime;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ArticlesByOrganization
 {

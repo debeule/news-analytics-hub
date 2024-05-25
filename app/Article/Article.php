@@ -7,6 +7,8 @@ namespace App\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Entity\Organization;
+use App\Mention\Mention;
 
 class Article extends Model
 {

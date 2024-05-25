@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Commands;
 
-use App\OpenAI\Data;
+use App\OpenAi\Data;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 final class ProcessEntityDomain

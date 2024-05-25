@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Article\Queries;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CacheFullContentByTitle
 {
