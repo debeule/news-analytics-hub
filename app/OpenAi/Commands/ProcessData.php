@@ -18,7 +18,10 @@ class ProcessData implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /** @var array<mixed> */
     private array $data;
+
+    /** @var array<mixed> */
     private array $headers;
 
     public function __construct(
@@ -41,7 +44,8 @@ class ProcessData implements ShouldQueue
             'Content-Type' => 'application/json',
         ];
     }
-
+    
+    /** @return array<mixed>  */
     public function execute(): Array
     {
         $response = PostRequest::setup(
@@ -53,6 +57,7 @@ class ProcessData implements ShouldQueue
         return GuzzleResponse::fromResponse($response)->extractOpenAiResponse();
     }
 
+    /** @return array<mixed>  */
     public function get(): Array
     {
         return $this->execute();

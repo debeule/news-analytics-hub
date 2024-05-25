@@ -26,11 +26,14 @@ final class GuzzleResponse
         return $response->getBody()->getContents();
     }
 
+    
+    /** @return array<mixed> */
     private function decode(): array
     {
         return json_decode($this->value, true);
     }
 
+    /** @return array<mixed> */
     public function getData(): array
     {
         return $this->decode();
@@ -41,6 +44,7 @@ final class GuzzleResponse
         return $this->getData()['response'][0]['result'];
     }
 
+    /** @return array<mixed> */
     public function extractOpenAiResponse(): array
     {
         $contents = $this->getData()['choices'][0]['message']['content'];
