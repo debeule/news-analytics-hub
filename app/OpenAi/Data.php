@@ -17,10 +17,10 @@ class Data implements DataInterface
 {
     public function __construct(
         public Article $article,
-        public ?collection $occupations,
-        public ?Collection $organizations,
-        public ?Collection $entities,
-        public Collection $mentions,
+        public ?OccupationCollection $occupations,
+        public ?OrganizationCollection $organizations,
+        public ?EntityCollection $entities,
+        public MentionCollection $mentions,
     ) {}
 
     
