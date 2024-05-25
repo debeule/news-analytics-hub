@@ -17,12 +17,13 @@ class EntityCollection extends Collection
         parent::offsetSet($key, $value);
     }
 
-    public function add($item): void
+    public function add($item): collection
     {
-        if (! $item instanceof Entity) {
+        if (! $item instanceof Entity) 
+        {
             throw new \InvalidArgumentException("Value must be an instance of Entity");
         }
 
-        parent::add($item);
+        return parent::add($item);
     }
 }
