@@ -33,11 +33,11 @@ class ArticlesByOrganization
         );
     }
 
-    public function FromDateTime(int $amountOfHours): self
+    public function FromDateTime(int $amountOfDays): self
     {
         return new self(
             $this->hasOrganizationId,
-            new FromDateTime(DateTime::fromHoursAgo($amountOfHours)),
+            new FromDateTime(DateTime::fromDaysAgo($amountOfDays)),
         );
     }
 
