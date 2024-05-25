@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EntityHasOccupation extends Model
 {
@@ -16,12 +17,12 @@ class EntityHasOccupation extends Model
         'created_at',
     ];
     
-    public function entity()
+    public function entity(): BelongsTo
     {
         return $this->belongsTo(Entity::class);
     }
 
-    public function occupation()
+    public function occupation(): BelongsTo
     {
         return $this->belongsTo(Occupation::class);
     }

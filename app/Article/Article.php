@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Article;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
 {
@@ -21,12 +23,12 @@ class Article extends Model
         'organization_id',
     ];
     
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
 
-    public function mentions()
+    public function mentions(): HasMany
     {
         return $this->hasMany(Mention::class);
     }

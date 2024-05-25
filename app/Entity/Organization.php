@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Organization extends Model
 {
@@ -15,17 +16,17 @@ class Organization extends Model
         'sector',
     ];
 
-    public function articles()
+    public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
     }
 
-    public function locations()
+    public function locations(): HasMany
     {
         return $this->hasMany(Location::class);
     }
 
-    public function entityHasOrganizations()
+    public function entityHasOrganizations(): HasMany
     {
         return $this->hasMany(EntityHasOrganization::class);
     }
