@@ -25,7 +25,7 @@ class ProcessArticle implements ShouldQueue
 {
     use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
-    public $tries = 3;
+    public $tries = 5;
 
     public function __construct(
         public ExternalArticle $article,
@@ -53,6 +53,8 @@ class ProcessArticle implements ShouldQueue
     {
         $response = ScrapeArticle::setup($this->article)->get();
         $fullContent = GuzzleResponse::fromResponse($response)->extractScraperResponse();
+
+        if ($fullContent == '') throw new \Exception('Failed to scrape article content');
 
         return $fullContent;
     }
