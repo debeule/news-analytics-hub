@@ -11,11 +11,19 @@ final class PostRequest
 {
     public function __construct(
         private string $url,
+
+        /** @var array<string> */
         private array $data,
+        
+        /** @var array<string> */
         private array $headers = [],
         private Client $client = new Client()
     ) {}
 
+    /**  
+     * @param array<mixed> $data
+     * @param array<mixed> $headers
+    */
     public static function setup(string $url, array $data, array $headers = []): self
     {
         return new self($url, $data, $headers);
