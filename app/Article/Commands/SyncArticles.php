@@ -10,30 +10,41 @@ use App\Imports\ProcessArticle;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Bus;
 
-class SyncArticles
+use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use App\Scraper\Commands\ScrapeArticle;
+use App\Imports\Values\GuzzleResponse;
+
+class SyncArticles implements ShouldQueue
 {
-    use DispatchesJobs;
+    use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels, Batchable;
+
+    public $tries = 3;
+
+    public function __construct(
+        private Organization $organization
+    ) {}
 
     public function __invoke(ArticlesDiff $articlesDiff): void
     {
-        foreach (Organization::where('sector', 'source_newspaper')->get() as $organization) 
-        {
             $jobs = [];
             
             $i = 0;
-            foreach ($articlesDiff($organization->id)->additions() as $scraperArticle) 
+            foreach ($articlesDiff($this->organization->id)->additions() as $scraperArticle) 
             {
                 $jobs[] = new ProcessArticle($scraperArticle);
 
                 $i++;
-                if($i > 2) break;
+                if($i > 1) break;
             }
 
             if(count($jobs) === 0) throw new \Exception('Scraping arrticles list failed.');
 
             Bus::batch($jobs)
-                ->name('article-scraping:' . $organization->name)
+                ->name('article-scraping:' . $this->organization->name)
                 ->dispatch();
-        }
     }
 }
