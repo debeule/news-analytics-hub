@@ -25,7 +25,7 @@ final class ArticleFactory
         return new self(collect());
     }
 
-    public function withorganizationId(int $organizationId): self
+    public function withOrganizationId(int $organizationId): self
     {
         $this->organizationId = $organizationId;
 

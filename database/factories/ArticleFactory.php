@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Article\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\CarbonImmutable;
 
 final class ArticleFactory extends Factory
 {
@@ -18,10 +19,20 @@ final class ArticleFactory extends Factory
             'word_count' => $this->faker->numberBetween(100, 1000),
             'full_content' => $this->faker->text(),
             'url' => $this->faker->url(),
-            'article_created_at' => $this->faker->dateTime(),
+            'article_created_at' => CarbonImmutable::now(),
             'category' => $this->faker->randomElement(['source_newspaper']),
             'author_id' => EntityFactory::new()->create()->id,
             'organization_id' => OrganizationFactory::new()->create()->id,
         ];
+    }
+
+    public function withOrganizationId(int $organizationId): self
+    {
+        return $this->state(['organization_id' => $organizationId]);
+    }
+
+    public function withAuthorId(int $authorId): self
+    {
+        return $this->state(['author_id' => $authorId]);
     }
 }
