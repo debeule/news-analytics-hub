@@ -17,12 +17,13 @@ class OrganizationCollection extends Collection
         parent::offsetSet($key, $value);
     }
 
-    public function add($item): void
+    public function add($item): collection
     {
-        if (! $item instanceof Organization) {
+        if (! $item instanceof Organization) 
+        {
             throw new \InvalidArgumentException("Value must be an instance of Organization");
         }
 
-        parent::add($item);
+        return parent::add($item);
     }
 }

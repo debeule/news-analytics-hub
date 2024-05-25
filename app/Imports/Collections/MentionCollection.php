@@ -17,12 +17,13 @@ class MentionCollection extends Collection
         parent::offsetSet($key, $value);
     }
 
-    public function add($item): void
+    public function add($item): collection
     {
-        if (! $item instanceof Mention) {
+        if (! $item instanceof Mention) 
+        {
             throw new \InvalidArgumentException("Value must be an instance of Mention");
         }
 
-        parent::add($item);
+        return parent::add($item);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Imports\Collections;
 
 use App\Entity\Occupation;
@@ -17,12 +18,13 @@ class OccupationCollection extends Collection
         parent::offsetSet($key, $value);
     }
 
-    public function add($item): void
+    public function add($item): collection
     {
-        if (! $item instanceof Occupation) {
+        if (! $item instanceof Occupation) 
+        {
             throw new \InvalidArgumentException("Value must be an instance of Occupation");
         }
 
-        parent::add($item);
+        return parent::add($item);
     }
 }
