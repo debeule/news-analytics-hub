@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Scraper;
 
 use App\Scraper\Article;
-use Database\Factories\EntityFactory;
 use Database\Factories\OrganizationFactory;
 use Faker\Factory as FakerFactory;
 use Illuminate\Support\Collection;

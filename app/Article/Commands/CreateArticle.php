@@ -6,10 +6,10 @@ declare(strict_types=1);
 namespace App\Article\Commands;
 
 use App\Article\Article as DbArticle;
-use App\Imports\Dtos\ProcessedArticle as Article;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Entity\Queries\EntityByName;
 use App\Entity\Queries\OrganizationByName;
+use App\Imports\Dtos\ProcessedArticle as Article;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 final class CreateArticle
 {

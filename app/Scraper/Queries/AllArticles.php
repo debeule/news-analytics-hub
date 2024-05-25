@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Scraper\Queries;
 
 use App\Imports\Queries\ExternalArticles;
-use App\Imports\Values\GuzzleResponse;
-use App\Scraper\Commands\ScrapeArticle;
 use App\Scraper\Commands\ScrapeArticlesList;
 use Illuminate\Support\Collection;
 

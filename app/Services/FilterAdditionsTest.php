@@ -9,8 +9,8 @@ use App\Article\Commands\CreateArticle;
 use App\Scraper\Article as ScraperArticle;
 use App\Testing\TestCase;
 use Database\Factories\OrganizationFactory;
-use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use Database\OpenAi\ArticleFactory as ExternalArticleFactory;
+use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\Test;
 

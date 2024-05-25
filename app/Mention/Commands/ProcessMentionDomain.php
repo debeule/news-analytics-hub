@@ -7,7 +7,6 @@ namespace App\Mention\Commands;
 use App\Article\Queries\ArticleByTitle;
 use App\OpenAI\Data;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use App\Article\Article;
 
 final class ProcessMentionDomain
 {

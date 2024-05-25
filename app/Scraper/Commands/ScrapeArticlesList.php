@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Scraper\Commands;
 
-use App\Entity\Organization;
 use App\Imports\Values\GuzzleResponse;
 use App\Imports\Values\ScrapeArticlesListEndpoint;
 use App\Scraper\Article;

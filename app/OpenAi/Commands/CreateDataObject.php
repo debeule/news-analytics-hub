@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\OpenAi\Commands;
 
+use App\Entity\Organization as DbOrganization;
 use App\Imports\Dtos\Article as ArticleInterface;
+
 use App\OpenAi\Article;
 
 use App\OpenAi\Data;
-
 use App\OpenAi\Entity;
 use App\OpenAi\Mention;
 use App\OpenAi\Occupation;
 use App\OpenAi\Organization;
-use Illuminate\Support\Collection;
 
-use App\Entity\Organization as DbOrganization;
+use Illuminate\Support\Collection;
 
 class CreateDataObject
 {

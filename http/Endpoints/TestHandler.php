@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace Http\Endpoints;
 
-use App\Imports\SyncAllSources;
-use App\OpenAi\Commands\ProcessData;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Database\Scraper\ArticleFactory;
-use Database\Factories\OrganizationFactory;
-use App\Imports\ProcessArticle;
-use App\Imports\Values\DateTime;
-use App\Article\Queries\ArticlesByOrganization;
 use App\Article\Article;
-use Carbon\CarbonImmutable;
-use Database\OpenAi\DataFactory;
-use Illuminate\Support\Facades\Cache;
 use App\Article\Commands\CacheFullContentByTitle;
 use App\Article\Queries\CacheFullContentByTitle as CacheArticleFullContentQuery;
+use App\Imports\Values\DateTime;
+use App\OpenAi\Commands\ProcessData;
+use Database\Factories\OrganizationFactory;
+use Database\Scraper\ArticleFactory;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class TestHandler
 {
@@ -28,7 +22,7 @@ class TestHandler
     ) {
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         $o = OrganizationFactory::new()->create();
         $a = ArticleFactory::new()->withOrganizationId($o->id)->create();

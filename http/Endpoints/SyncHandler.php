@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Http\Endpoints;
 
 use App\Imports\SyncAllSources;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\JsonResponse;
 
 final class SyncHandler
 {
