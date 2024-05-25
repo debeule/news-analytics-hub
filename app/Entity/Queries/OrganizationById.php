@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 final class OrganizationById
 {
     public function __construct(
-        public HasId $hasId = new HasId(''),
+        public HasId $hasId = new HasId(0),
     ) {}
 
     public function query(): Builder
