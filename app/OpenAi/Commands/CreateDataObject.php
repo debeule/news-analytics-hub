@@ -17,13 +17,22 @@ use App\OpenAi\Organization;
 
 use Illuminate\Support\Collection;
 
+use App\Imports\Collections\EntityCollection;
+use App\Imports\Collections\MentionCollection;
+use App\Imports\Collections\OccupationCollection;
+use App\Imports\Collections\OrganizationCollection;
+
 class CreateDataObject
 {
     public function __construct(
+        /** @var array<mixed> */
         private Array $data,
+        
         private ArticleInterface $article,
     ) {}
 
+    
+    /** @param array<mixed> $dataArray */
     public static function fromArray(array $dataArray, ArticleInterface $article): self
     {
         return new self($dataArray, $article);
@@ -43,24 +52,24 @@ class CreateDataObject
     private function collectArticle(): Article
     {
         return new Article(
-            $this->article->title,
-            $this->article->url,
-            $this->article->fullContent,
+            $this->article->title(),
+            $this->article->url(),
+            $this->article->fullContent(),
+            $this->article->organizationId(),
             $this->data['category'],
-            $this->article->organizationId,
             $this->data['author'],
             $this->data['created_at'],
         );
     }
     
-    private function collectOccupations(): ?collection
+    private function collectOccupations(): ?OccupationCollection
     {
         if(is_null($this->data['occupations'])) return null;
 
-        $occupations = collect();
+        $occupations = new OccupationCollection;
         
         foreach ($this->data['occupations'] as $occupation) 
-        {
+        {   
             $occupations->push(new Occupation(
                 $occupation['name'],
                 $occupation['sector'],
@@ -70,11 +79,11 @@ class CreateDataObject
         return $occupations;
     }
     
-    private function collectOrganizations(): ?collection
+    private function collectOrganizations(): ?OrganizationCollection
     {
         if(is_null($this->data['organizations'])) return null;
 
-        $organizations = collect();
+        $organizations = new OrganizationCollection;
 
         foreach ($this->data['organizations'] as $organization) 
         {
@@ -87,11 +96,11 @@ class CreateDataObject
         return $organizations;
     }
     
-    private function collectEntities(): ?collection
+    private function collectEntities(): ?EntityCollection
     {
         if(is_null($this->data['entities'])) return null;
 
-        $entities = collect();
+        $entities = new EntityCollection;
 
         foreach ($this->data['entities'] as $entity) 
         {
@@ -114,9 +123,9 @@ class CreateDataObject
         return $entities;
     }
     
-    private function collectMentions(): ?collection
+    private function collectMentions(): Mentioncollection
     {
-        $mentions = collect();
+        $mentions =  new MentionCollection;
 
         foreach ($this->data['entity-mentions'] as $mention) 
         {
