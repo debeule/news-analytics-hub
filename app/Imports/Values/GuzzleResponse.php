@@ -21,17 +21,17 @@ final class GuzzleResponse
         return new self($response);
     }
 
-    private function getContents(Response $response)
+    private function getContents(Response $response): string
     {
         return $response->getBody()->getContents();
     }
 
-    private function decode()
+    private function decode(): array
     {
         return json_decode($this->value, true);
     }
 
-    public function getData()
+    public function getData(): array
     {
         return $this->decode();
     }
