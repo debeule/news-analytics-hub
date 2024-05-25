@@ -47,8 +47,8 @@ final class ArticleFactory
             $faker->text(10),
             $faker->url(),
             $faker->text(2000, 4000) . 'author: ' . $faker->name(),
-            $faker->word(),
             $organizationId ?? OrganizationFactory::new()->create()->id,
+            $faker->word(),
             $authorName ?? EntityFactory::new()->create()->name,
             $faker->dateTime()->format('Y-m-d H:i'),
         );
