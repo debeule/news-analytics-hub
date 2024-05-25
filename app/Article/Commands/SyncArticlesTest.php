@@ -14,6 +14,7 @@ use App\Testing\TestCase;
 use Database\Factories\EntityFactory;
 
 use Database\Factories\OrganizationFactory;
+use Database\Factories\ArticleFactory;
 use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use Illuminate\Bus\PendingBatch;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,6 +33,7 @@ class SyncArticlesTest extends TestCase
         
         $organization = OrganizationFactory::new()->withSector('source_newspaper')->create();
         $entity = EntityFactory::new()->create();
+        ArticleFactory::new()->withOrganizationId($organization->id)->create();
 
         $scraperArticles = ScraperArticleFactory::new()->count(2)->create();
 
@@ -40,7 +42,7 @@ class SyncArticlesTest extends TestCase
 
         $articlesDiff = new ArticlesDiff($externalArticlesMock);
         
-        $syncArticles = new SyncArticles;
+        $syncArticles = new SyncArticles($organization);
 
         $syncArticles($articlesDiff($organization->id));
         
@@ -54,8 +56,7 @@ class SyncArticlesTest extends TestCase
 
         Bus::assertBatched(function (PendingBatch $batch) 
         {
-            #TODO: make ===2 when debug break is removed
-            return $batch->jobs->count() === 1;
+            return $batch->jobs->count() === 2;
         });
 
         Bus::assertBatchCount(1);
