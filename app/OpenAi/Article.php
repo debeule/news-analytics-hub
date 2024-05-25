@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\OpenAi;
 
-use App\Entity\Entity;
-use App\Entity\Organization;
 use App\Imports\Dtos\ProcessedArticle as ArticleInterface;
 use App\Imports\Values\DateTime;
 use Carbon\CarbonImmutable;

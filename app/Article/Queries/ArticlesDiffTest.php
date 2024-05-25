@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Article\Queries;
 
-use App\Article\Commands\CreateArticle;
-use App\Scraper\Article;
 use App\Article\Article as DbArticle;
+use App\Imports\Queries\ExternalArticles;
+use App\Scraper\Article;
 use App\Testing\TestCase;
-use Database\Scraper\ArticleFactory as ScraperArticleFactory;
+use Carbon\CarbonImmutable;
 use Database\Factories\EntityFactory;
 use Database\Factories\OrganizationFactory;
+use Database\Scraper\ArticleFactory as ScraperArticleFactory;
 use PHPUnit\Framework\Attributes\Test;
-use Carbon\CarbonImmutable;
-use App\Imports\Queries\ExternalArticles;
 
 final class ArticlesDiffTest extends TestCase
 {
@@ -30,13 +29,13 @@ final class ArticlesDiffTest extends TestCase
 
         DbArticle::create([
             'title' => $externalArticles->first()->title,
-             'word_count'=> '100',
+             'word_count' => '100',
             'full_content' => 'abc',
             'url' => 'www.example.com',
             'article_created_at' => CarbonImmutable::now(),
             'category' => 'business',
             'author_id' => $entity->id,
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
         ]);
         
         $externalArticlesMock = $this->createMock(ExternalArticles::class);

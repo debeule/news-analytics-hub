@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace App\Imports;
 
-use App\Article\Commands\ProcessArticleDomain;
-use App\Entity\Commands\ProcessEntityDomain;
-use App\Mention\Commands\ProcessMentionDomain;
+use App\Scraper\Article;
 use App\Testing\TestCase;
 use Database\OpenAi\DataFactory;
-use Illuminate\Support\Facades\Bus;
-use Mockery;
-use App\Scraper\Article;
 use Illuminate\Support\Facades\Cache;
+use Mockery;
 
 use PHPUnit\Framework\Attributes\Test;
 

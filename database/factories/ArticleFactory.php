@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Article\Article;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class ArticleFactory extends Factory
 {

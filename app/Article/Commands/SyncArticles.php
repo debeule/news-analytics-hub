@@ -6,17 +6,16 @@ namespace App\Article\Commands;
 
 use App\Article\Queries\ArticlesDiff;
 use App\Entity\Organization;
-use App\Imports\ScrapeArticle;
 use App\Imports\ProcessArticle;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Support\Facades\Bus;
-
+use App\Imports\ScrapeArticle;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
+
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Imports\Values\GuzzleResponse;
+use Illuminate\Support\Facades\Bus;
 
 class SyncArticles implements ShouldQueue
 {

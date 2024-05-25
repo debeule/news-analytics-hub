@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\OpenAi;
 
-use App\Imports\Dtos\ProcessedArticle as Article;
-
 use App\Imports\Dtos\Data as DataInterface;
+
+use App\Imports\Dtos\ProcessedArticle as Article;
 use App\Imports\Queries\Collections\EntityCollection;
 use App\Imports\Queries\Collections\MentionCollection;
 use App\Imports\Queries\Collections\OccupationCollection;

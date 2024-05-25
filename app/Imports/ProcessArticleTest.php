@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Imports;
 
-use App\Article\Commands\ProcessArticleDomain;
-use App\Testing\TestCase;
-use Database\OpenAi\DataFactory;
-use Illuminate\Support\Facades\Bus;
-use Mockery;
-use App\Scraper\Article;
 use App\Article\Article as DbArticle;
 use App\Entity\Entity;
 use App\Mention\Mention;
+use App\Scraper\Article;
+use App\Testing\TestCase;
+use Database\OpenAi\DataFactory;
+use Mockery;
 
 use PHPUnit\Framework\Attributes\Test;
 

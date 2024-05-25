@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace App\Scraper;
 
-use App\Entity\Entity;
-use App\Entity\Organization;
-use App\Imports\Values\DateTime;
-use Carbon\CarbonImmutable;
 use App\Imports\Dtos\Article as ArticleInterface;
 
 class Article implements ArticleInterface

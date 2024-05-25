@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Entity\Commands;
 
 use App\Entity\Entity;
-use App\Entity\Occupation;
 use App\Services\FilterAdditions;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Collection;
