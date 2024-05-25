@@ -15,7 +15,7 @@ class Article implements ArticleInterface
     public function __construct(
         public string $title,
         public string $url,
-        public ?string $fullContent = null,
+        public string $fullContent,
         public ?string $category = null,
         public int $organizationId,
         public ?string $author = null,
