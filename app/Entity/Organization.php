@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Article\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Article\Article;
-use App\Location\Location;
 
 class Organization extends Model
 {

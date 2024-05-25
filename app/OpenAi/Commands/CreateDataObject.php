@@ -5,29 +5,27 @@ declare(strict_types=1);
 namespace App\OpenAi\Commands;
 
 use App\Entity\Organization as DbOrganization;
+use App\Imports\Collections\EntityCollection;
+
+use App\Imports\Collections\MentionCollection;
+
+use App\Imports\Collections\OccupationCollection;
+use App\Imports\Collections\OrganizationCollection;
 use App\Imports\Dtos\Article as ArticleInterface;
-
 use App\OpenAi\Article;
-
 use App\OpenAi\Data;
+
+
 use App\OpenAi\Entity;
 use App\OpenAi\Mention;
 use App\OpenAi\Occupation;
 use App\OpenAi\Organization;
-
-use Illuminate\Support\Collection;
-
-use App\Imports\Collections\EntityCollection;
-use App\Imports\Collections\MentionCollection;
-use App\Imports\Collections\OccupationCollection;
-use App\Imports\Collections\OrganizationCollection;
 
 class CreateDataObject
 {
     public function __construct(
         /** @var array<mixed> */
         private Array $data,
-        
         private ArticleInterface $article,
     ) {}
 
@@ -125,7 +123,7 @@ class CreateDataObject
     
     private function collectMentions(): Mentioncollection
     {
-        $mentions =  new MentionCollection;
+        $mentions = new MentionCollection;
 
         foreach ($this->data['entity-mentions'] as $mention) 
         {

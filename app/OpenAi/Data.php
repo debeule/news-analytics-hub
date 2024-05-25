@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\OpenAi;
 
-use App\Imports\Dtos\Data as DataInterface;
-
-use App\Imports\Dtos\ProcessedArticle as Article;
 use App\Imports\Collections\EntityCollection;
+
 use App\Imports\Collections\MentionCollection;
 use App\Imports\Collections\OccupationCollection;
 use App\Imports\Collections\OrganizationCollection;
-use Illuminate\Support\Collection;
+use App\Imports\Dtos\Data as DataInterface;
+use App\Imports\Dtos\ProcessedArticle as Article;
 
 class Data implements DataInterface
 {
