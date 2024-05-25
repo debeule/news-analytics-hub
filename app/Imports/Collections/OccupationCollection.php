@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-namespace App\Imports\Queries\Collections;
+namespace App\Imports\Collections;
 
 use App\Entity\Occupation;
 use Illuminate\Support\Collection;

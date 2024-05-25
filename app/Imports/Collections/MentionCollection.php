@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-namespace App\Imports\Queries\Collections;
+namespace App\Imports\Collections;
 
 use App\Mention\Mention;
 use Illuminate\Support\Collection;
