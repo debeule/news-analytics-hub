@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EntityHasOrganization extends Model
 {
@@ -15,7 +16,7 @@ class EntityHasOrganization extends Model
         'author_id',
     ];
     
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
