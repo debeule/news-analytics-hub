@@ -31,7 +31,7 @@ final class ArticlesDiffTest extends TestCase
             'title' => $externalArticles->first()->title,
              'word_count' => '100',
             'full_content' => 'abc',
-            'url' => 'www.example.com',
+            'url' => $externalArticles->first()->url,
             'article_created_at' => CarbonImmutable::now(),
             'category' => 'business',
             'author_id' => $entity->id,

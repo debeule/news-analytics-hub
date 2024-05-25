@@ -16,7 +16,7 @@ final class FilterAdditions
 
     public function handle(): Collection
     {
-        if($this->searchField === 'title') return $this->filterByTitle();
+        if($this->searchField === 'url') return $this->filterByUrl();
 
         return $this->filterByName();
         
@@ -29,7 +29,7 @@ final class FilterAdditions
         foreach ($this->externalRecords as $externalRecord) 
         {
             if($this->existingRecords->where('name', $externalRecord->name())->isEmpty())
-            {
+            {   
                 $newRecords->push($externalRecord);
             }
         }
@@ -37,13 +37,13 @@ final class FilterAdditions
         return $newRecords;
     }
 
-    private function filterByTitle(): Collection
+    private function filterByUrl(): Collection
     {
         $newRecords = collect();
 
         foreach ($this->externalRecords as $externalRecord) 
         {
-            if($this->existingRecords->where('title', $externalRecord->title())->isEmpty())
+            if($this->existingRecords->where('url', $externalRecord->url())->isEmpty())
             {
                 $newRecords->push($externalRecord);
             }
