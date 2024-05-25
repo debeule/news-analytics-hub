@@ -23,6 +23,8 @@ final class CreateArticle
 
     public function handle(): bool
     {
+        if($this->article->fullContent() === null) throw new \Exception('Scraping article failed');
+
         return $this->buildRecord($this->article)->save();
     }   
 
