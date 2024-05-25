@@ -7,7 +7,6 @@ namespace App\OpenAi\Commands;
 use App\Imports\Values\GuzzleResponse;
 use App\Imports\Values\OpenAiEndpoint;
 use App\Services\PostRequest;
-use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -25,7 +24,6 @@ class ProcessData implements ShouldQueue
     public function __construct(
         private string $fullContent,
         private OpenAiEndpoint $endpoint = new OpenAiEndpoint(),
-        private Client $client = new Client(),
     ) {
         $this->data = [
             'model' => 'gpt-3.5-turbo',
