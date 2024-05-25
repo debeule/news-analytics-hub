@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace App\Entity\Commands;
 
-use App\Entity\entity as DbEntity;
-use App\Imports\Dtos\entity;
+use App\Entity\Entity as DbEntity;
+use App\Imports\Dtos\Entity;
 
 final class CreateEntity
 {

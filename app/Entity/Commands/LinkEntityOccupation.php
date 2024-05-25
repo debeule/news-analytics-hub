@@ -10,13 +10,10 @@ use App\Entity\Occupation;
 
 use App\Entity\Queries\EntityByName;
 use App\Entity\Queries\OccupationByName;
-use App\openAi\Entity as ExternalEntity;
+use App\OpenAi\Entity as ExternalEntity;
 
 class LinkEntityOccupation
 {
-    private Entity $entity;
-    private Occupation $occupation;
-
     public function __construct(
         private ExternalEntity $externalEntity,
         private EntityByName $entityByName = new EntityByName,
