@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Commands;
 
-use App\Entity\Entity;
 use App\Entity\EntityHasOrganization;
-use App\Entity\Organization;
 
 use App\Entity\Queries\EntityByName;
 use App\Entity\Queries\OrganizationByName;
