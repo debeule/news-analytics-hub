@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace Database\OpenAi;
 
+use App\Imports\Collections\MentionCollection;
 use App\OpenAi\Data;
 use Faker\Factory as FakerFactory;
-
-use Illuminate\Support\Collection;
 
 final class DataFactory
 {
     public function __construct(
-        private Collection $mentions,
+        private MentionCollection $mentions,
     ){}
 
     public static function new()
     {
-        return new self(collect());
+        return new self(new MentionCollection);
     }
 
     public static function build(): Data

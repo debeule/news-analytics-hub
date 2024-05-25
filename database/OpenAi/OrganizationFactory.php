@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace Database\OpenAi;
 
+use App\Imports\Collections\OrganizationCollection;
 use App\OpenAi\Organization;
 use Faker\Factory as FakerFactory;
-use Illuminate\Support\Collection;
-
 
 final class OrganizationFactory
 {
     public function __construct(
-        private Collection $organizations,
+        private OrganizationCollection $organizations,
     ){}
 
     public static function new()
     {
-        return new self(collect());
+        return new self(new OrganizationCollection);
     }
 
     public static function build(): Organization

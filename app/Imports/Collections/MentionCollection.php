@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace App\Imports\Collections;
 
-use App\Mention\Mention;
+use App\Imports\Dtos\Mention;
 use Illuminate\Support\Collection;
 
 class MentionCollection extends Collection

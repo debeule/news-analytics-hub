@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Database\OpenAi;
 
+use App\Imports\Collections\MentionCollection;
 use App\OpenAi\Mention;
 use Database\Factories\ArticleFactory;
 use Faker\Factory as FakerFactory;
-use Illuminate\Support\Collection;
-
 
 final class MentionFactory
 {
@@ -17,12 +16,12 @@ final class MentionFactory
     private ?int $articleId = null;
 
     public function __construct(
-        private Collection $mentions,
+        private MentionCollection $mentions,
     ){}
 
     public static function new()
     {
-        return new self(collect());
+        return new self(new MentionCollection);
     }
 
     public function withLinked(string $entityName, string $organizationName): self

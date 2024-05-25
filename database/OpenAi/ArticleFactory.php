@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Database\OpenAi;
 
+use App\Imports\Collections\ArticleCollection;
 use App\OpenAi\Article;
 use Database\Factories\EntityFactory;
 use Database\Factories\OrganizationFactory;
 use Faker\Factory as FakerFactory;
-use Illuminate\Support\Collection;
 
 final class ArticleFactory
 {
@@ -17,12 +17,12 @@ final class ArticleFactory
     private ?string $exampleArticle = null;
 
     public function __construct(
-        private Collection $articles,
+        private ArticleCollection $articles,
     ){}
 
     public static function new()
     {
-        return new self(collect());
+        return new self(new ArticleCollection);
     }
 
     public function withOrganizationId(int $organizationId): self
