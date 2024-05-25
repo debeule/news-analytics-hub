@@ -18,24 +18,23 @@ class ProcessArticleTest extends TestCase
     #[Test]
     public function CanProcessArticleWithProcessedData(): void
     {
-        #TODO: reanable bus fake
-        // Bus::fake();
+        Bus::fake();
 
         $data = DataFactory::new()->create();
         $scraperArticle = new Article(
             $data->article()->title(),
             $data->article()->url(),
             $data->article()->organizationId(),
-            $data->article()->fullContent(),
         );
 
         $processArticleMock = Mockery::mock(ProcessArticle::class, [$scraperArticle])->makePartial();
-        $processArticleMock->shouldReceive('scrapeArticleContent')->once()->andReturn($data->article()->fullContent());
         $processArticleMock->shouldReceive('getData')->once()->andReturn($data);
 
         $processArticleMock->handle();
 
-        #TODO: add more assertions
-        // Bus::assertDispatched(ProcessArticleDomain::class);
+        Bus::assertDispatchedSync(ProcessEntityDomain::class);
+        Bus::assertDispatchedSync(ProcessArticleDomain::class);
+        Bus::assertDispatchedSync(ProcessMentionDomain::class);
+
     }
 }

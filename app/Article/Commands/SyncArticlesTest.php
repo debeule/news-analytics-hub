@@ -8,6 +8,7 @@ use App\Article\Article;
 use App\Article\Commands\SyncArticles;
 use App\Article\Queries\ArticlesByOrganization;
 use App\Article\Queries\ArticlesDiff;
+use App\Imports\ScrapeArticle;
 use App\Imports\ProcessArticle;
 use App\Imports\Queries\ExternalArticles;
 use App\Testing\TestCase;
@@ -27,7 +28,7 @@ class SyncArticlesTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
-    public function itDispatchesBatchOfNewProcessArticleJobs(): void
+    public function itDispatchesBatchOfNewProcessArticleJobs22(): void
     {
         Bus::fake();
         
@@ -46,19 +47,33 @@ class SyncArticlesTest extends TestCase
 
         $syncArticles($articlesDiff($organization->id));
         
-        Bus::assertBatched(function (PendingBatch $batch) 
-        {
-            return $batch->jobs->every(function ($job) 
-            {
-                return $job instanceOf ProcessArticle;
-            });
-        });
+
+        Bus::assertBatchCount(1);
 
         Bus::assertBatched(function (PendingBatch $batch) 
         {
             return $batch->jobs->count() === 2;
         });
 
-        Bus::assertBatchCount(1);
+        Bus::assertBatched(function (PendingBatch $batch) 
+        {
+            return $batch->jobs->every(function ($job) 
+            {
+                return $job instanceof ScrapeArticle;
+            });
+        });
+
+        Bus::assertBatched(function (PendingBatch $batch) 
+        {
+            return $batch->jobs->every(function ($job) 
+            {
+                return collect($job->chained)->every(function ($chainedJob)
+                {
+                    $unserializedChainedJob = unserialize($chainedJob);
+                    
+                    return $unserializedChainedJob instanceOf ProcessArticle;
+                });
+            });
+        });
     }
 }
