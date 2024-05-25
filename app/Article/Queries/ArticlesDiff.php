@@ -8,6 +8,9 @@ use App\Imports\Queries\ExternalArticles;
 use App\Services\FilterAdditions;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Collection;
+use App\OpenAi\Article;
+use App\Article\Article as DbArticle;
+use App\Article\Commands\ProcessArticleDomain;
 
 class ArticlesDiff
 {
@@ -17,10 +20,9 @@ class ArticlesDiff
     private Collection $externalArticles;
 
     public function __construct(
-        private ExternalArticles $externalArticlesQuery = new ExternalArticles,
+        private ?ExternalArticles $externalArticlesQuery = null,
         private ArticlesByOrganization $articlesQuery = new ArticlesByOrganization,
-    ) {
-    }
+    ) {}
 
     public function __invoke(int $organizationId): self
     {
@@ -34,7 +36,7 @@ class ArticlesDiff
     
     public function additions(): Collection
     {
-        $filter = new FilterAdditions($this->allRecentArticles, $this->externalArticles, 'title');
+        $filter = new FilterAdditions($this->allRecentArticles, $this->externalArticles, 'url');
 
         return $filter->handle();
     }

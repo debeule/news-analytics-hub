@@ -22,7 +22,7 @@ final class FilterAdditionsTest extends TestCase
         $result = $this->DispatchSync(new FilterAdditions(
             collect(),
             ScraperArticleFactory::new()->count(3)->create(),
-            'title'
+            'url'
         ));
             
         $this->assertInstanceOf(Collection::class, $result);
@@ -42,7 +42,7 @@ final class FilterAdditionsTest extends TestCase
         $result = $this->DispatchSync(new FilterAdditions(
             Article::get(),
             $externalArticles,
-            'title'
+            'url'
         ));
         
         $this->assertEquals(2, $result->count());
