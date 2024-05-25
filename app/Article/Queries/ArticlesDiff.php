@@ -22,7 +22,7 @@ class ArticlesDiff
     ) {
     }
 
-    public function __invoke(int $organizationId)
+    public function __invoke(int $organizationId): self
     {
         $this->externalArticlesQuery->organizationId = $organizationId;
         $this->externalArticles = $this->externalArticlesQuery->get();

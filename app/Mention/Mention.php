@@ -8,6 +8,7 @@ use App\Article\Article;
 use App\Entity\Entity;
 use App\Entity\Organization;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Mention extends Model
 {
@@ -22,17 +23,17 @@ class Mention extends Model
         'article_id',
     ];
 
-    public function entity()
+    public function entity(): BelongsTo
     {
         return $this->belongsTo(Entity::class);
     }
 
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
     
-    public function article()
+    public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
     }
