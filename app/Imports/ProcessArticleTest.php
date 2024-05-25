@@ -30,6 +30,7 @@ class ProcessArticleTest extends TestCase
         );
 
         $processArticleMock = Mockery::mock(ProcessArticle::class, [$scraperArticle])->makePartial();
+        $processArticleMock->shouldReceive('scrapeArticleContent')->once()->andReturn($data->article()->fullContent());
         $processArticleMock->shouldReceive('getData')->once()->andReturn($data);
 
         $processArticleMock->handle();
