@@ -8,9 +8,6 @@ use App\Imports\Queries\ExternalArticles;
 use App\Services\FilterAdditions;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Collection;
-use App\OpenAi\Article;
-use App\Article\Article as DbArticle;
-use App\Article\Commands\ProcessArticleDomain;
 
 class ArticlesDiff
 {
