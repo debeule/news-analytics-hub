@@ -24,6 +24,7 @@ class ProcessArticle implements ShouldQueue
 {
     use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
+    /** @var int */
     public $tries = 5;
 
     public function __construct(

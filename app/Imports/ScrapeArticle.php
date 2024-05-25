@@ -20,6 +20,7 @@ class ScrapeArticle implements ShouldQueue
 {
     use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
+    /** @var int */
     public $tries = 4;
 
     public function __construct(
