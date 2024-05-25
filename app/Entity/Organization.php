@@ -23,11 +23,6 @@ class Organization extends Model
         return $this->hasMany(Article::class);
     }
 
-    public function locations(): HasMany
-    {
-        return $this->hasMany(Location::class);
-    }
-
     public function entityHasOrganizations(): HasMany
     {
         return $this->hasMany(EntityHasOrganization::class);

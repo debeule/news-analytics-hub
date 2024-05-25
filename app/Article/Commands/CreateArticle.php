@@ -7,7 +7,6 @@ namespace App\Article\Commands;
 
 use App\Article\Article as DbArticle;
 use App\Entity\Queries\EntityByName;
-use App\Entity\Queries\OrganizationByName;
 use App\Imports\Dtos\ProcessedArticle as Article;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -18,7 +17,6 @@ final class CreateArticle
     public function __construct(
         public Article $article,
         private EntityByName $entityByName = new EntityByName(),
-        private OrganizationByName $organizationByName = new OrganizationByName(),
     ) {}
 
     public function handle(): bool

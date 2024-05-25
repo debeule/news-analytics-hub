@@ -38,7 +38,6 @@ class ProcessArticle implements ShouldQueue
 
     public function handle(): void
     {
-
         $data = $this->getData($this->article);
 
         $this->dispatchSync(new ProcessEntityDomain($data));
