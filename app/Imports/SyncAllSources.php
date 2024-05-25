@@ -16,6 +16,7 @@ final class SyncAllSources implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /** @var int */
     public $tries = 3;
 
     public function handle(): void

@@ -21,6 +21,7 @@ class SyncArticles implements ShouldQueue
 {
     use DispatchesJobs, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
+    /** @var int */
     public $tries = 3;
 
     public function __construct(
