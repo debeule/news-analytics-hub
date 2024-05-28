@@ -22,7 +22,7 @@ final class CreateArticle
     public function handle(): bool
     {
         if($this->article->fullContent() === null) throw new \Exception('Scraping article failed');
-        if(DbArticle::where('url', $this->article->url())->exists()) $this->job->delete();
+        if(DbArticle::where('url', $this->article->url())->exists()) $this->delete();
 
         return $this->buildRecord($this->article)->save();
     }   
@@ -37,7 +37,7 @@ final class CreateArticle
 
         $newArticle->category = $article->category();
         $newArticle->word_count = str_word_count($this->article->fullContent());
-        $newArticle->article_created_at = $article->createdAt();
+        $newArticle->article_created_at = DateTime::now()->toString();
         
         $newArticle->author_id = $this->entityByName->hasName($article->author())->find()->id ?? null;
         $newArticle->organization_id = $article->organizationId();
