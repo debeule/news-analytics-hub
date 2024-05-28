@@ -26,7 +26,7 @@ class CacheFullContentByTitle
 
     public function CacheData(): void
     {
-        Cache::put('article_full_content_' . $this->organizationId . '_' . $this->articleTitle, $this->fullContent, now())->addMinutes(30);
+        Cache::put('article_full_content_' . $this->organizationId . '_' . $this->articleTitle, $this->fullContent, 1800);
     }
 
     public function execute(): void
