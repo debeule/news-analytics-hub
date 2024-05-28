@@ -127,8 +127,8 @@ class CreateDataObject
             $mentions->push(new Mention(
                 $mention['context'],
                 intval($mention['sentiment']),
-                $mention['entityName'] ?? null,
-                $mention['organizationName'] ?? null,
+                $mention['entity_name'] ?? null,
+                $mention['organization_name'] ?? null,
             ));
         }
 
@@ -137,8 +137,8 @@ class CreateDataObject
             $mentions->push(new Mention(
                 $mention['context'],
                 intval($mention['sentiment']),
-                $mention['entityName'] ?? null,
-                $mention['organizationName'] ?? null,
+                $mention['entity_name'] ?? null,
+                $mention['organization_name'] ?? null,
             ));
         }
 
