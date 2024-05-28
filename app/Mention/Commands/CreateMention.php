@@ -33,7 +33,7 @@ final class CreateMention
         $newMention->sentiment = $mention->sentiment();
         $newMention->mention_created_at = DateTime::now()->toString();
         
-        $newMention->entity_id = $mention->organization()->id ?? null;
+        $newMention->entity_id = $mention->entity()->id ?? null;
         $newMention->organization_id = $mention->organization()->id ?? null;
         $newMention->article_id = $this->articleId;
 
